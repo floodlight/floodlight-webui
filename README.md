@@ -9,9 +9,7 @@ Example for main page:
 
  //Controller status
         $.ajax({
-            url: "http://<controller ip address>/wm/core/health/json",
-            ...
-
+            url: "http://controller ip address/wm/core/health/json", ....
 
 Web UI Modules : 
 
