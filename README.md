@@ -1,7 +1,7 @@
 # floodlight-WebUI
 SDN Controller  WebUI
 
-WebUI is a new user interface for floodlight controller developed by using html and jquery. It can be deployed on (Windows) IIS or Apache (Linux) server.  
+WebUI is a new user interface for floodlight controller developed by using HTML and JQuery. It can be deployed on (Windows) IIS or Apache (Linux) server.  
 
 NOTE: Before starting to run you have to change the controller ip addresss in all html pages manually for now. 
 
