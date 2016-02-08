@@ -5,7 +5,7 @@ WebUI is a new user interface for floodlight controller developed by using html 
 
 NOTE: Before starting to run you have to change the controller ip addresss in all html pages manually for now. 
 
-Example for main page:  
+Example for main page (index.html):  
 
  //Controller status
  
