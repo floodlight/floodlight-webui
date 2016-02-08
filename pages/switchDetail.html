@@ -1,0 +1,705 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Animate.css -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet" />
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                        </li>
+                        <li>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                        </li>
+                        <li>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
+                        </li>
+
+                        <li>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">Anahtar (Switch)</h3>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <!-- /.content-->
+                    <div class="col-lg-5">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-info fa-fw"></i> Anahtar Detayı
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+
+                                <table class="table table-hover">
+
+
+                                    <tr>
+                                        <td><b>MAC</b></td>
+                                        <td>: <span id="dpid"></span></td>
+                                    </tr>
+                                    <tr>  <td><b>Versiyon</b></td>  <td>: <span class="version"></span></td>   </tr>
+                                    <tr>    <td><b>Üretici Firma</b></td> <td>: <span id="manufacturerDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Donanım Bilgisi</b></td> <td>: <span id="hardwareDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Yazılım Sürümü</b></td> <td>: <span id="softwareDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Seri No</b></td> <td>: <span id="serialNumber"></span></td>  </tr>
+                                    <tr>    <td><b>Veriyolu Tanımı</b></td> <td>: <span id="datapathDescription"></span></td>  </tr>
+
+
+
+                                </table>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-info fa-fw"></i> Akış Özet Bilgisi
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <table class="table table-hover">
+
+                                    <tr>  <td><b> Akış Sayısı</b></td>  <td>: <span id="flowCount"></span></td>   </tr>
+                                    <tr>    <td><b>Paket Sayısı</b></td> <td>: <span id="packetCount"></span></td>  </tr>
+                                    <tr>    <td><b>Byte</b></td> <td>: <span id="byteCount"></span></td>  </tr>
+                                    <tr>    <td><b>Flag</b></td> <td>: <span id="flags"></span></td>  </tr>
+                                    <tr>    <td><b>Buffer</b></td> <td>: <span id="bufferCount"></span></td>  </tr>
+                                    <tr>    <td><b>Tablo</b></td> <td>: <span id="tableCount"></span></td>  </tr>
+
+
+
+                                </table>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-user fa-fw"></i> Anahtar Rol Bilgisi
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" id="rbMASTER" name="iCheck"> MASTER
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" id="rbSLAVE" name="iCheck"> SLAVE
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" id="rbEQUAL" name="iCheck"> EQUAL
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="button" id="btnChangeRole" class="btn btn-primary">Değiştir</button>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-info fa-fw"></i> Anahtar Port Tablosu
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+
+                                <table class='table table-bordered table-striped table-hover responsive-utilities' id="portTable">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>R. Packets</th>
+                                            <th>Tran. Packets</th>
+                                            <th>R. Bytes</th>
+                                            <th>Tran. Bytes</th>
+                                            <th>R. Dropped</th>
+                                            <th>Tran. Dropped</th>
+                                            <th>Coll.</th>
+                                            <th>Duration(s)</th>
+
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <input type="button" id="btnFlowPusher" class="btn btn-sm btn-primary" value="Static Akış Girdilerini Düzenle" />
+                    </div>
+                    <br />
+                    <br />
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-info fa-fw"></i> Akış Tablosu
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <table class='table table-bordered table-striped table-hover responsive-utilities' id="flowTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Tablo</th>
+                                            <th>Pkt.Count</th>
+                                            <th>Byte</th>
+                                            <th>Duration(s)</th>
+                                            <th>Priority</th>
+                                            <th>IdleTimeoutSec</th>
+                                            <th>HardTimeoutSec</th>
+                                            <th>Flags</th>
+                                            <th>Instructions</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-table fa-fw"></i>Anahtar Tabloları
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <table class='table table-bordered table-striped table-hover responsive-utilities' id="switchTables">
+                                    <thead>
+                                        <tr>
+                                            <th>tableId</th>
+                                            <th>activeCount</th>
+                                            <th>lookUpCount</th>
+                                            <th>matchCount</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-info fa-fw"></i> Grup Bilgisi
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <tr>  <td><b>capabilities</b></td>  <td>: <span id="capabilities"></span></td>   </tr>
+                                    <tr>    <td><b>maxGroupsAll</b></td> <td>: <span id="maxGroupsAll"></span></td>  </tr>
+                                    <tr>    <td><b>maxGroupsSelect</b></td> <td>: <span id="maxGroupsSelect"></span></td>  </tr>
+                                    <tr>    <td><b>maxGroupsIndirect</b></td> <td>: <span id="maxGroupsIndirect"></span></td>  </tr>
+                                    <tr>    <td><b>maxGroupsFf</b></td> <td>: <span id="maxGroupsFf"></span></td>  </tr>
+                                    <tr>    <td><b>actionsAll</b></td> <td>: <span id="actionsAll"></span></td>  </tr>
+                                    <tr>    <td><b>actionsSelect</b></td> <td>: <span id="actionsSelect"></span></td>  </tr>
+                                    <tr>    <td><b>actionsIndirect</b></td> <td>: <span id="actionsIndirect"></span></td>  </tr>
+                                    <tr>    <td><b>actionsFf</b></td> <td>: <span id="actionsFf"></span></td>  </tr>
+                                </table>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+                <!-- Small modal -->
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog bs-example-modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2">Bantgenişliği Tüketimi</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <table class='table table-hover' id="statTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Port</th>
+                                            <th>Güncelleme</th>
+                                            <th>Bps (RX)</th>
+                                            <th>Bps (TX)</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- Querystring Parser-->
+    <script src="../js/querystringparser.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+
+    <!-- PNotify -->
+    <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
+    <script src="../bower_components/pnotify/pnotify.core.js"></script>
+    <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
+
+
+    <script src="../js/querystringparser.js"></script>
+
+
+    <script>
+
+        var sId = getQueryParameterByName("macAddress");
+        ///ANAHTAR features
+        $.ajax({
+            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/features/json",
+            success: function (data) {
+
+                $(".version").html(data["version"]);
+                $("#bufferCount").html(data["buffers"]);
+                $("#tableCount").html(data["tables"]);
+                $("#dpid").html(data["dpid"]);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+        $("#btnFlowPusher").click(function () {
+
+            window.location.href = "flowPusher.html?macAddress=" + sId;
+        });
+
+
+
+        ///ANAHTAR BİLGİLERİ
+        $.ajax({
+            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/desc/json",
+            success: function (data) {
+
+                $(".version").html(data.desc["version"]);
+                $("#hardwareDescription").html(data.desc["hardwareDescription"]);
+                $("#manufacturerDescription").html(data.desc["manufacturerDescription"]);
+                $("#softwareDescription").html(data.desc["softwareDescription"]);
+                $("#serialNumber").html(data.desc["serialNumber"]);
+                $("#datapathDescription").html(data.desc["datapathDescription"]);
+
+                if (sId != "")
+                    $(".macAddress").html(sId);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+
+        //GROUP BİLGİSİ
+        $.ajax({
+            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/group-features/json",
+            success: function (data) {
+                $("#capabilities").html(data.groupFeatures["capabilities"]);
+                $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
+                $("#maxGroupsSelect").html(data.groupFeatures["maxGroupsSelect"]);
+                $("#maxGroupsIndirect").html(data.groupFeatures["maxGroupsIndirect"]);
+                $("#maxGroupsFf").html(data.groupFeatures["maxGroupsFf"]);
+
+                $("#actionsAll").html(data.groupFeatures["actionsAll"]);
+                $("#actionsSelect").html(data.groupFeatures["actionsSelect"]);
+                $("#actionsIndirect").html(data.groupFeatures["actionsIndirect"]);
+                $("#actionsFf").html(data.groupFeatures["actionsFf"]);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+
+        ///ANAHTAR DETAY BİLGİSİ
+        $.ajax({
+            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/aggregate/json",
+            success: function (data) {
+
+                $(".version").html(data.aggregate["version"]);
+                $("#flowCount").html(data.aggregate["flowCount"]);
+                $("#packetCount").html(data.aggregate["packetCount"]);
+                $("#byteCount").html(data.aggregate["byteCount"]);
+                $("#flags").html(data.aggregate["flags"]);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+
+
+        ///ANAHTAR PORTLARI
+        $.ajax({
+            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/port/json",
+            success: function (dat) {
+
+                $('#portTable').DataTable({
+                    data: dat["port_reply"][0].port,
+                    "columnDefs": [
+         {
+             // The `data` parameter refers to the data for the cell (defined by the
+             // `data` option, which defaults to the column being worked with, in
+             // this case `data: 0`.
+             "render": function (data, type, row) {
+                 return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
+             },
+             "targets": 0
+         }
+
+                    ],
+
+                    columns: [
+                        { data: 'portNumber' },
+                        { data: 'receivePackets' },
+                        { data: 'transmitPackets' },
+                        { data: 'receiveBytes' },
+                        { data: 'transmitBytes' },
+                        { data: 'receiveDropped' },
+                        { data: 'transmitDropped' },
+                        { data: 'collisions' },
+                        { data: 'durationSec' }
+                    ]
+                });
+
+
+            }
+        ,
+            error: function (xhr, status, error) {
+                alert("Hata==" + xhr.responseText);
+                return "";
+            }
+        });
+
+
+
+
+        ///ANAHTAR AKIŞ BİLGİLERİ
+        $.ajax({
+            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/flow/json",
+            success: function (dat) {
+
+                $('#flowTable').DataTable({
+                    data: dat["flows"],
+                    columns: [
+                        { data: 'tableId' },
+                        { data: 'packetCount' },
+                        { data: 'byteCount' },
+                        { data: 'durationSeconds' },
+                        { data: 'priority' },
+                        { data: 'idleTimeoutSec' },
+                        { data: 'hardTimeoutSec' },
+                        { data: 'flags' },
+                        { data: 'instructions.instruction_apply_actions.actions' }
+                    ]
+                });
+
+
+            }
+      ,
+            error: function (xhr, status, error) {
+                alert("Hata==" + xhr.responseText);
+                return "";
+            }
+        });
+
+
+        GetSwitchRole(sId);
+
+        function GetSwitchRole(switchId) {
+
+            ///ANAHTAR rol BİLGİSİ
+            $.ajax({
+                url: " http://192.168.1.43:8080/wm/core/switch/" + switchId + "/role/json",
+                success: function (data) {
+
+                    var obj = data;
+                    var propName = switchId;
+                    var role = "";
+
+
+                    if (obj.hasOwnProperty(propName)) {
+                        role = obj[propName];
+                    }
+                    $("#rb" + role).prop("checked", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+
+        $("#btnChangeRole").click(function () {
+
+            ChangeSwitchRole(sId);
+        });
+
+        function ChangeSwitchRole(switchId) {
+
+
+            var newRole = "";
+
+            var roleMASTER = $('input[id=rbMASTER]:checked').val();
+            var roleSLAVE = $('input[id=rbSLAVE]:checked').val();
+            var roleEQUAL = $('input[id=rbEQUAL]:checked').val();
+
+
+            if (roleMASTER == "on") newRole = "MASTER";
+            if (roleSLAVE == "on") newRole = "SLAVE";
+            if (roleEQUAL == "on") newRole = "EQUAL";
+
+
+            ///ANAHTAR rol BİLGİSİ
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: " http://192.168.1.43:8080/wm/core/switch/" + switchId + "/role/json",
+                data: '{"role":' + "\"" + newRole + "\"" + '}',
+                success: function (data) {
+
+
+                    GetSwitchRole(switchId);
+
+
+                    new PNotify({
+                        title: 'Rol Değişti',
+                        text: 'Anahtarın yeni rol durumu atandı.',
+                        type: 'success',
+                        hide: true
+                    });
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+
+
+
+        ///ANAHTAR TABLOLARI
+        $.ajax({
+            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/table/json",
+            success: function (dat) {
+                $('#switchTables').DataTable({
+                    data: dat["table"],
+                    columns: [
+                        { data: 'tableId' },
+                        { data: 'activeCount' },
+                        { data: 'lookUpCount' },
+                        { data: 'matchCount' }
+                    ]
+                });
+
+
+            }
+        ,
+            error: function (xhr, status, error) {
+                alert("Hata==" + xhr.responseText);
+                return "";
+            }
+        });
+
+
+
+
+        function getStatistic(portId) {
+
+            $(".bs-example-modal-sm").modal();
+
+
+            $.ajax({
+                url: "http://192.168.1.43:8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
+                success: function (dat) {
+                    $('#statTable').DataTable().destroy();
+
+                    $('#statTable').DataTable({
+                        data: dat,
+                        columns: [
+                            { data: 'port' },
+                            { data: 'updated' },
+                            { data: 'bits-per-second-rx' },
+                            { data: 'bits-per-second-tx' }
+                        ]
+                    });
+
+                }
+            ,
+                error: function (xhr, status, error) {
+                    alert("Hata==" + xhr.responseText);
+                    return "";
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

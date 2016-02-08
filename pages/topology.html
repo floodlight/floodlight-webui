@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SDNCore - Topoloji</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <link href="../bower_components/visjs/vis.css" rel="stylesheet" />
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            border: 1px solid lightgray;
+           background-color:#f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+            </div>
+            <!-- /.navbar-header -->
+
+         
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                        </li>
+                        <li>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                        </li>
+                        <li>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
+                        </li>
+
+                        <li>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <!-- /.row -->
+            <div class="row">
+                
+                    <div id="mynetwork"></div>
+                
+                
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    
+    <script src="../js/querystringparser.js"></script>
+
+    <script src="../bower_components/visjs/vis.js"></script>
+    <script src="../bower_components/visjs/googleAnalytics.js"></script>
+
+
+
+    <script type="text/javascript">
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+    var DIR = '../bower_components/visjs/img/refresh-cl/';
+    var EDGE_LENGTH_MAIN = 50;
+    var EDGE_LENGTH_SUB =50;
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+     
+
+      //nodes.push({id: 1, label: 'Main', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+      //nodes.push({id: 2, label: 'Office', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+      //nodes.push({id: 3, label: 'Wireless', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+      //edges.push({from: 1, to: 2, length: EDGE_LENGTH_MAIN});
+      //edges.push({from: 1, to: 3, length: EDGE_LENGTH_MAIN});
+
+      //for (var i = 4; i <= 7; i++) {
+      //  nodes.push({id: i, label: 'Computer', image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image'});
+      //  edges.push({from: 2, to: i, length: EDGE_LENGTH_SUB});
+      //}
+
+      //nodes.push({id: 101, label: 'Printer', image: DIR + 'Hardware-Printer-Blue-icon.png', shape: 'image'});
+      //edges.push({from: 2, to: 101, length: EDGE_LENGTH_SUB});
+
+      //nodes.push({id: 102, label: 'Laptop', image: DIR + 'Hardware-Laptop-1-icon.png', shape: 'image'});
+      //edges.push({from: 3, to: 102, length: EDGE_LENGTH_SUB});
+
+      //nodes.push({id: 103, label: 'network drive', image: DIR + 'Network-Drive-icon.png', shape: 'image'});
+      //edges.push({from: 1, to: 103, length: EDGE_LENGTH_SUB});
+
+      //nodes.push({id: 104, label: 'Internet', image: DIR + 'System-Firewall-2-icon.png', shape: 'image'});
+      //edges.push({from: 1, to: 104, length: EDGE_LENGTH_SUB});
+
+      //for (var i = 200; i <= 201; i++ ) {
+      //  nodes.push({id: i, label: 'Smartphone', image: DIR + 'Hardware-My-PDA-02-icon.png', shape: 'image'});
+      //  edges.push({from: 3, to: i, length: EDGE_LENGTH_SUB});
+      //}
+ 
+      // create a network
+      var container = document.getElementById('mynetwork');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {
+          autoResize: true,
+          height: '1000px',
+          width: '100%'
+         };
+      network = new vis.Network(container, data, options);
+    }
+    </script>
+    
+
+
+    <script>
+        // Create a data table with nodes.
+        nodes = [];
+
+        // Create a data table with links.
+        edges = [];
+      
+
+        LoadSwitches();
+
+
+        function LoadsLinks(hosts) {  ///LİNKLER
+
+                       
+            $.ajax({
+                url: "http://192.168.1.43:8080/wm/topology/links/json",
+                success: function (data) {
+
+                    for(var i=0;i< data.length; i++){
+                        edges.push({ from: "s"+data[i]["src-switch"], to: "s"+data[i]["dst-switch"], length: EDGE_LENGTH_MAIN });
+                    }
+               
+                    for (var i = 0; i < hosts.length; i++)
+                    {
+                        if (hosts[i]["attachmentPoint"].length > 0)
+                        {
+                            edges.push({
+                                from: "h" + hosts[i]["mac"]
+                                , to: "s"+hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN
+                            });
+                        }
+                    }
+
+                  
+                    draw();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+        function LoadSwitches()
+        {
+
+            var url = "http://192.168.1.43:8080/wm/core/controller/switches/json";
+            ///HOSTLAR
+            $.ajax({
+                url: url,
+                success: function (data)
+                {
+                    for (var i = 0; i < data.length; i++) {
+                        var id ="s"+data[i]["switchDPID"];
+                        var label ="s"+data[i]["switchDPID"];
+                        nodes.push({ id: id, label: label, image: DIR + 'switch.png', shape: 'image' });
+                    }
+                    LoadHosts();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+        
+        function LoadHosts()
+        {
+            var url = "http://192.168.1.43:8080/wm/device/";
+            ///HOSTLAR
+            $.ajax({
+                url: url,
+                success: function (hosts)
+                {
+                    for (var i = 0; i < hosts.length; i++)
+                    {
+                          
+                        if (hosts[i]["attachmentPoint"].length > 0) {
+                            var id = "h" + hosts[i]["mac"];
+                            var label = "h" + hosts[i]["mac"];
+                            nodes.push({ id: id, label: label, image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image' });
+                        }
+                    }
+                    LoadsLinks(hosts);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+
+        }
+        
+
+
+
+
+    </script>
+
+</body>
+
+</html>

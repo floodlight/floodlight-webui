@@ -1,0 +1,725 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SDNCore - Güvenlik Duvarı</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Animate.css -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                        </li>
+                        <li>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                        </li>
+                        <li>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
+                        </li>
+
+                        <li>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Güvenlik Duvarı (Firewall)</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel" id="firewallStatusPanel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i id="firewallStatusIcon"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="firewallStatus">...</div>
+                                    <div>Firewall Durumu  <a href="#" class="btn btn-xs btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Değiştir</a>  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-info fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="subnetMask">...</div>
+                                    <div>Subnet Mask <a href="#" class="btn btn-xs btn-default" data-toggle="modal" data-target="#changeFirewallStatusModal">Değiştir</a>  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- Small modal -->
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Firewall Durumunu Değiştir</h4>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbEnable" name="iCheck"> AÇIK
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbDisable" name="iCheck"> KAPALI
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">İptal</button>
+                            <button type="button" id="btnChange" class="btn btn-xs btn-primary">Değiştir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Small modal -->
+            <div class="modal fade modal-lg" tabindex="-1" role="dialog" id="changeFirewallStatusModal" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="roleModalCloseButton2" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Alt Ağ Maskesini Değiştir</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="text" id="tbSubnetMask" />
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">İptal</button>
+                            <button type="button" id="btnChangeSubnetMask" class="btn btn-xs btn-primary">Değiştir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addRuleModal">Yeni Kural Ekle</a>
+                </div>
+                <br /><br />
+            </div>
+
+
+            <div class="row">
+
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-table fa-fw"></i> Firewall Kural Talosu
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <table class="table table-bordered table-hover table-responsive responsive-utilities" id="ruleTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Switch</th>
+                                        <th>InPort</th>
+                                        <th>Kaynak</th>
+                                        <th>Hedef</th>
+                                        <th>DL</th>
+                                        <th>Kaynak IP</th>
+                                        <th>MaskBit</th>
+                                        <th>Hedef IP</th>
+                                        <th>MaskBit</th>
+                                        <th>Protokol</th>
+                                        <th>Kaynak Port</th>
+                                        <th>Hedef Port</th>
+                                        <th>Pri.</th>
+                                        <th>Act.</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Add Rule-->
+            <div class="modal fade" tabindex="-1" id="addRuleModal" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="roleModalCloseButton2" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Kural Oluştur</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Switch ID</label>
+                                <input class="form-control" type="text" id="switchid" placeholder="Anahtar MAC adresi">
+
+                                <label>Kaynak Port</label>
+                                <input class="form-control" type="text" id="src-inport" placeholder="Kaynak port">
+
+                                <label>Kaynak MAC</label>
+                                <input class="form-control" type="text" id="src-mac" placeholder="Kaynak MAC adresi">
+
+                                <label>Hedef MAC</label>
+                                <input class="form-control" type="text" id="dst-mac" placeholder="Hedef MAC adresi">
+
+                                <label>Dl Type</label>
+                                <div class="radio">
+                                <label>
+                                    <input type="radio" id="rbARP" name="check2" checked="checked" /> ARP
+                                </label>
+                                <label>
+                                    <input type="radio" id="rbIPV4" name="check2"> IPV4
+                                </label>
+                            </div>
+
+
+
+                                <label>Kaynak IPv4</label>
+                                <input class="form-control" type="text" id="src-ip" placeholder="A.B.C.D/M">
+
+                                <label>Hedef IPv4</label>
+                                <input class="form-control" type="text" id="dst-ip" placeholder="A.B.C.D/M">
+
+                                <label>Protokol</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbTCP" name="check3" checked="checked" /> TCP
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="rbUDP" name="check3"> UDP
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" id="rbICMP" name="check3"> ICMP
+                                    </label>
+                                </div>
+
+
+                                <label>Kaynak TP</label>
+                                <input class="form-control" type="text" id="tp-src" placeholder="Kaynak Tp">
+
+                                <label>Hedef TP</label>
+                                <input class="form-control" type="text" id="tp-dst" placeholder="Hedef Tp">
+
+                                <label>Öncelik</label>
+                                <input class="form-control" type="text" id="priority" placeholder="Öncelik">
+
+                                <label>Eylem</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbAllow"  name="check1" checked="checked" /> ALLOW
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="rbDeny"  name="check1"> DENY
+                                    </label>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">İptal</button>
+                            <button type="button" id="btnAddRule" class="btn btn-sm btn-primary">Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- PNotify -->
+    <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
+    <script src="../bower_components/pnotify/pnotify.core.js"></script>
+    <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+
+    <script src="../js/querystringparser.js"></script>
+    <script>
+
+
+
+        var controllerIp = getQueryParameterByName("cip");
+
+        GetStatus();
+        GetSubnetMask();
+
+
+
+
+
+
+
+        $("#btnChangeSubnetMask").click(function () {
+
+            if ($("#tbSubnetMask").val() != "") {
+                ChangeSubnetMask($("#tbSubnetMask").val());
+            }
+            else {
+                new PNotify({
+                    title: 'Değer Giriniz!',
+                    text: 'Lütfen geçerli bir değer giriniz!',
+                    type: 'warning',
+                    hide: true
+                });
+            }
+        });
+
+
+
+
+        $("#btnChange").click(function () {
+
+            if ($("#rbEnable").is(':checked')) {
+                OpenFirewall();
+            }
+
+            else if ($("#rbDisable").is(':checked')) {
+                CloseFirewall();
+            }
+            else {
+                new PNotify({
+                    title: 'Durum Seçiniz!',
+                    text: 'AÇIK / KAPALI seçeneklerinden birisini seçiniz!',
+                    type: 'warning',
+                    hide: true
+                });
+            }
+        });
+
+
+        function GetStatus() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: " http://192.168.1.43:8080/wm/firewall/module/status/json",
+
+                success: function (data) {
+
+
+                    if (data["result"] == "firewall disabled") {
+                        $("#firewallStatus").html("Pasif");
+                        $("#firewallStatusPanel").removeClass("panel-green");
+                        $("#firewallStatusPanel").addClass("panel-red");
+                        $("#firewallStatusIcon").removeClass("glyphicon glyphicon-ok fa-5x")
+                        $("#firewallStatusIcon").addClass("glyphicon glyphicon-remove fa-5x");
+                    }
+                    else {
+                        $("#firewallStatus").html("Aktif");
+                        $("#firewallStatusPanel").removeClass("panel-red");
+                        $("#firewallStatusIcon").removeClass("glyphicon glyphicon-remove fa-5x");
+                        $("#firewallStatusPanel").addClass("panel-green");
+                        $("#firewallStatusIcon").addClass("glyphicon glyphicon-ok fa-5x");
+                    }
+
+                    if (data["result"] == "firewall disabled")
+                        $("#rbDisable").prop('checked', 'checked');
+                    else
+                        $("#rbEnable").prop('checked', 'checked');
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+
+        function OpenFirewall() {
+            $.ajax({
+                type: "PUT",
+                dataType: 'json',
+                url: " http://192.168.1.43:8080/wm/firewall/module/enable/json",
+
+                success: function (data) {
+
+                    new PNotify({
+                        title: 'Firewall Durumu Değişti',
+                        text: 'Güvenlik Duvarı aktif edildi.',
+                        type: 'success',
+                        hide: true
+                    });
+                    GetStatus();
+                    $("#roleModalCloseButton").click();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+        function CloseFirewall() {
+            $.ajax({
+                type: "PUT",
+                dataType: 'json',
+                url: " http://192.168.1.43:8080/wm/firewall/module/disable/json",
+                success: function (data) {
+
+                    new PNotify({
+                        title: 'Firewall Durumu Değişti',
+                        text: 'Güvenlik Duvarı kapatıldı.',
+                        type: 'success',
+                        hide: true
+                    });
+
+                    GetStatus();
+                    $("#roleModalCloseButton").click();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+        function ChangeSubnetMask(mask) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "http://192.168.1.43:8080/wm/firewall/module/subnet-mask/json",
+                data: '{"subnet-mask":' + "\"" + mask + "\"" + '}',
+                success: function (data) {
+
+                    new PNotify({
+                        title: 'Firewall Alt Ağ Maskesi Değişti',
+                        text: 'Yeni alt ağ maskesi ayarlandı.',
+                        type: 'success',
+                        hide: true
+                    });
+
+                    GetSubnetMask();
+
+                    $("#roleModalCloseButton2").click();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+
+        function GetSubnetMask() {
+
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "http://192.168.1.43:8080/wm/firewall/module/subnet-mask/json",
+                success: function (data) {
+                    $("#subnetMask").html(data["subnet-mask"]);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+        $("#btnAddRule").click(function () {
+
+
+            var switchid = $("#switchid").val();
+            var src_inport = $("#src-inport").val();
+            var src_mac = $("#src-mac").val();
+            var dst_mac = $("#dst-mac").val();
+            var dl_type = "";
+            if ($("#rbARP").is(':checked')) dl_type = "ARP";
+            else dl_type = "IPV4";
+
+            var nw_proto = "";
+
+            if ($("#rbTCP").is(':checked')) nw_proto = "TCP";
+            else if ($("#rbUDP").is(':checked')) nw_proto = "UDP";
+            else nw_proto = "ICMP";
+
+            var tp_src = $("#tp-src").val();
+            var tp_dst = $("#tp-dst").val();
+            var priority = $("#priority").val();
+            var dst_ip = $("#dst-ip").val();
+            var src_ip = $("#src-ip").val();
+
+            var action = "";
+            if ($("#rbDeny").is(':checked')) action = "DENY";
+            else action = "ALLOW";
+
+            if (switchid != "" || src_inport != "" || src_mac != "" || dst_mac != "" || dl_type != "" || nw_proto != "" || tp_src != "" || tp_dst != "" || priority != "" || dst_ip != "" || src_ip != "" || action != "") {
+
+                AddFirewallRule(switchid, src_inport, src_mac, dst_mac, dl_type, nw_proto, tp_src, tp_dst, priority, dst_ip, src_ip, action);
+
+            }
+            else {
+
+                new PNotify({
+                    title: 'Değer Giriniz!',
+                    text: 'Lütfen geçerli bir değer giriniz!',
+                    type: 'warning',
+                    hide: true
+                });
+            }
+        });
+
+
+        function AddFirewallRule(switchid, src_inport, src_mac, dst_mac, dl_type, nw_proto, tp_src, tp_dst, priority, dst_ip, src_ip, action) {
+            var postData = "";
+            postData = '{ "switchid":' + "\"" + switchid + "\""
+                    + ',"src-inport" :' + "\"" + src_inport + "\""
+                    + ',"src-mac" :' + "\"" + src_mac + "\""
+                    + ',"dst-mac" :' + "\"" + dst_mac + "\""
+                    + ',"dl-type":' + "\"" + dl_type + "\""
+                    + ',"nw-proto": ' + "\"" + nw_proto + "\""
+                    + ',"tp-src" : ' + "\"" + tp_src + "\""
+                    + ',"tp-dst": ' + "\"" + tp_dst + "\""
+                    + ',"priority": ' + "\"" + priority + "\""
+                    + ',"dst-ip": ' + "\"" + dst_ip + "\""
+                    + ',"src-ip": ' + "\"" + src_ip + "\""
+                    + ',"action": ' + "\"" + action + "\"" + '}';
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "http://192.168.1.43:8080/wm/firewall/rules/json",
+                data: postData,
+                success: function (data) {
+
+                    if (data["status"] == "Rule added") {
+                        new PNotify({
+                            title: 'Kural Eklendi!',
+                            text: 'Yeni kural başarıyla eklendi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetRules();
+                    }
+                    else {
+
+                        new PNotify({
+                            title: 'Hata Oluştu.',
+                            text: data["status"],
+                            type: 'error',
+                            hide: true
+                        });
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+
+
+        }
+
+
+        GetRules();
+
+        function GetRules() {
+
+            var url = "http://192.168.1.43:8080/wm/firewall/rules/json";
+
+            $(document).ready(function () {
+
+                $('#ruleTable').DataTable().destroy();
+
+                $('#ruleTable').DataTable({
+                    responsive: true,
+                    ajax:
+                   {
+                       url: url,
+                       dataSrc: ''
+                   },
+                    "columnDefs": [
+                {
+                    // The `data` parameter refers to the data for the cell (defined by the
+                    // `data` option, which defaults to the column being worked with, in
+                    // this case `data: 0`.
+                    "render": function (data, type, row) {
+                        return "<a class='btn btn-xs btn-danger' onclick='DeleteRule(" + data + ")' >Sil</<a>";
+                    },
+                    "targets": 15
+                }
+
+                    ],
+                    columns: [
+                    { data: 'ruleid' },
+                     { data: 'dpid' },
+                    { data: 'in_port' },
+                    { data: 'dl_src' },
+                    { data: 'dl_dst' },
+                    { data: 'dl_type' },
+                    { data: 'nw_src_prefix' },
+                    { data: 'nw_src_maskbits' },
+                      { data: 'nw_dst_prefix' },
+                    { data: 'nw_dst_maskbits' },
+                    { data: 'nw_proto' },
+                    { data: 'tp_src' },
+                    { data: 'tp_dst' },
+                    { data: 'priority' },
+                    { data: 'action' },
+                    { data: 'ruleid' },
+                    ]
+                });
+
+
+            });
+
+        }
+
+
+
+
+        function DeleteRule(ruleId) {
+
+            if (confirm("Kural silinecektir. Devam etmek için Tamam'a basınız!")) {
+
+                $.ajax({
+                    type: "DELETE",
+                    dataType: 'json',
+                    url: "http://192.168.1.43:8080/wm/firewall/rules/json",
+                    data: '{ "ruleid":' + "\"" + ruleId + "\"" + '}',
+                    success: function (data) {
+
+
+                        new PNotify({
+                            title: 'Kural Silindi!',
+                            text: 'Kural başarıyla silindi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+
+                        GetRules();
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>

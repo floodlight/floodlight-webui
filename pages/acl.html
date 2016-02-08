@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SDNCore - Erişim Kontrol Listeleri</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Animate.css -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                        </li>
+                        <li>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                        </li>
+                        <li>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
+                        </li>
+
+                        <li>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Erişim Kontrol Listesi (ACL)</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addRuleModal">Yeni Ekle</a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" id="btnDeleteAll">Tümünü Sil</a>
+                </div>
+                <br /><br />
+            </div>
+
+
+            <div class="row">
+
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-table fa-fw"></i>Kontrol Listesi
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <table class="table table-bordered table-hover table-responsive responsive-utilities" id="aclTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Kaynak</th>
+                                        <th>Hedef</th>
+                                        <th>Kaynak IP</th>
+                                        <th>Mask</th>
+                                        <th>Hedef IP</th>
+                                        <th>Mask</th>
+                                        <th>Prot.</th>
+                                        <th>Hedef TP</th>
+                                        <th>Act.</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Add Rule-->
+            <div class="modal fade" tabindex="-1" id="addRuleModal" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="roleModalCloseButton2" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Kural Oluştur</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Protokol</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbTCP" name="check3" checked="checked" /> TCP
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="rbUDP" name="check3"> UDP
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" id="rbICMP" name="check3"> ICMP
+                                    </label>
+                                </div>
+
+
+                                <label>Kaynak IPv4</label>
+                                <input class="form-control" type="text" id="src-ip" placeholder="A.B.C.D/M">
+
+                                <label>Hedef IPv4</label>
+                                <input class="form-control" type="text" id="dst-ip" placeholder="A.B.C.D/M">
+
+                                <label>Hedef TP</label>
+                                <input class="form-control" type="text" id="tp-dst" placeholder="Hedef Tp">
+
+                                <label>Eylem</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbAllow" name="check1" checked="checked" /> ALLOW
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="rbDeny" name="check1"> DENY
+                                    </label>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">İptal</button>
+                            <button type="button" id="btnAddRule" class="btn btn-sm btn-primary">Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- PNotify -->
+    <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
+    <script src="../bower_components/pnotify/pnotify.core.js"></script>
+    <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+
+    <script src="../js/querystringparser.js"></script>
+    <script>
+
+
+        var controllerIp = getQueryParameterByName("cip");
+
+        $("#btnAddRule").click(function () {
+
+            var nw_proto = "";
+
+            if ($("#rbTCP").is(':checked')) nw_proto = "TCP";
+            else if ($("#rbUDP").is(':checked')) nw_proto = "UDP";
+            else nw_proto = "ICMP";
+
+            var dst_ip = $("#dst-ip").val();
+            var src_ip = $("#src-ip").val();
+            var tp_dst = $("#tp-dst").val();
+            var action = "";
+            if ($("#rbDeny").is(':checked')) action = "DENY";
+            else action = "ALLOW";
+
+
+            if (nw_proto != "" || tp_dst != "" || dst_ip != "" || src_ip != "" || action != "") {
+
+                AddFirewallRule(nw_proto, tp_dst, dst_ip, src_ip, action);
+
+            }
+            else {
+
+                new PNotify({
+                    title: 'Değer Giriniz!',
+                    text: 'Lütfen geçerli bir değer giriniz!',
+                    type: 'warning',
+                    hide: true
+                });
+            }
+        });
+
+
+        function AddFirewallRule(nw_proto, tp_dst, dst_ip, src_ip, action) {
+            var postData = "";
+            postData = '{"nw-proto": ' + "\"" + nw_proto + "\""
+                    + ',"tp-dst": ' + "\"" + tp_dst + "\""
+                    + ',"dst-ip": ' + "\"" + dst_ip + "\""
+                    + ',"src-ip": ' + "\"" + src_ip + "\""
+                    + ',"action": ' + "\"" + action + "\"" + '}';
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "http://192.168.1.43:8080/wm/acl/rules/json",
+                data: postData,
+                success: function (data) {
+
+                    if (data["status"] == "Success! New rule added.") {
+                        new PNotify({
+                            title: 'Kural Eklendi!',
+                            text: 'Yeni kural başarıyla eklendi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetRules();
+                    }
+                    else {
+
+                        new PNotify({
+                            title: 'Hata Oluştu.',
+                            text: data["status"],
+                            type: 'error',
+                            hide: true
+                        });
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+
+
+        }
+
+
+        GetRules();
+
+        function GetRules() {
+
+            var url = "http://192.168.1.43:8080/wm/acl/rules/json";
+
+            $(document).ready(function () {
+
+                $('#aclTable').DataTable().destroy();
+
+                $('#aclTable').DataTable({
+                    responsive: true,
+                    ajax:
+                   {
+                       url: url,
+                       dataSrc: ''
+                   },
+                    "columnDefs": [{
+                    // The `data` parameter refers to the data for the cell (defined by the
+                    // `data` option, which defaults to the column being worked with, in
+                    // this case `data: 0`.
+                    "render": function (data, type, row) {
+                        return "<a class='btn btn-xs btn-danger' onclick='DeleteRule(" + data + ")' >Sil</<a>";
+                    },
+                    "targets": 10
+                    }],
+                    columns: [
+                    { data: 'id' },
+                    { data: 'nw_src' },
+                    { data: 'nw_dst' },
+                    { data: 'nw_src_prefix' },
+                    { data: 'nw_src_maskbits' },
+                    { data: 'nw_dst_prefix' },
+                    { data: 'nw_dst_maskbits' },
+                    { data: 'nw_proto' },
+                    { data: 'tp_dst' },
+                    { data: 'action' },
+                    { data: 'id' }
+                    ]
+                });
+
+
+            });
+
+        }
+
+
+        function DeleteRule(ruleId) {
+
+            if (confirm("Kural silinecektir. Devam etmek için Tamam'a basınız!")) {
+
+                $.ajax({
+                    type: "DELETE",
+                    dataType: 'json',
+                    url: "http://192.168.1.43:8080/wm/acl/rules/json",
+                    data: '{ "ruleid":' + "\"" + ruleId + "\"" + '}',
+                    success: function (data) {
+
+
+                        new PNotify({
+                            title: 'Kural Silindi!',
+                            text: 'Kural başarıyla silindi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetRules();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+
+        $("#btnDeleteAll").click(function () {
+             
+                DeleteAll();
+          
+        });
+
+
+        function DeleteAll() {
+
+            if (confirm("Tüm Kurallar silinecektir. Devam etmek için Tamam'a basınız!")) {
+
+                $.ajax({
+                    type: "GET",
+                    dataType:"json",
+                    url: "http://192.168.1.43:8080/wm/acl/clear/json",
+                    success: function (data) {
+
+                        new PNotify({
+                            title: 'Tüm Kurallar Silindi!',
+                            text: 'Kurallar başarıyla silindi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetRules();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>

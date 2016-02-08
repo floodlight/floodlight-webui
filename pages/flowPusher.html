@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SDNCore - Statik Akışlar</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Animate.css -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                        </li>
+                        <li>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                        </li>
+                        <li>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
+                        </li>
+
+                        <li>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Statik Akışlar (Static Flow Pusher) <div id="divSId"></div></h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addRuleModal">Yeni Ekle</a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" id="btnDeleteAll">Tümünü Sil</a>
+                </div>
+                <br /><br />
+            </div>
+
+
+            <div class="row">
+
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-table fa-fw"></i>Akış Listesi
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <div id="flowTable"></div>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Add Rule-->
+            <div class="modal fade" tabindex="-1" id="addRuleModal" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="roleModalCloseButton2" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Akış Oluştur</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Switch</label>
+                                <input class="form-control" type="text" id="switch" placeholder="Anahtar MAC adresi">
+
+                                <label>Ad (Name)</label>
+                                <input class="form-control" type="text" id="name" placeholder="Akış Adı">
+
+                                <label>Çerez (Cookie)</label>
+                                <input class="form-control" type="text" id="cookie">
+
+                                <label>Öncelik</label>
+                                <input class="form-control" type="text" id="priority" placeholder="Öncelik">
+
+                                <label>Port (in port)</label>
+                                <input class="form-control" type="text" id="in_port" placeholder="">
+
+                                <label>Aktif / Pasif</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="rbActive" name="check2" checked="checked" /> Aktif
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="rbPasive" name="check2"> Pasif
+                                    </label>
+                                </div>
+
+                                <label>Tablo</label>
+                                <input class="form-control" type="text" id="table" placeholder="Varsayılan akış tablosu">
+
+                                <label>idle_timeout</label>
+                                <input class="form-control" type="text" id="idle_timeout" placeholder="">
+
+                                <label>hard_timeout</label>
+                                <input class="form-control" type="text" id="hard_timeout" placeholder="">
+
+
+                                <label>Eylem</label>
+                                <input class="form-control" type="text" id="actions" placeholder="Eylem">
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">İptal</button>
+                            <button type="button" id="btnAddRule" class="btn btn-sm btn-primary">Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- PNotify -->
+    <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
+    <script src="../bower_components/pnotify/pnotify.core.js"></script>
+    <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+
+    <script src="../js/querystringparser.js"></script>
+    <script>
+
+        var sId = getQueryParameterByName("macAddress");
+        $("#divSId").html("(" + sId + ")");
+        var controllerIp = getQueryParameterByName("cip");
+
+        $("#btnAddRule").click(function () {
+
+            var switchid = $("#switch").val();
+            var name = $("#name").val();
+            var priority = $("#priority").val();
+            var table = $("#table").val();
+            var idle_timeout = $("#idle_timeout").val();
+            var hard_timeout = $("#hard_timeout").val();
+            var cookie = $("#cookie").val();
+            var in_port = $("#in_port").val();
+            var actions = $("#actions").val();
+
+            if ($("#rbActive").is(':checked')) active = "true";
+            else active = "false";
+
+
+            if (switchid != "" && name != "") {
+
+                AddFirewallRule(switchid, name, priority, table, idle_timeout, hard_timeout, cookie, in_port, actions, active);
+
+            }
+            else {
+
+                new PNotify({
+                    title: 'Değer Giriniz!',
+                    text: 'Lütfen geçerli bir değer giriniz!',
+                    type: 'warning',
+                    hide: true
+                });
+            }
+        });
+
+
+        function AddFirewallRule(switchid, name, priority, table, idle_timeout, hard_timeout, cookie, in_port, actions, active) {
+            var postData = "";
+            postData = '{"switch":' + "\"" + switchid + "\"";
+
+            if (name != "") postData += ',"name":' + "\"" + name + "\"";
+            if (priority != "") postData += ',"priority":' + "\"" + priority + "\"";
+            if (table != "") postData += ',"table":' + "\"" + table + "\"";
+            if (idle_timeout != "") postData += ',"idle_timeout":' + "\"" + idle_timeout + "\"";
+            if (hard_timeout != "") postData += ',"hard_timeout":' + "\"" + hard_timeout + "\"";
+            if (in_port != "") postData += ',"in_port":' + "\"" + in_port + "\"";
+            if (actions != "") postData += ',"actions":' + "\"" + actions + "\"";
+            if (cookie != "") postData += ',"cookie":' + "\"" + cookie + "\"";
+            if (active != "") postData += ',"active":' + "\"" + active + "\"";
+
+            postData += '}';
+ 
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "http://192.168.1.43:8080/wm/staticflowpusher/json",
+                data: postData,
+                success: function (data) {
+
+                    if (data["status"] == "Entry pushed") {
+                        new PNotify({
+                            title: 'Akış Eklendi!',
+                            text: 'Yeni akış başarıyla eklendi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetFlows();
+                    }
+                    else {
+
+                        new PNotify({
+                            title: 'Hata Oluştu.',
+                            text: data["status"],
+                            type: 'error',
+                            hide: true
+                        });
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+
+        }
+
+
+        GetFlows();
+
+        function GetFlows() {
+
+
+            $.ajax({
+                url: "http://192.168.1.43:8080/wm/staticflowpusher/list/" + sId + "/json",
+                success: function (data) {
+                    var obj = data["" + sId + ""];
+
+                    var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'><thead>"
+                        + "<tr>"
+                        + " <th>Name</th>"
+                        + " <th>Command</th>"
+                        + " <th>Cookie</th>"
+                        + " <th>Öncelik</th>"
+                        + " <th>idleTimeoutSec</th>"
+                        + " <th>hardTimeoutSec</th>"
+                        + " <th>Out Port</th>"
+                        + " <th>flags</th>"
+                        + " <th>In port</th>"
+                        + " <th>Komut</th>"
+                        + " <th>Sil</th>"
+                        + "</tr></thead><tbody>";
+
+                    for (var i = 0; i < obj.length; i++) {
+
+                        for (propName in obj[i]) {
+
+                            if (obj[i].hasOwnProperty(propName)) {
+                                var objValue = obj[i][propName];
+
+
+
+                                html += "<tr><td>" + propName + "</td>"
+                                 + "<td>" + objValue["command"] + "</td>"
+                                + "<td>" + objValue["cookie"] + "</td>"
+                                + "<td>" + objValue["priority"] + "</td>"
+                                + "<td>" + objValue["idleTimeoutSec"] + "</td>"
+                                + "<td>" + objValue["hardTimeoutSec"] + "</td>"
+                                + "<td>" + objValue["outPort"] + "</td>"
+                                + "<td>" + objValue["flags"] + "</td>"
+                                + "<td>" + objValue["match"]["in_port"] + "</td>"
+                                + "<td>" + objValue["instructions"]["instruction_apply_actions"].actions + "</td>"
+                                + "<td><input type='button' value='Sil' class='btn btn-xs btn-danger' onclick=" + "\"" + "DeleteRule('" + propName + "');" + "\"" + "/></td>"
+                                + "</tr>";
+                            }
+                        }
+
+                    }
+
+                    html += "  </tbody></table>";
+
+
+                    $("#flowTable").html("");
+                    $("#flowTable").html(html);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+
+
+        }
+
+
+        function DeleteRule(name) {
+
+            if (confirm("Akış silinecektir. Devam etmek için Tamam'a basınız!")) {
+
+                $.ajax({
+                    type: "DELETE",
+                    dataType: 'json',
+                    url: "http://192.168.1.43:8080/wm/staticflowpusher/json",
+                    data: '{ "name":' + "\"" + name + "\"" + '}',
+                    success: function (data) {
+
+                        new PNotify({
+                            title: 'Akış Silindi!',
+                            text: 'Akış başarıyla silindi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetFlows();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+
+        $("#btnDeleteAll").click(function () {
+
+            DeleteAll(sId);
+
+        });
+
+
+        function DeleteAll(switchId) {
+
+
+            if (confirm("Tüm Akışlar silinecektir. Devam etmek için Tamam'a basınız!")) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.1.43:8080/wm/staticflowpusher/clear/" + switchId + "/json",
+                    success: function (data) {
+
+                        new PNotify({
+                            title: 'Tüm Akışlar Silindi!',
+                            text: 'Akışlar başarıyla silindi.',
+                            type: 'success',
+                            hide: true
+                        });
+
+                        GetFlows();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>
