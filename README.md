@@ -8,6 +8,7 @@ NOTE: Before starting to run you have to change the controller ip addresss in al
 Example for main page:  
 
  //Controller status
+ 
         $.ajax({
             url: "http://controller ip address/wm/core/health/json", ....
 
