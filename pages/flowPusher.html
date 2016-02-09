@@ -42,33 +42,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
             </div>
+            <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +80,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Statik Akışlar (Static Flow Pusher) <div id="divSId"></div></h3>
+                    <h3 class="page-header">Static Flow Pusher<div id="divSId"></div></h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -88,10 +89,10 @@
 
             <div class="row">
                 <div class="col-md-1">
-                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addRuleModal">Yeni Ekle</a>
+                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addRuleModal">Add New</a>
                 </div>
                 <div class="col-md-1">
-                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" id="btnDeleteAll">Tümünü Sil</a>
+                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" id="btnDeleteAll">Delete All</a>
                 </div>
                 <br /><br />
             </div>
@@ -103,7 +104,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i>Akış Listesi
+                            <i class="fa fa-table fa-fw"></i>Flows
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -127,37 +128,37 @@
                             <button type="button" class="close" id="roleModalCloseButton2" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="myModalLabel2">Akış Oluştur</h4>
+                            <h4 class="modal-title" id="myModalLabel2">Create</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Switch</label>
-                                <input class="form-control" type="text" id="switch" placeholder="Anahtar MAC adresi">
+                                <input class="form-control" type="text" id="switch" placeholder="MAC">
 
-                                <label>Ad (Name)</label>
-                                <input class="form-control" type="text" id="name" placeholder="Akış Adı">
+                                <label>Name</label>
+                                <input class="form-control" type="text" id="name">
 
-                                <label>Çerez (Cookie)</label>
+                                <label>Cookie</label>
                                 <input class="form-control" type="text" id="cookie">
 
-                                <label>Öncelik</label>
-                                <input class="form-control" type="text" id="priority" placeholder="Öncelik">
+                                <label>Priority</label>
+                                <input class="form-control" type="text" id="priority" placeholder="Priority">
 
-                                <label>Port (in port)</label>
+                                <label>In port</label>
                                 <input class="form-control" type="text" id="in_port" placeholder="">
 
-                                <label>Aktif / Pasif</label>
+                                <label>Active / Passive</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" id="rbActive" name="check2" checked="checked" /> Aktif
+                                        <input type="radio" id="rbActive" name="check2" checked="checked" /> Active
                                     </label>
                                     <label>
-                                        <input type="radio" id="rbPasive" name="check2"> Pasif
+                                        <input type="radio" id="rbPasive" name="check2"> Passive
                                     </label>
                                 </div>
 
-                                <label>Tablo</label>
-                                <input class="form-control" type="text" id="table" placeholder="Varsayılan akış tablosu">
+                                <label>Table</label>
+                                <input class="form-control" type="text" id="table" placeholder="Default flow table">
 
                                 <label>idle_timeout</label>
                                 <input class="form-control" type="text" id="idle_timeout" placeholder="">
@@ -166,8 +167,8 @@
                                 <input class="form-control" type="text" id="hard_timeout" placeholder="">
 
 
-                                <label>Eylem</label>
-                                <input class="form-control" type="text" id="actions" placeholder="Eylem">
+                                <label>Action</label>
+                                <input class="form-control" type="text" id="actions" placeholder="Action">
 
 
 
@@ -175,8 +176,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">İptal</button>
-                            <button type="button" id="btnAddRule" class="btn btn-sm btn-primary">Oluştur</button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btnAddRule" class="btn btn-sm btn-primary">Create</button>
                         </div>
                     </div>
                 </div>
@@ -237,8 +238,8 @@
             else {
 
                 new PNotify({
-                    title: 'Değer Giriniz!',
-                    text: 'Lütfen geçerli bir değer giriniz!',
+                    title: 'Enter a value!',
+                    text: 'Please enter a valid value!',
                     type: 'warning',
                     hide: true
                 });
@@ -265,14 +266,14 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "http://192.168.1.43:8080/wm/staticflowpusher/json",
+                url: "http://192.168.1.62:8080/wm/staticflowpusher/json",
                 data: postData,
                 success: function (data) {
 
                     if (data["status"] == "Entry pushed") {
                         new PNotify({
-                            title: 'Akış Eklendi!',
-                            text: 'Yeni akış başarıyla eklendi.',
+                            title: 'Flow entry added!',
+                            text: 'Flow entry successfully added.',
                             type: 'success',
                             hide: true
                         });
@@ -282,7 +283,7 @@
                     else {
 
                         new PNotify({
-                            title: 'Hata Oluştu.',
+                            title: 'Error Occured.',
                             text: data["status"],
                             type: 'error',
                             hide: true
@@ -291,7 +292,7 @@
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                 }
             });
 
@@ -304,7 +305,7 @@
 
 
             $.ajax({
-                url: "http://192.168.1.43:8080/wm/staticflowpusher/list/" + sId + "/json",
+                url: "http://192.168.1.62:8080/wm/staticflowpusher/list/" + sId + "/json",
                 success: function (data) {
                     var obj = data["" + sId + ""];
 
@@ -313,14 +314,14 @@
                         + " <th>Name</th>"
                         + " <th>Command</th>"
                         + " <th>Cookie</th>"
-                        + " <th>Öncelik</th>"
+                        + " <th>Priority</th>"
                         + " <th>idleTimeoutSec</th>"
                         + " <th>hardTimeoutSec</th>"
                         + " <th>Out Port</th>"
                         + " <th>flags</th>"
                         + " <th>In port</th>"
-                        + " <th>Komut</th>"
-                        + " <th>Sil</th>"
+                        + " <th>Command</th>"
+                        + " <th>Delete</th>"
                         + "</tr></thead><tbody>";
 
                     for (var i = 0; i < obj.length; i++) {
@@ -342,7 +343,7 @@
                                 + "<td>" + objValue["flags"] + "</td>"
                                 + "<td>" + objValue["match"]["in_port"] + "</td>"
                                 + "<td>" + objValue["instructions"]["instruction_apply_actions"].actions + "</td>"
-                                + "<td><input type='button' value='Sil' class='btn btn-xs btn-danger' onclick=" + "\"" + "DeleteRule('" + propName + "');" + "\"" + "/></td>"
+                                + "<td><input type='button' value='Delete' class='btn btn-xs btn-danger' onclick=" + "\"" + "DeleteRule('" + propName + "');" + "\"" + "/></td>"
                                 + "</tr>";
                             }
                         }
@@ -357,7 +358,7 @@
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                 }
             });
 
@@ -367,18 +368,18 @@
 
         function DeleteRule(name) {
 
-            if (confirm("Akış silinecektir. Devam etmek için Tamam'a basınız!")) {
+            if (confirm("Flow entry will be deleted. To Continue press 'OK'!")) {
 
                 $.ajax({
                     type: "DELETE",
                     dataType: 'json',
-                    url: "http://192.168.1.43:8080/wm/staticflowpusher/json",
+                    url: "http://192.168.1.62:8080/wm/staticflowpusher/json",
                     data: '{ "name":' + "\"" + name + "\"" + '}',
                     success: function (data) {
 
                         new PNotify({
-                            title: 'Akış Silindi!',
-                            text: 'Akış başarıyla silindi.',
+                            title: 'Flow entry deleted!',
+                            text: 'Flow entry successfully deleted.',
                             type: 'success',
                             hide: true
                         });
@@ -387,7 +388,7 @@
 
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                        alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                     }
                 });
             }
@@ -405,16 +406,16 @@
         function DeleteAll(switchId) {
 
 
-            if (confirm("Tüm Akışlar silinecektir. Devam etmek için Tamam'a basınız!")) {
+            if (confirm("All flow entries will be deleted. To Continue press 'OK'!")) {
 
                 $.ajax({
                     type: "GET",
-                    url: "http://192.168.1.43:8080/wm/staticflowpusher/clear/" + switchId + "/json",
+                    url: "http://192.168.1.62:8080/wm/staticflowpusher/clear/" + switchId + "/json",
                     success: function (data) {
 
                         new PNotify({
-                            title: 'Tüm Akışlar Silindi!',
-                            text: 'Akışlar başarıyla silindi.',
+                            title: 'All flow entries deleted!',
+                            text: 'All flow entries successfully deleted.',
                             type: 'success',
                             hide: true
                         });
@@ -423,7 +424,7 @@
 
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                        alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                     }
                 });
             }

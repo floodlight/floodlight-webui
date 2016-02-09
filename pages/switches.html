@@ -37,34 +37,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
             </div>
             <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -75,7 +76,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Anahtarlar (Switches)</h3>
+                    <h3 class="page-header">Switches</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -84,7 +85,7 @@
                 <div class="col-lg-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Denetleyiciye Bağlı Anahtarlar
+                          Switches Connected
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -92,9 +93,9 @@
                                 <table class="table table-striped table-bordered table-hover" id="tableSwitches">
                                     <thead>
                                         <tr>
-                                            <th>Anahtar ID</th>
-                                            <th>IPv4 Adresi</th>
-                                            <th>Bağlanma Zamanı</th>
+                                            <th>Switch ID</th>
+                                            <th>IPv4 Address</th>
+                                            <th>Connected Since</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -113,7 +114,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Anahtar Rolleri
+                         Switch Roles
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -149,7 +150,7 @@
     <script>
 
 
-        var url = "http://192.168.1.43:8080/wm/core/controller/switches/json";
+        var url = "http://192.168.1.62:8080/wm/core/controller/switches/json";
 
         $(document).ready(function () {
 
@@ -188,10 +189,10 @@
         $(document).ready(function () {
 
             $.ajax({
-                url: "http://192.168.1.43:8080/wm/core/switch/all/role/json",
+                url: "http://192.168.1.62:8080/wm/core/switch/all/role/json",
                 success: function (data) {
                     var obj = data;
-                    var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'><thead><tr> <th>Switch MAC Adresi</th> <th>Rol</th></tr></thead><tbody>";
+                    var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'><thead><tr> <th>Switch MAC </th> <th>Role</th></tr></thead><tbody>";
                     for (propName in obj) {
 
                         if (obj.hasOwnProperty(propName)) {

@@ -58,35 +58,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
             </div>
             <!-- /.navbar-header -->
 
+            <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -98,7 +99,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">İstatistik</h3>
+                    <h3 class="page-header">Statistics</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -107,7 +108,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                          İstatistik
+                            Statistics
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -115,16 +116,16 @@
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" id="rbEnable" name="iCheck"> AÇIK
+                                        <input type="radio" id="rbEnable" name="iCheck"> OPEN
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" id="rbDisable" name="iCheck"> KAPALI
+                                        <input type="radio" id="rbDisable" name="iCheck"> CLOSE
                                     </label>
                                 </div>
                             </div>
-                            <button type="button" id="btnChange" class="btn btn-primary">Değiştir</button>
+                            <button type="button" id="btnChange" class="btn btn-primary">Change</button>
                            
                         </div>
                         <!-- /.panel-body -->
@@ -185,8 +186,8 @@
             else {
 
                 new PNotify({
-                    title: 'Durum Seçiniz!',
-                    text: 'AÇIK / KAPALI seçeneklerinden birisini seçiniz!',
+                    title: 'Select A Status!',
+                    text: 'Please select a status (OPEN / CLOSE)!',
                     type: 'warning',
                     hide: true
                 });
@@ -198,13 +199,13 @@
             $.ajax({
                 type: "PUT",
                 dataType: 'json',
-                url: "http://192.168.1.43:8080/wm/statistics/config/enable/json",
+                url: "http://192.168.1.62:8080/wm/statistics/config/enable/json",
 
                 success: function (data) {
 
                     new PNotify({
-                        title: 'İstatistik Durumu Değişti',
-                        text: 'İstatistik aktif edildi.',
+                        title: 'Statistic Status Changed',
+                        text: 'Statistics are enabled.',
                         type: 'success',
                         hide: true
                     });
@@ -220,16 +221,15 @@
             $.ajax({
                 type: "PUT",
                 dataType: 'json',
-                url: " http://192.168.1.43:8080/wm/statistics/config/disable/json",
+                url: " http://192.168.1.62:8080/wm/statistics/config/disable/json",
                 success: function (data) {
 
                     new PNotify({
-                        title: 'İstatistik Durumu Değişti',
-                        text: 'İstatistik kapatıldı.',
+                        title: 'Statistic Status Changed',
+                        text: 'Statistics are disabled.',
                         type: 'success',
                         hide: true
                     });
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);

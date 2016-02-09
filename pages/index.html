@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
 
             </div>
 
@@ -55,27 +55,27 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -87,7 +87,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Denetleyici</h3>
+                    <h3 class="page-header">Controller</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="controllerStatus">...</div>
-                                    <div>Denetleyici Durumu</div>
+                                    <div>Controller Status</div>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="controllerUpTime">...</div>
-                                    <div>Aktif Olduğu Süre(s)</div>
+                                    <div>Uptime (s)</div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,8 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="controllerRole">...</div>
-                                    <div>Denetleyici Rolü <a href="#" class="btn btn-xs btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Değiştir</a>  </div>
+                                    <div>Controller Role <a href="#" class="btn btn-xs btn-success"
+                                                             data-toggle="modal" data-target=".bs-example-modal-sm">Change</a>  </div>
                                 </div>
                             </div>
                         </div>
@@ -161,13 +162,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="switchCountDiv">0</div>
-                                    <div>Anahtar (Switch)</div>
+                                    <div>Switches</div>
                                 </div>
                             </div>
                         </div>
                         <a href="switches.html">
                             <div class="panel-footer">
-                                <span class="pull-left">Tümünü Gör</span>
+                                <span class="pull-left">See All</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -183,13 +184,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="hostCountDiv">0</div>
-                                    <div>Cihaz (Host)</div>
+                                    <div>Hosts</div>
                                 </div>
                             </div>
                         </div>
                         <a href="hosts.html">
                             <div class="panel-footer">
-                                <span class="pull-left">Tümünü Gör</span>
+                                <span class="pull-left">See All</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -205,13 +206,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="linkCountDiv">0</div>
-                                    <div>Bağlantı (Link)</div>
+                                    <div>Connections (Links)</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">Tümünü Gör</span>
+                                <span class="pull-left">See All</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -227,13 +228,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="portCountDiv">0</div>
-                                    <div>Ayrılmış Port</div>
+                                    <div>Reserved Ports</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">Tümünü Gör</span>
+                                <span class="pull-left">See All</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -247,7 +248,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-dashboard fa-fw"></i>Denetleyici RAM Tüketimi
+                            <i class="fa fa-dashboard fa-fw"></i>JVM Memory Bloat
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -273,25 +274,25 @@
                 <div class="col-lg-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-signal fa-fw"></i> Tüketim Bilgisi
+                            <i class="fa fa-signal fa-fw"></i> Consumption Detail
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> Toplam:
+                                    <i class="fa fa-info fa-fw"></i> Total:
                                     <span class="pull-right text-muted small">
                                         <em><div id="totalMemoryDiv"></div></em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> 3 Kullanılan:
+                                    <i class="fa fa-info fa-fw"></i> Used:
                                     <span class="pull-right text-muted small">
                                         <em><div id="usedMemoryDiv"></div></em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> Boşta:
+                                    <i class="fa fa-info fa-fw"></i> Free:
                                     <span class="pull-right text-muted small">
                                         <em><div id="freeMemoryDiv"></div></em>
                                     </span>
@@ -309,7 +310,7 @@
                 <div class="col-lg-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> Saklama Tabloları
+                            <i class="fa fa-table fa-fw"></i> Storage Tables
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -326,7 +327,7 @@
                 <div class="col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> Yüklenen Modüller
+                            <i class="fa fa-table fa-fw"></i> Modules Loaded
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -343,7 +344,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> Tüm Denetleyici Modülleri
+                            <i class="fa fa-table fa-fw"></i> All Modules
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -367,7 +368,7 @@
                             <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="myModalLabel2">Denetleyici Rolünü Değiştir</h4>
+                            <h4 class="modal-title" id="myModalLabel2">Change Role</h4>
                         </div>
                         <div class="modal-body">
 
@@ -387,8 +388,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">İptal</button>
-                            <button type="button" id="btnChangeRole" class="btn btn-xs btn-primary">Değiştir</button>
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btnChangeRole" class="btn btn-xs btn-primary">Change</button>
                         </div>
                     </div>
                 </div>
@@ -433,7 +434,7 @@
         function LoadControllerRole() {
 
             $.ajax({
-                url: "http://192.168.1.43:8080/wm/core/role/json",
+                url: "http://192.168.1.62:8080/wm/core/role/json",
                 success: function (data) {
                     var role = data["role"];
                     var changeTime = data["role-change-date-time"];
@@ -468,7 +469,7 @@
 
                     type: "POST",
                     dataType: 'json',
-                    url: " http://192.168.1.43:8080/wm/core/role/json",
+                    url: " http://192.168.1.62:8080/wm/core/role/json",
                     data: '{"role":' + "\"" + newRole + "\"" + '}',
                     success: function (data) {
          
@@ -511,7 +512,7 @@
 
         //controller uptime
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/system/uptime/json",
+            url: "http://192.168.1.62:8080/wm/core/system/uptime/json",
             success: function (data) {
                 var uptime = data["systemUptimeMsec"];
                 uptime = uptime / 1000;
@@ -527,7 +528,7 @@
 
         //Controller status
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/health/json",
+            url: "http://192.168.1.62:8080/wm/core/health/json",
             success: function (data) {
                 var healthy = data["healthy"];
 
@@ -556,7 +557,7 @@
 
         //controller summary
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/controller/summary/json",
+            url: "http://192.168.1.62:8080/wm/core/controller/summary/json",
 
             success: function (data) {
 
@@ -578,7 +579,7 @@
 
         //controller memory used
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/memory/json",
+            url: "http://192.168.1.62:8080/wm/core/memory/json",
 
             success: function (data) {
                 var total = data["total"];
@@ -606,7 +607,7 @@
         //storage Tables
 
         $.ajax({
-            url: " http://192.168.1.43:8080/wm/core/storage/tables/json",
+            url: " http://192.168.1.62:8080/wm/core/storage/tables/json",
             success: function (data) {
 
                 var html = "<table class='table table-hover'>";
@@ -628,7 +629,7 @@
         //denetleyici modülleri
 
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/module/loaded/json",
+            url: "http://192.168.1.62:8080/wm/core/module/loaded/json",
             success: function (data) {
 
                 var obj = data;
@@ -656,7 +657,7 @@
 
 
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/module/all/json",
+            url: "http://192.168.1.62:8080/wm/core/module/all/json",
             success: function (data) {
 
                 var obj = data;

@@ -61,36 +61,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SDNCore - Ağ Yönetim Sistemi</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
             </div>
             <!-- /.navbar-header -->
 
          
+            <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -212,7 +213,7 @@
 
                        
             $.ajax({
-                url: "http://192.168.1.43:8080/wm/topology/links/json",
+                url: "http://192.168.1.62:8080/wm/topology/links/json",
                 success: function (data) {
 
                     for(var i=0;i< data.length; i++){
@@ -243,7 +244,7 @@
         function LoadSwitches()
         {
 
-            var url = "http://192.168.1.43:8080/wm/core/controller/switches/json";
+            var url = "http://192.168.1.62:8080/wm/core/controller/switches/json";
             ///HOSTLAR
             $.ajax({
                 url: url,
@@ -264,7 +265,7 @@
         
         function LoadHosts()
         {
-            var url = "http://192.168.1.43:8080/wm/device/";
+            var url = "http://192.168.1.62:8080/wm/device/";
             ///HOSTLAR
             $.ajax({
                 url: url,

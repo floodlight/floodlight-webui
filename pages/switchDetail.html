@@ -41,35 +41,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
             </div>
             <!-- /.navbar-header -->
-
+            <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Denetleyici Durumu</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
                         </li>
                         <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Anahtarlar</a>
+                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                         </li>
                         <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Cihazlar</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topoloji</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Güvenlik Duvarı</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Erişim Kontrol Listeleri</a>
+                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                         </li>
 
                         <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> İstatistik</a>
+                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                        </li>
+                        <li>
+                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        </li>
+                        <li>
+                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                        </li>
+
+                        <li>
+                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
                     </ul>
                 </div>
@@ -82,7 +82,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header">Anahtar (Switch)</h3>
+                        <h3 class="page-header">Switch Detail</h3>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -92,7 +92,7 @@
                     <div class="col-lg-5">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-info fa-fw"></i> Anahtar Detayı
+                                <i class="fa fa-info fa-fw"></i>Switch Detail
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -104,12 +104,12 @@
                                         <td><b>MAC</b></td>
                                         <td>: <span id="dpid"></span></td>
                                     </tr>
-                                    <tr>  <td><b>Versiyon</b></td>  <td>: <span class="version"></span></td>   </tr>
-                                    <tr>    <td><b>Üretici Firma</b></td> <td>: <span id="manufacturerDescription"></span></td>  </tr>
-                                    <tr>    <td><b>Donanım Bilgisi</b></td> <td>: <span id="hardwareDescription"></span></td>  </tr>
-                                    <tr>    <td><b>Yazılım Sürümü</b></td> <td>: <span id="softwareDescription"></span></td>  </tr>
-                                    <tr>    <td><b>Seri No</b></td> <td>: <span id="serialNumber"></span></td>  </tr>
-                                    <tr>    <td><b>Veriyolu Tanımı</b></td> <td>: <span id="datapathDescription"></span></td>  </tr>
+                                    <tr>  <td><b>Version</b></td>  <td>: <span class="version"></span></td>   </tr>
+                                    <tr>    <td><b>Vendor</b></td> <td>: <span id="manufacturerDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Hardware Info</b></td> <td>: <span id="hardwareDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Software Version</b></td> <td>: <span id="softwareDescription"></span></td>  </tr>
+                                    <tr>    <td><b>Serial Number</b></td> <td>: <span id="serialNumber"></span></td>  </tr>
+                                    <tr>    <td><b>Datapath</b></td> <td>: <span id="datapathDescription"></span></td>  </tr>
 
 
 
@@ -124,18 +124,18 @@
                     <div class="col-lg-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-info fa-fw"></i> Akış Özet Bilgisi
+                                <i class="fa fa-info fa-fw"></i> Flow Summary
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <table class="table table-hover">
 
-                                    <tr>  <td><b> Akış Sayısı</b></td>  <td>: <span id="flowCount"></span></td>   </tr>
-                                    <tr>    <td><b>Paket Sayısı</b></td> <td>: <span id="packetCount"></span></td>  </tr>
+                                    <tr>  <td><b> Flow Count</b></td>  <td>: <span id="flowCount"></span></td>   </tr>
+                                    <tr>    <td><b>Packet Count</b></td> <td>: <span id="packetCount"></span></td>  </tr>
                                     <tr>    <td><b>Byte</b></td> <td>: <span id="byteCount"></span></td>  </tr>
                                     <tr>    <td><b>Flag</b></td> <td>: <span id="flags"></span></td>  </tr>
                                     <tr>    <td><b>Buffer</b></td> <td>: <span id="bufferCount"></span></td>  </tr>
-                                    <tr>    <td><b>Tablo</b></td> <td>: <span id="tableCount"></span></td>  </tr>
+                                    <tr>    <td><b>Table Count</b></td> <td>: <span id="tableCount"></span></td>  </tr>
 
 
 
@@ -149,7 +149,7 @@
                     <div class="col-lg-3">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-user fa-fw"></i> Anahtar Rol Bilgisi
+                                <i class="fa fa-user fa-fw"></i> Role Info
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -172,7 +172,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button type="button" id="btnChangeRole" class="btn btn-primary">Değiştir</button>
+                                <button type="button" id="btnChangeRole" class="btn btn-primary">Change</button>
                             </div>
                             <!-- /.panel-body -->
                         </div>
@@ -195,7 +195,7 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-info fa-fw"></i> Anahtar Port Tablosu
+                                <i class="fa fa-info fa-fw"></i> Port Table
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -230,7 +230,8 @@
 
                 <div class="row">
                     <div class="col-md-1">
-                        <input type="button" id="btnFlowPusher" class="btn btn-sm btn-primary" value="Static Akış Girdilerini Düzenle" />
+                        <input type="button" id="btnFlowPusher" class="btn btn-sm btn-primary"
+                                value="Edit Static Flow Entries" />
                     </div>
                     <br />
                     <br />
@@ -244,14 +245,14 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-info fa-fw"></i> Akış Tablosu
+                                <i class="fa fa-info fa-fw"></i> Flow Table
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <table class='table table-bordered table-striped table-hover responsive-utilities' id="flowTable">
                                     <thead>
                                         <tr>
-                                            <th>Tablo</th>
+                                            <th>Table No</th>
                                             <th>Pkt.Count</th>
                                             <th>Byte</th>
                                             <th>Duration(s)</th>
@@ -281,7 +282,7 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-table fa-fw"></i>Anahtar Tabloları
+                                <i class="fa fa-table fa-fw"></i>Tables
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -307,7 +308,7 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-info fa-fw"></i> Grup Bilgisi
+                                <i class="fa fa-info fa-fw"></i> Groups
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -343,7 +344,7 @@
                                 <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
-                                <h4 class="modal-title" id="myModalLabel2">Bantgenişliği Tüketimi</h4>
+                                <h4 class="modal-title" id="myModalLabel2">Bandwitdh Consumption</h4>
                             </div>
                             <div class="modal-body">
 
@@ -351,7 +352,7 @@
                                     <thead>
                                         <tr>
                                             <th>Port</th>
-                                            <th>Güncelleme</th>
+                                            <th>Updated On</th>
                                             <th>Bps (RX)</th>
                                             <th>Bps (TX)</th>
                                         </tr>
@@ -403,7 +404,7 @@
         var sId = getQueryParameterByName("macAddress");
         ///ANAHTAR features
         $.ajax({
-            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/features/json",
+            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/features/json",
             success: function (data) {
 
                 $(".version").html(data["version"]);
@@ -425,7 +426,7 @@
 
         ///ANAHTAR BİLGİLERİ
         $.ajax({
-            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/desc/json",
+            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/desc/json",
             success: function (data) {
 
                 $(".version").html(data.desc["version"]);
@@ -447,7 +448,7 @@
 
         //GROUP BİLGİSİ
         $.ajax({
-            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/group-features/json",
+            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/group-features/json",
             success: function (data) {
                 $("#capabilities").html(data.groupFeatures["capabilities"]);
                 $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
@@ -468,7 +469,7 @@
 
         ///ANAHTAR DETAY BİLGİSİ
         $.ajax({
-            url: " http://192.168.1.43:8080/wm/core/switch/" + sId + "/aggregate/json",
+            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/aggregate/json",
             success: function (data) {
 
                 $(".version").html(data.aggregate["version"]);
@@ -487,7 +488,7 @@
 
         ///ANAHTAR PORTLARI
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/port/json",
+            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/port/json",
             success: function (dat) {
 
                 $('#portTable').DataTable({
@@ -532,7 +533,7 @@
 
         ///ANAHTAR AKIŞ BİLGİLERİ
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/flow/json",
+            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/flow/json",
             success: function (dat) {
 
                 $('#flowTable').DataTable({
@@ -566,7 +567,7 @@
 
             ///ANAHTAR rol BİLGİSİ
             $.ajax({
-                url: " http://192.168.1.43:8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://192.168.1.62:8080/wm/core/switch/" + switchId + "/role/json",
                 success: function (data) {
 
                     var obj = data;
@@ -611,7 +612,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: " http://192.168.1.43:8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://192.168.1.62:8080/wm/core/switch/" + switchId + "/role/json",
                 data: '{"role":' + "\"" + newRole + "\"" + '}',
                 success: function (data) {
 
@@ -639,7 +640,7 @@
 
         ///ANAHTAR TABLOLARI
         $.ajax({
-            url: "http://192.168.1.43:8080/wm/core/switch/" + sId + "/table/json",
+            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/table/json",
             success: function (dat) {
                 $('#switchTables').DataTable({
                     data: dat["table"],
@@ -669,7 +670,7 @@
 
 
             $.ajax({
-                url: "http://192.168.1.43:8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
+                url: "http://192.168.1.62:8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
                 success: function (dat) {
                     $('#statTable').DataTable().destroy();
 
