@@ -14,20 +14,20 @@ Example for main page (index.html):
 
 Web UI Modules : 
 
-Controller Status 
-Controller Role Management
-Controller Memory Consume
-Loaded  Controller Modules
-Switches 
-Switch Role Management
-Switch Details
-Static Flow Pusher
-Hosts
-Switch Statistics 
-Topology View
-Firewall Management
-Access Control Lists Module
-Statistics Management
+        Controller Status,
+        Controller Role Management,
+        Controller Memory Consume,
+        Loaded  Controller Modules,
+        Switches,
+        Switch Role Management,
+        Switch Details,
+        Static Flow Pusher,
+        Hosts,
+        Switch Statistics,
+        Topology View,
+        Firewall Management,
+        Access Control Lists Module,
+        Statistics Management
 
 Screen Shots 
 
