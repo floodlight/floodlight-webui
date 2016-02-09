@@ -20,10 +20,12 @@ Controller Memory Consume
 Loaded  Controller Modules
 Switches 
 Switch Role Management
+Switch Details
+Static Flow Pusher
 Hosts
 Switch Statistics 
 Topology View
-Firewall Module
+Firewall Management
 Access Control Lists Module
 Statistics Management
 
