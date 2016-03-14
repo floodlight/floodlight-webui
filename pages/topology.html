@@ -92,7 +92,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -138,9 +140,13 @@
     <script src="../bower_components/visjs/vis.js"></script>
     <script src="../bower_components/visjs/googleAnalytics.js"></script>
 
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script type="text/javascript">
+
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+
+
     var nodes = null;
     var edges = null;
     var network = null;
@@ -213,7 +219,7 @@
 
                        
             $.ajax({
-                url: "http://192.168.1.62:8080/wm/topology/links/json",
+                url: "http://" +ipaddress+ ":8080/wm/topology/links/json",
                 success: function (data) {
 
                     for(var i=0;i< data.length; i++){
@@ -244,7 +250,7 @@
         function LoadSwitches()
         {
 
-            var url = "http://192.168.1.62:8080/wm/core/controller/switches/json";
+            var url = "http://" +ipaddress+ ":8080/wm/core/controller/switches/json";
             ///HOSTLAR
             $.ajax({
                 url: url,
@@ -265,7 +271,7 @@
         
         function LoadHosts()
         {
-            var url = "http://192.168.1.62:8080/wm/device/";
+            var url = "http://" +ipaddress+ ":8080/wm/device/";
             ///HOSTLAR
             $.ajax({
                 url: url,

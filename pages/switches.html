@@ -66,7 +66,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -145,12 +147,14 @@
     <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script src="../js/querystringparser.js"></script>
     <script>
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
 
-
-        var url = "http://192.168.1.62:8080/wm/core/controller/switches/json";
+        var url = "http://" +ipaddress+ ":8080/wm/core/controller/switches/json";
 
         $(document).ready(function () {
 
@@ -189,7 +193,7 @@
         $(document).ready(function () {
 
             $.ajax({
-                url: "http://192.168.1.62:8080/wm/core/switch/all/role/json",
+                url: "http://" +ipaddress+ ":8080/wm/core/switch/all/role/json",
                 success: function (data) {
                     var obj = data;
                     var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'><thead><tr> <th>Switch MAC </th> <th>Role</th></tr></thead><tbody>";

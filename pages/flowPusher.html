@@ -70,7 +70,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -205,14 +207,15 @@
     <script src="../bower_components/pnotify/pnotify.core.js"></script>
     <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script src="../js/querystringparser.js"></script>
     <script>
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
 
         var sId = getQueryParameterByName("macAddress");
         $("#divSId").html("(" + sId + ")");
-        var controllerIp = getQueryParameterByName("cip");
+        
 
         $("#btnAddRule").click(function () {
 
@@ -266,7 +269,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "http://192.168.1.62:8080/wm/staticflowpusher/json",
+                url: "http://" +ipaddress+ ":8080/wm/staticflowpusher/json",
                 data: postData,
                 success: function (data) {
 
@@ -305,7 +308,7 @@
 
 
             $.ajax({
-                url: "http://192.168.1.62:8080/wm/staticflowpusher/list/" + sId + "/json",
+                url: "http://" +ipaddress+ ":8080/wm/staticflowpusher/list/" + sId + "/json",
                 success: function (data) {
                     var obj = data["" + sId + ""];
 
@@ -373,7 +376,7 @@
                 $.ajax({
                     type: "DELETE",
                     dataType: 'json',
-                    url: "http://192.168.1.62:8080/wm/staticflowpusher/json",
+                    url: "http://" +ipaddress+ ":8080/wm/staticflowpusher/json",
                     data: '{ "name":' + "\"" + name + "\"" + '}',
                     success: function (data) {
 
@@ -410,7 +413,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "http://192.168.1.62:8080/wm/staticflowpusher/clear/" + switchId + "/json",
+                    url: "http://" +ipaddress+ ":8080/wm/staticflowpusher/clear/" + switchId + "/json",
                     success: function (data) {
 
                         new PNotify({

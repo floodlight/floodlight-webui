@@ -70,7 +70,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -394,17 +396,17 @@
     <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
     <script src="../bower_components/pnotify/pnotify.core.js"></script>
     <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script src="../js/querystringparser.js"></script>
 
 
     <script>
-
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
         var sId = getQueryParameterByName("macAddress");
         ///ANAHTAR features
         $.ajax({
-            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/features/json",
+            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/features/json",
             success: function (data) {
 
                 $(".version").html(data["version"]);
@@ -426,7 +428,7 @@
 
         ///ANAHTAR BİLGİLERİ
         $.ajax({
-            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/desc/json",
+            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/desc/json",
             success: function (data) {
 
                 $(".version").html(data.desc["version"]);
@@ -448,7 +450,7 @@
 
         //GROUP BİLGİSİ
         $.ajax({
-            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/group-features/json",
+            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/group-features/json",
             success: function (data) {
                 $("#capabilities").html(data.groupFeatures["capabilities"]);
                 $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
@@ -469,7 +471,7 @@
 
         ///ANAHTAR DETAY BİLGİSİ
         $.ajax({
-            url: " http://192.168.1.62:8080/wm/core/switch/" + sId + "/aggregate/json",
+            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/aggregate/json",
             success: function (data) {
 
                 $(".version").html(data.aggregate["version"]);
@@ -488,7 +490,7 @@
 
         ///ANAHTAR PORTLARI
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/port/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/port/json",
             success: function (dat) {
 
                 $('#portTable').DataTable({
@@ -533,7 +535,7 @@
 
         ///ANAHTAR AKIŞ BİLGİLERİ
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/flow/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/flow/json",
             success: function (dat) {
 
                 $('#flowTable').DataTable({
@@ -567,7 +569,7 @@
 
             ///ANAHTAR rol BİLGİSİ
             $.ajax({
-                url: " http://192.168.1.62:8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://" +ipaddress+ ":8080/wm/core/switch/" + switchId + "/role/json",
                 success: function (data) {
 
                     var obj = data;
@@ -612,7 +614,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: " http://192.168.1.62:8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://" +ipaddress+ ":8080/wm/core/switch/" + switchId + "/role/json",
                 data: '{"role":' + "\"" + newRole + "\"" + '}',
                 success: function (data) {
 
@@ -640,7 +642,7 @@
 
         ///ANAHTAR TABLOLARI
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/switch/" + sId + "/table/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/table/json",
             success: function (dat) {
                 $('#switchTables').DataTable({
                     data: dat["table"],
@@ -670,7 +672,7 @@
 
 
             $.ajax({
-                url: "http://192.168.1.62:8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
+                url: "http://" +ipaddress+ ":8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
                 success: function (dat) {
                     $('#statTable').DataTable().destroy();
 

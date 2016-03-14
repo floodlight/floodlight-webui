@@ -70,7 +70,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -220,13 +222,13 @@
     <script src="../bower_components/pnotify/pnotify.core.js"></script>
     <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script src="../js/querystringparser.js"></script>
     <script>
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
 
-
-        var controllerIp = getQueryParameterByName("cip");
+       
 
         $("#btnAddRule").click(function () {
 
@@ -272,7 +274,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "http://192.168.1.62:8080/wm/acl/rules/json",
+                url: "http://" +ipaddress+ ":8080/wm/acl/rules/json",
                 data: postData,
                 success: function (data) {
 
@@ -310,7 +312,7 @@
 
         function GetRules() {
 
-            var url = "http://192.168.1.62:8080/wm/acl/rules/json";
+            var url = "http://" +ipaddress+ ":8080/wm/acl/rules/json";
 
             $(document).ready(function () {
 
@@ -360,7 +362,7 @@
                 $.ajax({
                     type: "DELETE",
                     dataType: 'json',
-                    url: "http://192.168.1.62:8080/wm/acl/rules/json",
+                    url: "http://" +ipaddress+ ":8080/wm/acl/rules/json",
                     data: '{ "ruleid":' + "\"" + ruleId + "\"" + '}',
                     success: function (data) {
 
@@ -398,7 +400,7 @@
                 $.ajax({
                     type: "GET",
                     dataType:"json",
-                    url: "http://192.168.1.62:8080/wm/acl/clear/json",
+                    url: "http://" +ipaddress+ ":8080/wm/acl/clear/json",
                     success: function (data) {
 
                         new PNotify({

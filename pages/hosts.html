@@ -80,7 +80,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -152,13 +154,17 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
+    <script src="../js/jquery.cookie.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script src="../js/querystringparser.js"></script>
 
     <script>
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
 
-        var url = "http://192.168.1.62:8080/wm/device/";
+        var url = "http://" +ipaddress+ ":8080/wm/device/";
+
+      
+
 
         $(document).ready(function () {
 

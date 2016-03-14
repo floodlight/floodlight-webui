@@ -70,7 +70,9 @@
 
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
+                        </li><li>
+    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -354,14 +356,13 @@
     <script src="../bower_components/pnotify/pnotify.core.js"></script>
     <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script src="../js/querystringparser.js"></script>
     <script>
 
 
-
-        var controllerIp = getQueryParameterByName("cip");
+        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
 
         GetStatus();
         GetSubnetMask();
@@ -414,7 +415,7 @@
             $.ajax({
                 type: "GET",
                 dataType: 'json',
-                url: " http://192.168.1.62:8080/wm/firewall/module/status/json",
+                url: " http://" +ipaddress+ ":8080/wm/firewall/module/status/json",
 
                 success: function (data) {
 
@@ -452,7 +453,7 @@
             $.ajax({
                 type: "PUT",
                 dataType: 'json',
-                url: " http://192.168.1.62:8080/wm/firewall/module/enable/json",
+                url: " http://" +ipaddress+ ":8080/wm/firewall/module/enable/json",
 
                 success: function (data) {
 
@@ -475,7 +476,7 @@
             $.ajax({
                 type: "PUT",
                 dataType: 'json',
-                url: " http://192.168.1.62:8080/wm/firewall/module/disable/json",
+                url: " http://" +ipaddress+ ":8080/wm/firewall/module/disable/json",
                 success: function (data) {
 
                     new PNotify({
@@ -500,7 +501,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "http://192.168.1.62:8080/wm/firewall/module/subnet-mask/json",
+                url: "http://" +ipaddress+ ":8080/wm/firewall/module/subnet-mask/json",
                 data: '{"subnet-mask":' + "\"" + mask + "\"" + '}',
                 success: function (data) {
 
@@ -527,7 +528,7 @@
             $.ajax({
                 type: "GET",
                 dataType: 'json',
-                url: "http://192.168.1.62:8080/wm/firewall/module/subnet-mask/json",
+                url: "http://" +ipaddress+ ":8080/wm/firewall/module/subnet-mask/json",
                 success: function (data) {
                     $("#subnetMask").html(data["subnet-mask"]);
                 },
@@ -599,7 +600,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "http://192.168.1.62:8080/wm/firewall/rules/json",
+                url: "http://" +ipaddress+ ":8080/wm/firewall/rules/json",
                 data: postData,
                 success: function (data) {
 
@@ -637,7 +638,7 @@
 
         function GetRules() {
 
-            var url = "http://192.168.1.62:8080/wm/firewall/rules/json";
+            var url = "http://" +ipaddress+ ":8080/wm/firewall/rules/json";
 
             $(document).ready(function () {
 
@@ -697,7 +698,7 @@
                 $.ajax({
                     type: "DELETE",
                     dataType: 'json',
-                    url: "http://192.168.1.62:8080/wm/firewall/rules/json",
+                    url: "http://" +ipaddress+ ":8080/wm/firewall/rules/json",
                     data: '{ "ruleid":' + "\"" + ruleId + "\"" + '}',
                     success: function (data) {
 

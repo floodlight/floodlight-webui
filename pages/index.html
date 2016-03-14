@@ -77,6 +77,10 @@
                         <li>
                             <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                         </li>
+
+                        <li>
+                            <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -421,12 +425,12 @@
     <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
     <script src="../bower_components/pnotify/pnotify.core.js"></script>
     <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
-
-
     <script src="../js/querystringparser.js"></script>
-
+    <script src="../js/jquery.cookie.js"></script>
 
     <script type="text/javascript">
+       var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+       
 
         //Controller role
         LoadControllerRole();
@@ -434,7 +438,7 @@
         function LoadControllerRole() {
 
             $.ajax({
-                url: "http://192.168.1.62:8080/wm/core/role/json",
+                url: "http://" +ipaddress+ ":8080/wm/core/role/json",
                 success: function (data) {
                     var role = data["role"];
                     var changeTime = data["role-change-date-time"];
@@ -469,7 +473,7 @@
 
                     type: "POST",
                     dataType: 'json',
-                    url: " http://192.168.1.62:8080/wm/core/role/json",
+                    url: " http://" +ipaddress+ ":8080/wm/core/role/json",
                     data: '{"role":' + "\"" + newRole + "\"" + '}',
                     success: function (data) {
          
@@ -512,7 +516,7 @@
 
         //controller uptime
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/system/uptime/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/system/uptime/json",
             success: function (data) {
                 var uptime = data["systemUptimeMsec"];
                 uptime = uptime / 1000;
@@ -528,7 +532,7 @@
 
         //Controller status
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/health/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/health/json",
             success: function (data) {
                 var healthy = data["healthy"];
 
@@ -557,7 +561,7 @@
 
         //controller summary
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/controller/summary/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/controller/summary/json",
 
             success: function (data) {
 
@@ -579,7 +583,7 @@
 
         //controller memory used
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/memory/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/memory/json",
 
             success: function (data) {
                 var total = data["total"];
@@ -607,7 +611,7 @@
         //storage Tables
 
         $.ajax({
-            url: " http://192.168.1.62:8080/wm/core/storage/tables/json",
+            url: " http://" +ipaddress+ ":8080/wm/core/storage/tables/json",
             success: function (data) {
 
                 var html = "<table class='table table-hover'>";
@@ -629,7 +633,7 @@
         //denetleyici modülleri
 
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/module/loaded/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/module/loaded/json",
             success: function (data) {
 
                 var obj = data;
@@ -657,7 +661,7 @@
 
 
         $.ajax({
-            url: "http://192.168.1.62:8080/wm/core/module/all/json",
+            url: "http://" +ipaddress+ ":8080/wm/core/module/all/json",
             success: function (data) {
 
                 var obj = data;
