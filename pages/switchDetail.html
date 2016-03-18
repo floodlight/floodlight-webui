@@ -403,10 +403,12 @@
 
     <script>
         var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+        var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
+
         var sId = getQueryParameterByName("macAddress");
         ///ANAHTAR features
         $.ajax({
-            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/features/json",
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/features/json",
             success: function (data) {
 
                 $(".version").html(data["version"]);
@@ -428,7 +430,7 @@
 
         ///ANAHTAR BİLGİLERİ
         $.ajax({
-            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/desc/json",
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/desc/json",
             success: function (data) {
 
                 $(".version").html(data.desc["version"]);
@@ -450,7 +452,7 @@
 
         //GROUP BİLGİSİ
         $.ajax({
-            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/group-features/json",
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/group-features/json",
             success: function (data) {
                 $("#capabilities").html(data.groupFeatures["capabilities"]);
                 $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
@@ -471,7 +473,7 @@
 
         ///ANAHTAR DETAY BİLGİSİ
         $.ajax({
-            url: " http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/aggregate/json",
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/aggregate/json",
             success: function (data) {
 
                 $(".version").html(data.aggregate["version"]);
@@ -490,7 +492,7 @@
 
         ///ANAHTAR PORTLARI
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/port/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/port/json",
             success: function (dat) {
 
                 $('#portTable').DataTable({
@@ -535,7 +537,7 @@
 
         ///ANAHTAR AKIŞ BİLGİLERİ
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/flow/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/flow/json",
             success: function (dat) {
 
                 $('#flowTable').DataTable({
@@ -569,7 +571,7 @@
 
             ///ANAHTAR rol BİLGİSİ
             $.ajax({
-                url: " http://" +ipaddress+ ":8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + switchId + "/role/json",
                 success: function (data) {
 
                     var obj = data;
@@ -614,7 +616,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: " http://" +ipaddress+ ":8080/wm/core/switch/" + switchId + "/role/json",
+                url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + switchId + "/role/json",
                 data: '{"role":' + "\"" + newRole + "\"" + '}',
                 success: function (data) {
 
@@ -642,7 +644,7 @@
 
         ///ANAHTAR TABLOLARI
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/switch/" + sId + "/table/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/table/json",
             success: function (dat) {
                 $('#switchTables').DataTable({
                     data: dat["table"],
@@ -672,7 +674,7 @@
 
 
             $.ajax({
-                url: "http://" +ipaddress+ ":8080/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
+                url: "http://" +ipaddress+ ":" +restport+ "/wm/statistics/bandwidth/" + sId + "/" + portId + "/json",
                 success: function (dat) {
                     $('#statTable').DataTable().destroy();
 

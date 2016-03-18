@@ -145,6 +145,7 @@
     <script type="text/javascript">
 
         var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+        var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
 
     var nodes = null;
@@ -219,7 +220,7 @@
 
                        
             $.ajax({
-                url: "http://" +ipaddress+ ":8080/wm/topology/links/json",
+                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
                 success: function (data) {
 
                     for(var i=0;i< data.length; i++){
@@ -250,7 +251,7 @@
         function LoadSwitches()
         {
 
-            var url = "http://" +ipaddress+ ":8080/wm/core/controller/switches/json";
+            var url = "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json";
             ///HOSTLAR
             $.ajax({
                 url: url,
@@ -271,7 +272,7 @@
         
         function LoadHosts()
         {
-            var url = "http://" +ipaddress+ ":8080/wm/device/";
+            var url = "http://" +ipaddress+ ":" +restport+ "/wm/device/";
             ///HOSTLAR
             $.ajax({
                 url: url,

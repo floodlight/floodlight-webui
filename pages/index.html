@@ -430,7 +430,7 @@
 
     <script type="text/javascript">
        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
-       
+       var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
         //Controller role
         LoadControllerRole();
@@ -438,7 +438,7 @@
         function LoadControllerRole() {
 
             $.ajax({
-                url: "http://" +ipaddress+ ":8080/wm/core/role/json",
+                url: "http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
                 success: function (data) {
                     var role = data["role"];
                     var changeTime = data["role-change-date-time"];
@@ -473,7 +473,7 @@
 
                     type: "POST",
                     dataType: 'json',
-                    url: " http://" +ipaddress+ ":8080/wm/core/role/json",
+                    url: " http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
                     data: '{"role":' + "\"" + newRole + "\"" + '}',
                     success: function (data) {
          
@@ -516,7 +516,7 @@
 
         //controller uptime
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/system/uptime/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/system/uptime/json",
             success: function (data) {
                 var uptime = data["systemUptimeMsec"];
                 uptime = uptime / 1000;
@@ -532,19 +532,19 @@
 
         //Controller status
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/health/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/health/json",
             success: function (data) {
                 var healthy = data["healthy"];
 
                 if (healthy == "1") {
-                    $("#controllerStatus").html("Aktif");
+                    $("#controllerStatus").html("Active");
 
                     $("#controllerStatusPanel").removeClass("panel-green");
                     $("#controllerStatusPanel").addClass("panel-green");
                     $("#controllerStatusIcon").addClass("glyphicon glyphicon-ok fa-5x");
                 }
                 else {
-                    $("#controllerStatus").html("Pasif");
+                    $("#controllerStatus").html("Passive");
                     $("#controllerStatusPanel").removeClass("panel-green");
                     $("#controllerStatusPanel").addClass("panel-red");
                     $("#controllerStatusIcon").removeClass("glyphicon glyphicon-ok fa-5x")
@@ -561,7 +561,7 @@
 
         //controller summary
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/controller/summary/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/summary/json",
 
             success: function (data) {
 
@@ -569,6 +569,8 @@
                 var hostCount = data["# hosts"];
                 var linkCount = data["# inter-switch links"];
                 var portCount = data["# quarantine ports"];
+
+                console.log(linkCount);
 
                 $("#switchCountDiv").html(switchCount);
                 $("#hostCountDiv").html(hostCount);
@@ -583,7 +585,7 @@
 
         //controller memory used
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/memory/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/memory/json",
 
             success: function (data) {
                 var total = data["total"];
@@ -611,7 +613,7 @@
         //storage Tables
 
         $.ajax({
-            url: " http://" +ipaddress+ ":8080/wm/core/storage/tables/json",
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/storage/tables/json",
             success: function (data) {
 
                 var html = "<table class='table table-hover'>";
@@ -633,7 +635,7 @@
         //denetleyici modülleri
 
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/module/loaded/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/loaded/json",
             success: function (data) {
 
                 var obj = data;
@@ -661,7 +663,7 @@
 
 
         $.ajax({
-            url: "http://" +ipaddress+ ":8080/wm/core/module/all/json",
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/all/json",
             success: function (data) {
 
                 var obj = data;

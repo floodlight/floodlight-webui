@@ -160,8 +160,9 @@
 
     <script>
         var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+        var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
-        var url = "http://" +ipaddress+ ":8080/wm/device/";
+        var url = "http://" +ipaddress+ ":" +restport+ "/wm/device/";
 
       
 
