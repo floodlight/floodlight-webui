@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDNCore - Topoloji</title>
+    <title>SDNCore - Topology</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -216,17 +216,18 @@
         LoadSwitches();
 
 
-        function LoadsLinks(hosts) {  ///LİNKLER
+        function LoadExternalLinks(hosts) {  ///LİNKLER
 
-                       
+            var url = "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json";
+
             $.ajax({
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
+                url: url,
                 success: function (data) {
-
+                    console.log(data);
                     for(var i=0;i< data.length; i++){
                         edges.push({ from: "s"+data[i]["src-switch"], to: "s"+data[i]["dst-switch"], length: EDGE_LENGTH_MAIN });
                     }
-               
+
                     for (var i = 0; i < hosts.length; i++)
                     {
                         if (hosts[i]["attachmentPoint"].length > 0)
@@ -238,8 +239,39 @@
                         }
                     }
 
-                  
+                    LoadInternalLinks();
+                    //draw();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+        function LoadInternalLinks(hosts) {  ///LİNKLER
+
+                       
+            $.ajax({
+                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
+                success: function (data) {
+                    console.log(data);
+                    for(var i=0;i< data.length; i++){
+                        edges.push({ from: "s"+data[i]["src-switch"], to: "s"+data[i]["dst-switch"], length: EDGE_LENGTH_MAIN });
+                    }
+               
+//                    for (var i = 0; i < hosts.length; i++)
+//                    {
+//                        if (hosts[i]["attachmentPoint"].length > 0)
+//                        {
+//                            edges.push({
+//                                from: "h" + hosts[i]["mac"]
+//                                , to: "s"+hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN
+//                            });
+//                        }
+//                    }
+
                     draw();
+                    //LoadExternalLinks(hosts);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
@@ -287,7 +319,7 @@
                             nodes.push({ id: id, label: label, image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image' });
                         }
                     }
-                    LoadsLinks(hosts);
+                    LoadExternalLinks(hosts);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
