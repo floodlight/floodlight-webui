@@ -712,6 +712,83 @@
        function startRefresh() {
            setTimeout(startRefresh,1000);
 
+           function LoadControllerRole() {
+
+               $.ajax({
+                   url: "http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
+                   success: function (data) {
+                       var role = data["role"];
+                       var changeTime = data["role-change-date-time"];
+
+
+                       if (role == "ACTIVE") {
+                           $("#rbActive").prop("checked", true);
+
+                       }
+                       else if (role == "STANDBY") {
+                           $("#rbStandBy").prop("checked", true);
+                       }
+
+                       $("#controllerRole").html(role);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                   }
+               });
+           }
+
+           //Controller status
+           $.ajax({
+               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/health/json",
+               success: function (data) {
+                   var healthy = data["healthy"];
+
+                   if (healthy == "1") {
+                       $("#controllerStatus").html("Active");
+
+                       $("#controllerStatusPanel").removeClass("panel-green");
+                       $("#controllerStatusPanel").addClass("panel-green");
+                       $("#controllerStatusIcon").addClass("glyphicon glyphicon-ok fa-5x");
+                   }
+                   else {
+                       $("#controllerStatus").html("Passive");
+                       $("#controllerStatusPanel").removeClass("panel-green");
+                       $("#controllerStatusPanel").addClass("panel-red");
+                       $("#controllerStatusIcon").removeClass("glyphicon glyphicon-ok fa-5x")
+                       $("#controllerStatusIcon").addClass("glyphicon glyphicon-remove fa-5x");
+                   }
+
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
+
+
+           //controller summary
+           $.ajax({
+               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/summary/json",
+
+               success: function (data) {
+
+                   var switchCount = data["# Switches"];
+                   var hostCount = data["# hosts"];
+                   var linkCount = data["# inter-switch links"];
+                   var portCount = data["# quarantine ports"];
+
+                   console.log(linkCount);
+
+                   $("#switchCountDiv").html(switchCount);
+                   $("#hostCountDiv").html(hostCount);
+                   $("#linkCountDiv").html(linkCount);
+                   $("#portCountDiv").html(portCount);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
            //controller memory used
            $.ajax({
                url: "http://" + ipaddress + ":" + restport + "/wm/core/memory/json",
@@ -743,6 +820,65 @@
                    var uptime = data["systemUptimeMsec"];
                    uptime = uptime / 1000;
                    $("#controllerUpTime").html(Math.floor(uptime));
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
+           //storage Tables
+
+           $.ajax({
+               url: " http://" +ipaddress+ ":" +restport+ "/wm/core/storage/tables/json",
+               success: function (data) {
+
+                   var html = "<table class='table table-hover'>";
+
+                   for (var i = 0 ; i < data.length; i++) {
+                       html += "<tr><td>" + data[i] + "</td></tr>";
+                   }
+                   html += "</table>";
+                   $("#storageTables").html(html);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
+           //denetleyici modülleri
+
+           $.ajax({
+               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/loaded/json",
+               success: function (data) {
+                   var obj = data;
+                   var html = "<table class='table table-hover'>";
+                   for (propName in obj) {
+                       html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
+                   }
+                   html += "</table>";
+                   $("#loadedModules").html("");
+                   $("#loadedModules").html(html);
+
+
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
+
+           $.ajax({
+               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/all/json",
+               success: function (data) {
+                   var obj = data;
+                   var html = "<table class='table table-hover'>";
+                   for (propName in obj) {
+                       html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
+                   }
+                   html += "</table>";
+
+                   $("#allModules").html("");
+                   $("#allModules").html(html);
                },
                error: function (jqXHR, textStatus, errorThrown) {
                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
