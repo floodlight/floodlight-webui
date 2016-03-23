@@ -492,8 +492,8 @@
                     url: " http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
                     data: '{"role":' + "\"" + newRole + "\"" + '}',
                     success: function (data) {
-         
-                         
+
+
 
                         if (data["TBD"] != "Not yet implemented") {
                             $("#roleModalCloseButton").click();
@@ -511,7 +511,7 @@
                             });
 
                         }
-                      
+
 
 
                     },
@@ -536,7 +536,7 @@
             success: function (data) {
                 var uptime = data["systemUptimeMsec"];
                 uptime = uptime / 1000;
-                $("#controllerUpTime").html(uptime);
+                $("#controllerUpTime").html(Math.floor(uptime));
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
@@ -608,10 +608,10 @@
                 var free = data["free"];
                 var used = Number(total) - Number(free);
 
-                $("#goal-text").html(total);
-                $("#totalMemoryDiv").html(total);
-                $("#usedMemoryDiv").html(used);
-                $("#freeMemoryDiv").html(free);
+                $("#goal-text").html(formatSizeUnits(total));
+                $("#totalMemoryDiv").html(formatSizeUnits(total));
+                $("#usedMemoryDiv").html(formatSizeUnits(used));
+                $("#freeMemoryDiv").html(formatSizeUnits(free));
 
 
                 var target = document.getElementById('foo'); // your canvas element
@@ -704,6 +704,61 @@
                 alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
+
+       $(function() {
+           startRefresh();
+       });
+
+       function startRefresh() {
+           setTimeout(startRefresh,1000);
+
+           //controller memory used
+           $.ajax({
+               url: "http://" + ipaddress + ":" + restport + "/wm/core/memory/json",
+
+               success: function (data) {
+                   var total = data["total"];
+                   var free = data["free"];
+                   var used = Number(total) - Number(free);
+
+                   $("#goal-text").html(formatSizeUnits(total));
+                   $("#totalMemoryDiv").html(formatSizeUnits(total));
+                   $("#usedMemoryDiv").html(formatSizeUnits(used));
+                   $("#freeMemoryDiv").html(formatSizeUnits(free));
+
+                   gauge.maxValue = total; // set max gauge value
+                   gauge.animationSpeed = 64; // set animation speed (32 is default value)
+                   gauge.set(used); // set actual value
+                   gauge.setTextField(document.getElementById("gauge-text"));
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+
+           //controller uptime
+           $.ajax({
+               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/system/uptime/json",
+               success: function (data) {
+                   var uptime = data["systemUptimeMsec"];
+                   uptime = uptime / 1000;
+                   $("#controllerUpTime").html(Math.floor(uptime));
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+               }
+           });
+       }
+
+       function formatSizeUnits(bytes){
+           if      (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
+           else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
+           else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
+           else if (bytes>1)           {bytes=bytes+' bytes';}
+           else if (bytes==1)          {bytes=bytes+' byte';}
+           else                        {bytes='0 byte';}
+           return bytes;
+       }
     </script>
 
 </body>
