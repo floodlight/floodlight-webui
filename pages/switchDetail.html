@@ -454,6 +454,7 @@
         $.ajax({
             url: " http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/group-features/json",
             success: function (data) {
+                console.log(data);
                 $("#capabilities").html(data.groupFeatures["capabilities"]);
                 $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
                 $("#maxGroupsSelect").html(data.groupFeatures["maxGroupsSelect"]);
@@ -489,47 +490,49 @@
         });
 
 
-
         ///ANAHTAR PORTLARI
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/port/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/port/json",
             success: function (dat) {
-
+                console.log(dat["port_reply"][0].port);
+//
                 $('#portTable').DataTable({
-                    data: dat["port_reply"][0].port,
+                    aaData: dat["port_reply"],
                     "columnDefs": [
-         {
-             // The `data` parameter refers to the data for the cell (defined by the
-             // `data` option, which defaults to the column being worked with, in
-             // this case `data: 0`.
-             "render": function (data, type, row) {
-                 return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
-             },
-             "targets": 0
-         }
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function (data, type, row) {
+                                return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
+                            },
+                            "targets": 0
+                        }
 
                     ],
 
-                    columns: [
-                        { data: 'portNumber' },
-                        { data: 'receivePackets' },
-                        { data: 'transmitPackets' },
-                        { data: 'receiveBytes' },
-                        { data: 'transmitBytes' },
-                        { data: 'receiveDropped' },
-                        { data: 'transmitDropped' },
-                        { data: 'collisions' },
-                        { data: 'durationSec' }
+                    "aoColumns": [
+                        {"mData": 'port.0.portNumber'},
+                        {"mData": 'port.0.receivePackets'},
+                        {"mData": 'port.0.transmitPackets'},
+                        {"mData": 'port.0.receiveBytes'},
+                        {"mData": 'port.0.transmitBytes'},
+                        {"mData": 'port.0.receiveDropped'},
+                        {"mData": 'port.0.transmitDropped'},
+                        {"mData": 'port.0.collisions'},
+                        {"mData": 'port.0.durationSec'}
                     ]
                 });
 
-
+                console.log("DATATABLE");
+                console.log($("#portTable").DataTable().rows().data());
             }
-        ,
+            ,
             error: function (xhr, status, error) {
                 alert("Hata==" + xhr.responseText);
                 return "";
             }
+
         });
 
 
@@ -539,7 +542,7 @@
         $.ajax({
             url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/" + sId + "/flow/json",
             success: function (dat) {
-
+                console.log(dat);
                 $('#flowTable').DataTable({
                     data: dat["flows"],
                     columns: [

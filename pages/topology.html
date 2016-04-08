@@ -18,7 +18,8 @@
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+          rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
     <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
@@ -30,122 +31,125 @@
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
-    <link href="../bower_components/visjs/vis.css" rel="stylesheet" />
-    
+    <link href="../bower_components/visjs/vis.css" rel="stylesheet"/>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
         #mynetwork {
             width: 100%;
             height: 100%;
             border: 1px solid lightgray;
-           background-color:#f8f8f8;
+            background-color: #f8f8f8;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
-            </div>
-            <!-- /.navbar-header -->
-
-         
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
-                        </li>
-                        <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
-                        </li>
-                        <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
-                        </li>
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
-                        </li>
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
-                        </li>
-
-                        <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li><li>
-    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
-</li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <!-- /.row -->
-            <div class="row">
-                
-                    <div id="mynetwork"></div>
-                
-                
-            </div>
-            <!-- /.row -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.navbar-header -->
 
+
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
+                    </li>
+                    <li>
+                        <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
+                    </li>
+                    <li>
+                        <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
+                    </li>
+
+                    <li>
+                        <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                    </li>
+                    <li>
+                        <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Firewall</a>
+                    </li>
+                    <li>
+                        <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                    </li>
+
+                    <li>
+                        <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
+                    </li>
+                    <li>
+                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <!-- /.row -->
+        <div class="row">
+
+            <div id="mynetwork"></div>
+
+
+        </div>
+        <!-- /.row -->
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+</div>
+<!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- DataTables JavaScript -->
-    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    
-    <script src="../js/querystringparser.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
 
-    <script src="../bower_components/visjs/vis.js"></script>
-    <script src="../bower_components/visjs/googleAnalytics.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
-    <script src="../js/jquery.cookie.js"></script>
+<script src="../js/querystringparser.js"></script>
 
-    <script type="text/javascript">
+<script src="../bower_components/visjs/vis.js"></script>
+<script src="../bower_components/visjs/googleAnalytics.js"></script>
 
-        var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
-        var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
+<script src="../js/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+
+    var ipaddress = $.cookie('cip');
+    if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
 
 
     var nodes = null;
@@ -154,185 +158,222 @@
 
     var DIR = '../bower_components/visjs/img/refresh-cl/';
     var EDGE_LENGTH_MAIN = 50;
-    var EDGE_LENGTH_SUB =50;
+    var EDGE_LENGTH_SUB = 50;
 
     // Called when the Visualization API is loaded.
     function draw() {
-     
 
-      //nodes.push({id: 1, label: 'Main', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-      //nodes.push({id: 2, label: 'Office', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-      //nodes.push({id: 3, label: 'Wireless', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-      //edges.push({from: 1, to: 2, length: EDGE_LENGTH_MAIN});
-      //edges.push({from: 1, to: 3, length: EDGE_LENGTH_MAIN});
 
-      //for (var i = 4; i <= 7; i++) {
-      //  nodes.push({id: i, label: 'Computer', image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image'});
-      //  edges.push({from: 2, to: i, length: EDGE_LENGTH_SUB});
-      //}
+        //nodes.push({id: 1, label: 'Main', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+        //nodes.push({id: 2, label: 'Office', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+        //nodes.push({id: 3, label: 'Wireless', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+        //edges.push({from: 1, to: 2, length: EDGE_LENGTH_MAIN});
+        //edges.push({from: 1, to: 3, length: EDGE_LENGTH_MAIN});
 
-      //nodes.push({id: 101, label: 'Printer', image: DIR + 'Hardware-Printer-Blue-icon.png', shape: 'image'});
-      //edges.push({from: 2, to: 101, length: EDGE_LENGTH_SUB});
+        //for (var i = 4; i <= 7; i++) {
+        //  nodes.push({id: i, label: 'Computer', image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image'});
+        //  edges.push({from: 2, to: i, length: EDGE_LENGTH_SUB});
+        //}
 
-      //nodes.push({id: 102, label: 'Laptop', image: DIR + 'Hardware-Laptop-1-icon.png', shape: 'image'});
-      //edges.push({from: 3, to: 102, length: EDGE_LENGTH_SUB});
+        //nodes.push({id: 101, label: 'Printer', image: DIR + 'Hardware-Printer-Blue-icon.png', shape: 'image'});
+        //edges.push({from: 2, to: 101, length: EDGE_LENGTH_SUB});
 
-      //nodes.push({id: 103, label: 'network drive', image: DIR + 'Network-Drive-icon.png', shape: 'image'});
-      //edges.push({from: 1, to: 103, length: EDGE_LENGTH_SUB});
+        //nodes.push({id: 102, label: 'Laptop', image: DIR + 'Hardware-Laptop-1-icon.png', shape: 'image'});
+        //edges.push({from: 3, to: 102, length: EDGE_LENGTH_SUB});
 
-      //nodes.push({id: 104, label: 'Internet', image: DIR + 'System-Firewall-2-icon.png', shape: 'image'});
-      //edges.push({from: 1, to: 104, length: EDGE_LENGTH_SUB});
+        //nodes.push({id: 103, label: 'network drive', image: DIR + 'Network-Drive-icon.png', shape: 'image'});
+        //edges.push({from: 1, to: 103, length: EDGE_LENGTH_SUB});
 
-      //for (var i = 200; i <= 201; i++ ) {
-      //  nodes.push({id: i, label: 'Smartphone', image: DIR + 'Hardware-My-PDA-02-icon.png', shape: 'image'});
-      //  edges.push({from: 3, to: i, length: EDGE_LENGTH_SUB});
-      //}
- 
-      // create a network
-      var container = document.getElementById('mynetwork');
-      var data = {
-        nodes: nodes,
-        edges: edges
-      };
-      var options = {
-          autoResize: true,
-          height: '1000px',
-          width: '100%'
-         };
-      network = new vis.Network(container, data, options);
+        //nodes.push({id: 104, label: 'Internet', image: DIR + 'System-Firewall-2-icon.png', shape: 'image'});
+        //edges.push({from: 1, to: 104, length: EDGE_LENGTH_SUB});
+
+        //for (var i = 200; i <= 201; i++ ) {
+        //  nodes.push({id: i, label: 'Smartphone', image: DIR + 'Hardware-My-PDA-02-icon.png', shape: 'image'});
+        //  edges.push({from: 3, to: i, length: EDGE_LENGTH_SUB});
+        //}
+
+        // create a network
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            autoResize: true,
+            height: '1000px',
+            width: '100%'
+        };
+        network = new vis.Network(container, data, options);
+
+        network.on("showPopup", function (params) {
+            if (params.charAt(0) == 's') {
+                var id = params.substring(1);
+                network["body"]["nodes"][params]["options"]["title"] = parseFlows(id);
+            }
+        });
+
     }
-    </script>
-    
 
 
-    <script>
-        // Create a data table with nodes.
-        nodes = [];
-
-        // Create a data table with links.
-        edges = [];
-      
-
-        LoadSwitches();
+</script>
 
 
-        function LoadExternalLinks(hosts) {  ///LİNKLER
+<script>
+    // Create a data table with nodes.
+    nodes = [];
 
-            var url = "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json";
+    // Create a data table with links.
+    edges = [];
 
-            $.ajax({
-                url: url,
-                success: function (data) {
-                    console.log(data);
-                    for(var i=0;i< data.length; i++){
-                        edges.push({ from: "s"+data[i]["src-switch"], to: "s"+data[i]["dst-switch"], length: EDGE_LENGTH_MAIN });
-                    }
 
-                    for (var i = 0; i < hosts.length; i++)
-                    {
-                        if (hosts[i]["attachmentPoint"].length > 0)
-                        {
-                            edges.push({
-                                from: "h" + hosts[i]["mac"]
-                                , to: "s"+hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN
-                            });
-                        }
-                    }
+    LoadSwitches();
 
-                    LoadInternalLinks();
-                    //draw();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+
+    function LoadExternalLinks(hosts) {  ///LİNKLER
+
+        var url = "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json";
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    edges.push({
+                        from: "s" + data[i]["src-switch"],
+                        to: "s" + data[i]["dst-switch"],
+                        length: EDGE_LENGTH_MAIN,
+                        title: data[i]["src-switch"] + "/" + data[i]["src-port"] + "<br>" + data[i]["dst-switch"] + "/" + data[i]["dst-port"],
+                        color: 'red',
+                        width: 4
+                    });
                 }
-            });
-        }
 
-        function LoadInternalLinks(hosts) {  ///LİNKLER
-
-                       
-            $.ajax({
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
-                success: function (data) {
-                    console.log(data);
-                    for(var i=0;i< data.length; i++){
-                        edges.push({ from: "s"+data[i]["src-switch"], to: "s"+data[i]["dst-switch"], length: EDGE_LENGTH_MAIN });
+                for (var i = 0; i < hosts.length; i++) {
+                    if (hosts[i]["attachmentPoint"].length > 0) {
+                        edges.push({
+                            from: "h" + hosts[i]["mac"]
+                            , to: "s" + hosts[i]["trueAttachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
+                            title: hosts[i]["trueAttachmentPoint"][0].switchDPID + "/" + hosts[i]["trueAttachmentPoint"][0].port,
+                            color: 'green',
+                            width: 2
+                        });
                     }
-               
-//                    for (var i = 0; i < hosts.length; i++)
-//                    {
-//                        if (hosts[i]["attachmentPoint"].length > 0)
-//                        {
-//                            edges.push({
-//                                from: "h" + hosts[i]["mac"]
-//                                , to: "s"+hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN
-//                            });
-//                        }
-//                    }
-
-                    draw();
-                    //LoadExternalLinks(hosts);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                 }
-            });
-        }
+
+                LoadInternalLinks();
+                //draw();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function LoadInternalLinks(hosts) {  ///LİNKLER
 
 
-        function LoadSwitches()
-        {
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    edges.push({
+                        from: "s" + data[i]["src-switch"], to: "s" + data[i]["dst-switch"], length: EDGE_LENGTH_MAIN,
+                        title: data[i]["src-switch"] + "/" + data[i]["src-port"] + "<br>" + data[i]["dst-switch"] + "/" + data[i]["dst-port"],
+                        width: 3
+                    });
+                }
 
-            var url = "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json";
-            ///HOSTLAR
-            $.ajax({
-                url: url,
-                success: function (data)
-                {
-                    for (var i = 0; i < data.length; i++) {
-                        var id ="s"+data[i]["switchDPID"];
-                        var label ="s"+data[i]["switchDPID"];
-                        nodes.push({ id: id, label: label, image: DIR + 'switch.png', shape: 'image' });
+                draw();
+                //LoadExternalLinks(hosts);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function parseFlows(id) {
+        var flowString = "";
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/switch/" + id + "/flow/json",
+            async: false,
+            success: function (flowobject) {
+                for (var i = 0; i < flowobject["flows"].length; i++) {
+                    flowString += "Flow " + i + ":";
+                    flowString += "<br>&nbsp;&nbsp;&nbsp;Packet count: " + JSON.stringify(flowobject["flows"][i]["packetCount"]);
+                    flowString += "<br>&nbsp;&nbsp;&nbsp;Matches: " + JSON.stringify(flowobject["flows"][i]["match"]);
+                    if (flowobject["flows"][i]["version"] == "OF_13") {
+                        flowString += "<br>&nbsp;&nbsp;&nbsp;Actions: " + JSON.stringify(flowobject["flows"][i]["instructions"]["instruction_apply_actions"]["actions"]);
                     }
-                    LoadHosts();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-                }
-            });
-        }
-        
-        function LoadHosts()
-        {
-            var url = "http://" +ipaddress+ ":" +restport+ "/wm/device/";
-            ///HOSTLAR
-            $.ajax({
-                url: url,
-                success: function (hosts)
-                {
-                    for (var i = 0; i < hosts.length; i++)
-                    {
-                          
-                        if (hosts[i]["attachmentPoint"].length > 0) {
-                            var id = "h" + hosts[i]["mac"];
-                            var label = "h" + hosts[i]["mac"];
-                            nodes.push({ id: id, label: label, image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image' });
-                        }
+                    if (flowobject["flows"][i]["version"] == "OF_10") {
+                        flowString += "<br>&nbsp;&nbsp;&nbsp;Actions: " + JSON.stringify(flowobject["flows"][i]["actions"]["actions"]);
                     }
-                    LoadExternalLinks(hosts);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                    flowString += "<br>";
                 }
-            });
-
-        }
-        
-
-
+            }
+        });
+        return flowString;
+    }
 
 
-    </script>
+    function LoadSwitches() {
+
+        var url = "http://" + ipaddress + ":" + restport + "/wm/core/controller/switches/json";
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    var id = "s" + data[i]["switchDPID"];
+                    var label = "s" + data[i]["switchDPID"];
+                    nodes.push({
+                        id: id,
+                        label: label,
+                        image: DIR + 'switch.png',
+                        shape: 'image',
+                        title: parseFlows(data[i]["switchDPID"])
+                    });
+                }
+                LoadHosts();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function LoadHosts() {
+        var url = "http://" + ipaddress + ":" + restport + "/wm/device/";
+        ///HOSTLAR
+        $.ajax({
+            url: url,
+            success: function (hosts) {
+                console.log(hosts);
+                for (var i = 0; i < hosts.length; i++) {
+
+                    if (hosts[i]["attachmentPoint"].length > 0) {
+                        var id = "h" + hosts[i]["mac"];
+                        var label = "h" + hosts[i]["ipv4"];
+                        nodes.push({
+                            id: id,
+                            label: label,
+                            image: DIR + 'Hardware-My-Computer-3-icon.png',
+                            shape: 'image',
+                            title: hosts[i]["mac"]
+                        });
+                    }
+                }
+                LoadExternalLinks(hosts);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+    }
+
+
+</script>
 
 </body>
 
