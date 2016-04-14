@@ -249,13 +249,24 @@
 
                 for (var i = 0; i < hosts.length; i++) {
                     if (hosts[i]["attachmentPoint"].length > 0) {
-                        edges.push({
-                            from: "h" + hosts[i]["mac"]
-                            , to: "s" + hosts[i]["trueAttachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
-                            title: hosts[i]["trueAttachmentPoint"][0].switchDPID + "/" + hosts[i]["trueAttachmentPoint"][0].port,
-                            color: 'green',
-                            width: 2
-                        });
+                        if (hosts[i].hasOwnProperty("trueAttachmentPoint") && hosts[i]["trueAttachmentPoint"][0] != null) {
+                            edges.push({
+                                from: "h" + hosts[i]["mac"]
+                                , to: "s" + hosts[i]["trueAttachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["trueAttachmentPoint"][0].switchDPID + "/" + hosts[i]["trueAttachmentPoint"][0].port,
+                                color: 'green',
+                                width: 2
+                            });
+                        }
+                        else {
+                            edges.push({
+                                from: "h" + hosts[i]["mac"]
+                                , to: "s" + hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["attachmentPoint"][0].switchDPID + "/" + hosts[i]["attachmentPoint"][0].port,
+                                color: 'green',
+                                width: 2
+                            });
+                        }
                     }
                 }
 
@@ -263,7 +274,8 @@
                 //draw();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                console.log(jqXHR.responseText);
+                alert('Haddddddddta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -286,7 +298,7 @@
                 //LoadExternalLinks(hosts);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Haccccccccta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -337,7 +349,7 @@
                 LoadHosts();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Habbbbbbbbta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -366,7 +378,8 @@
                 LoadExternalLinks(hosts);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                console.log(jqXHR.responseText);
+                alert('Haaaaaaaata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
 
