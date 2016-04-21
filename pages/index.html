@@ -21,444 +21,697 @@
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Animate.css -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css" />
-    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet" />
-
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet"/>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-               
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
 
-                <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
+            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+
+        </div>
+
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
+                    </li>
+
+                    <li>
+                        <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
+                    </li>
+
+                    <li>
+                        <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
+                    </li>
+
+                    <li>
+                        <a href="links.html"><i class="fa fa-expand fa-fw"></i> Links</a>
+                    </li>
+
+                    <li>
+                        <a href="routes.html"><i class="fa fa-expand fa-fw"></i> Routes</a>
+                    </li>
+
+                    <li>
+                        <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
+                    </li>
+
+                    <li>
+                        <a href="flowPusher.html"><i class="fa fa-pencil fa-fw"></i> Static Flow Pusher</a>
+                    </li>
+
+                    <li>
+                        <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Firewall</a>
+                    </li>
+
+                    <li>
+                        <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
+                    </li>
+
+                    <li>
+                        <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
+                    </li>
+
+                    <li>
+                        <a href="sos.html"><i class="fa fa-magic fa-fw"></i> SOS</a>
+                    </li>
+
+                    <li>
+                        <a href="genicinema.html"><i class="fa fa-film fa-fw"></i> GENI Cinema</a>
+                    </li>
+
+                    <li>
+                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                    </li>
+                </ul>
             </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
 
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Controller (Home) </a>
-                        </li>
-
-                        <li>
-                            <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
-                        </li>
-
-                        <li>
-                            <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
-                        </li>
-
-                        <li>
-                            <a href="links.html"><i class="fa fa-expand fa-fw"></i> Links</a>
-                        </li>
-
-                        <li>
-                            <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
-                        </li>
-
-                        <li>
-                            <a href="flowPusher.html"><i class="fa fa-pencil fa-fw"></i>  Static Flow Pusher</a>
-                        </li>
-
-                        <li>
-                            <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
-                        </li>
-
-                        <li>
-                            <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
-                        </li>
-
-                        <li>
-                            <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                        </li>
-
-                        <li>
-                            <a href="sos.html"><i class="fa fa-magic fa-fw"></i> SOS</a>
-                        </li>
-
-                        <li>
-                            <a href="genicinema.html"><i class="fa fa-film fa-fw"></i> GENI Cinema</a>
-                        </li>
-
-                        <li>
-                            <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">Controller</h3>
             </div>
-            <!-- /.navbar-static-side -->
+            <!-- /.col-lg-12 -->
+        </div>
 
-        </nav>
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header">Controller</h3>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+        <div class="row">
 
-            <div class="row">
-
-                <div class="col-lg-4 col-md-12">
-                    <div class="panel" id="controllerStatusPanel">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i id="controllerStatusIcon"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="controllerStatus">...</div>
-                                    <div>Controller Status</div>
-                                </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="panel" id="controllerStatusPanel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i id="controllerStatusIcon"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="controllerStatus">...</div>
+                                <div>Controller Status</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-12">
-                    <div class="panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="glyphicon glyphicon-time fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="controllerUpTime">...</div>
-                                    <div>Uptime (s)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="controllerRole">...</div>
-                                    <div>Controller Role <a href="#" class="btn btn-xs btn-success"
-                                                             data-toggle="modal" data-target=".bs-example-modal-sm">Change</a>  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-            </div>
-
-            <!-- /.row -->
-
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-random fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="switchCountDiv">0</div>
-                                    <div>Switches</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="switches.html">
-                            <div class="panel-footer">
-                                <span class="pull-left">See All</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-laptop fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="hostCountDiv">0</div>
-                                    <div>Hosts</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="hosts.html">
-                            <div class="panel-footer">
-                                <span class="pull-left">See All</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-expand fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="linkCountDiv">0</div>
-                                    <div>Connections (Links)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="links.html">
-                            <div class="panel-footer">
-                                <span class="pull-left">See All</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-square-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="portCountDiv">0</div>
-                                    <div>Reserved Ports</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">See All</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
 
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-dashboard fa-fw"></i>JVM Memory Bloat
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-
-
-                            <div class="sidebar-widget">
-                                <canvas width="150" height="80" id="foo" class="" style="width: 160px; height: 100px;"></canvas>
-                                <div class="goal-wrapper">
-                                    <span class="gauge-value pull-left"></span>
-                                    <span id="gauge-text" class="gauge-value pull-left"></span>
-                                    <span id="goal-text" class="goal-value pull-right"></span>
-                                </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="glyphicon glyphicon-time fa-5x"></i>
                             </div>
-
-
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="controllerUpTime">...</div>
+                                <div>Uptime (s)</div>
+                            </div>
                         </div>
-                        <!-- /.panel-body -->
                     </div>
                 </div>
-
-
-
-                <div class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-signal fa-fw"></i> Consumption Detail
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="controllerRole">...</div>
+                                <div>Controller Role <a href="#" class="btn btn-xs btn-success"
+                                                        data-toggle="modal"
+                                                        data-target=".bs-example-modal-sm">Change</a></div>
+                            </div>
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> Total:
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- /.row -->
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-random fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="switchCountDiv">0</div>
+                                <div>Switches</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="switches.html">
+                        <div class="panel-footer">
+                            <span class="pull-left">See All</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-laptop fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="hostCountDiv">0</div>
+                                <div>Hosts</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="hosts.html">
+                        <div class="panel-footer">
+                            <span class="pull-left">See All</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-expand fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="linkCountDiv">0</div>
+                                <div>Connections (Links)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="links.html">
+                        <div class="panel-footer">
+                            <span class="pull-left">See All</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-check-square-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" id="portCountDiv">0</div>
+                                <div>Reserved Ports</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">See All</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-dashboard fa-fw"></i>JVM Memory Bloat
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+
+
+                        <div class="sidebar-widget">
+                            <canvas width="150" height="80" id="foo" class=""
+                                    style="width: 160px; height: 100px;"></canvas>
+                            <div class="goal-wrapper">
+                                <span class="gauge-value pull-left"></span>
+                                <span id="gauge-text" class="gauge-value pull-left"></span>
+                                <span id="goal-text" class="goal-value pull-right"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+
+
+            <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-signal fa-fw"></i> Consumption Detail
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-info fa-fw"></i> Total:
                                     <span class="pull-right text-muted small">
-                                        <em><div id="totalMemoryDiv"></div></em>
+                                        <em>
+                                            <div id="totalMemoryDiv"></div>
+                                        </em>
                                     </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> Used:
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-info fa-fw"></i> Used:
                                     <span class="pull-right text-muted small">
-                                        <em><div id="usedMemoryDiv"></div></em>
+                                        <em>
+                                            <div id="usedMemoryDiv"></div>
+                                        </em>
                                     </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-info fa-fw"></i> Free:
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-info fa-fw"></i> Free:
                                     <span class="pull-right text-muted small">
-                                        <em><div id="freeMemoryDiv"></div></em>
+                                        <em>
+                                            <div id="freeMemoryDiv"></div>
+                                        </em>
                                     </span>
-                                </a>
+                            </a>
 
-                            </div>
-                            <!-- /.list-group -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.list-group -->
                     </div>
-                </div>
-
-
-
-                <div class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> Storage Tables
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="storageTables"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> Modules Loaded
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="loadedModules"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-
-                </div>
-
-                <div class="col-md-6 col-lg-6">
-
-
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-table fa-fw"></i> All Modules
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="allModules"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
+                    <!-- /.panel-body -->
                 </div>
             </div>
 
 
-
-
-
-
-            <!-- Small modal -->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel2">Change Role</h4>
-                        </div>
-                        <div class="modal-body">
-
-
-                            <div class="form-group">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" id="rbActive" name="iCheck"> ACTIVE
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" id="rbStandBy" name="iCheck"> STANDBY
-                                    </label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" id="btnChangeRole" class="btn btn-xs btn-primary">Change</button>
-                        </div>
+            <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-table fa-fw"></i> Storage Tables
                     </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="storageTables"></div>
+                    </div>
+                    <!-- /.panel-body -->
                 </div>
             </div>
 
         </div>
-        <!-- /#page-wrapper -->
+
+
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-table fa-fw"></i> Modules Loaded
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="loadedModules"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-table fa-fw"></i> All Modules
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="allModules"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Small modal -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="roleModalCloseButton" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">Change Role</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="rbActive" name="iCheck"> ACTIVE
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="rbStandBy" name="iCheck"> STANDBY
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="btnChangeRole" class="btn btn-xs btn-primary">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    
-
-    <!-- Gauge Js -->
-    <script src="../bower_components/gauge/gauge.min.js"></script>
-    <script src="../bower_components/gauge/gauge_demo.js"></script>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 
+<!-- Gauge Js -->
+<script src="../bower_components/gauge/gauge.min.js"></script>
+<script src="../bower_components/gauge/gauge_demo.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
 
 
-    <!-- PNotify -->
-    <script src="../bower_components/pnotify/pnotify.buttons.js"></script>
-    <script src="../bower_components/pnotify/pnotify.core.js"></script>
-    <script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
-    <script src="../js/querystringparser.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
+<!-- PNotify -->
+<script src="../bower_components/pnotify/pnotify.buttons.js"></script>
+<script src="../bower_components/pnotify/pnotify.core.js"></script>
+<script src="../bower_components/pnotify/pnotify.nonblock.js"></script>
+<script src="../js/querystringparser.js"></script>
+<script src="../js/jquery.cookie.js"></script>
 
-    <script type="text/javascript">
-       var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
-       var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
+<script type="text/javascript">
+    var ipaddress = $.cookie('cip');
+    if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
 
-        //Controller role
-        LoadControllerRole();
+    //Controller role
+    LoadControllerRole();
+
+    function LoadControllerRole() {
+
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/role/json",
+            success: function (data) {
+                var role = data["role"];
+                var changeTime = data["role-change-date-time"];
+
+
+                if (role == "ACTIVE") {
+                    $("#rbActive").prop("checked", true);
+
+                }
+                else if (role == "STANDBY") {
+                    $("#rbStandBy").prop("checked", true);
+                }
+
+                $("#controllerRole").html(role);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    $("#btnChangeRole").click(function () {
+
+        var roleStandBy = $('input[id=rbStandBy]:checked').val();
+        var roleActive = $('input[id=rbActive]:checked').val();
+        var newRole = "";
+        if (roleActive == "on") newRole = "ACTIVE";
+        if (roleStandBy == "on") newRole = "STANDBY";
+
+        if (newRole == "ACTIVE" || newRole == "STANDBY") {
+            $.ajax({
+
+                type: "POST",
+                dataType: 'json',
+                url: " http://" + ipaddress + ":" + restport + "/wm/core/role/json",
+                data: '{"role":' + "\"" + newRole + "\"" + '}',
+                success: function (data) {
+
+
+                    if (data["TBD"] != "Not yet implemented") {
+                        $("#roleModalCloseButton").click();
+
+                        LoadControllerRole();
+
+
+                    } else {
+
+                        new PNotify({
+                            title: 'Rol Değişmedi',
+                            text: data["TBD"],
+                            type: 'error',
+                            hide: true
+                        });
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                }
+            });
+        }
+
+    });
+
+
+    //controller uptime
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/system/uptime/json",
+        success: function (data) {
+            var uptime = data["systemUptimeMsec"];
+            uptime = uptime / 1000;
+            $("#controllerUpTime").html(Math.floor(uptime));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+
+    //Controller status
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/health/json",
+        success: function (data) {
+            var healthy = data["healthy"];
+
+            if (healthy == "1") {
+                $("#controllerStatus").html("Active");
+
+                $("#controllerStatusPanel").removeClass("panel-green");
+                $("#controllerStatusPanel").addClass("panel-green");
+                $("#controllerStatusIcon").addClass("glyphicon glyphicon-ok fa-5x");
+            }
+            else {
+                $("#controllerStatus").html("Passive");
+                $("#controllerStatusPanel").removeClass("panel-green");
+                $("#controllerStatusPanel").addClass("panel-red");
+                $("#controllerStatusIcon").removeClass("glyphicon glyphicon-ok fa-5x")
+                $("#controllerStatusIcon").addClass("glyphicon glyphicon-remove fa-5x");
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+
+    //controller summary
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/controller/summary/json",
+
+        success: function (data) {
+
+            var switchCount = data["# Switches"];
+            var hostCount = data["# hosts"];
+            var linkCount = data["# inter-switch links"];
+            var portCount = data["# quarantine ports"];
+
+            console.log(linkCount);
+
+            $("#switchCountDiv").html(switchCount);
+            $("#hostCountDiv").html(hostCount);
+            $("#linkCountDiv").html(linkCount);
+            $("#portCountDiv").html(portCount);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+
+    //controller memory used
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/memory/json",
+
+        success: function (data) {
+            var total = data["total"];
+            var free = data["free"];
+            var used = Number(total) - Number(free);
+
+            $("#goal-text").html(formatSizeUnits(total));
+            $("#totalMemoryDiv").html(formatSizeUnits(total));
+            $("#usedMemoryDiv").html(formatSizeUnits(used));
+            $("#freeMemoryDiv").html(formatSizeUnits(free));
+
+
+            var target = document.getElementById('foo'); // your canvas element
+            var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+            gauge.maxValue = total; // set max gauge value
+            gauge.animationSpeed = 32; // set animation speed (32 is default value)
+            gauge.set(used); // set actual value
+            gauge.setTextField(document.getElementById("gauge-text"));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+    //storage Tables
+
+    $.ajax({
+        url: " http://" + ipaddress + ":" + restport + "/wm/core/storage/tables/json",
+        success: function (data) {
+
+            var html = "<table class='table table-hover'>";
+
+            for (var i = 0; i < data.length; i++) {
+
+                html += "<tr><td>" + data[i] + "</td></tr>";
+
+            }
+            html += "</table>";
+            $("#storageTables").html(html);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+
+    //denetleyici modülleri
+
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/module/loaded/json",
+        success: function (data) {
+
+            var obj = data;
+
+
+            var html = "<table class='table table-hover'>";
+            for (propName in obj) {
+
+
+                html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
+
+            }
+            html += "</table>";
+
+
+            $("#loadedModules").html("");
+            $("#loadedModules").html(html);
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+
+    $.ajax({
+        url: "http://" + ipaddress + ":" + restport + "/wm/core/module/all/json",
+        success: function (data) {
+
+            var obj = data;
+
+
+            var html = "<table class='table table-hover'>";
+            for (propName in obj) {
+
+
+                html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
+
+            }
+            html += "</table>";
+
+
+            $("#allModules").html("");
+            $("#allModules").html(html);
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+        }
+    });
+
+    $(function () {
+        startRefresh();
+    });
+
+    function startRefresh() {
+        setTimeout(startRefresh, 1000);
 
         function LoadControllerRole() {
 
             $.ajax({
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
+                url: "http://" + ipaddress + ":" + restport + "/wm/core/role/json",
                 success: function (data) {
                     var role = data["role"];
                     var changeTime = data["role-change-date-time"];
@@ -480,79 +733,9 @@
             });
         }
 
-        $("#btnChangeRole").click(function () {
-
-            var roleStandBy = $('input[id=rbStandBy]:checked').val();
-            var roleActive = $('input[id=rbActive]:checked').val();
-            var newRole = "";
-            if (roleActive == "on") newRole = "ACTIVE";
-            if (roleStandBy == "on") newRole = "STANDBY";
-
-            if (newRole == "ACTIVE" || newRole == "STANDBY") {
-                $.ajax({
-
-                    type: "POST",
-                    dataType: 'json',
-                    url: " http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
-                    data: '{"role":' + "\"" + newRole + "\"" + '}',
-                    success: function (data) {
-
-
-
-                        if (data["TBD"] != "Not yet implemented") {
-                            $("#roleModalCloseButton").click();
-
-                            LoadControllerRole();
-
-
-                        } else {
-
-                            new PNotify({
-                                title: 'Rol Değişmedi',
-                                text: data["TBD"],
-                                type: 'error',
-                                hide: true
-                            });
-
-                        }
-
-
-
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-                    }
-                });
-            }
-
-        });
-
-
-
-
-
-
-
-
-        //controller uptime
-        $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/system/uptime/json",
-            success: function (data) {
-                var uptime = data["systemUptimeMsec"];
-                uptime = uptime / 1000;
-                $("#controllerUpTime").html(Math.floor(uptime));
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-            }
-        });
-
-
-
-
         //Controller status
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/health/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/health/json",
             success: function (data) {
                 var healthy = data["healthy"];
 
@@ -578,10 +761,9 @@
         });
 
 
-
         //controller summary
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/summary/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/controller/summary/json",
 
             success: function (data) {
 
@@ -602,10 +784,9 @@
             }
         });
 
-
         //controller memory used
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/memory/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/memory/json",
 
             success: function (data) {
                 var total = data["total"];
@@ -617,13 +798,23 @@
                 $("#usedMemoryDiv").html(formatSizeUnits(used));
                 $("#freeMemoryDiv").html(formatSizeUnits(free));
 
-
-                var target = document.getElementById('foo'); // your canvas element
-                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                 gauge.maxValue = total; // set max gauge value
-                gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge.animationSpeed = 64; // set animation speed (32 is default value)
                 gauge.set(used); // set actual value
                 gauge.setTextField(document.getElementById("gauge-text"));
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+        //controller uptime
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/system/uptime/json",
+            success: function (data) {
+                var uptime = data["systemUptimeMsec"];
+                uptime = uptime / 1000;
+                $("#controllerUpTime").html(Math.floor(uptime));
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
@@ -633,15 +824,13 @@
         //storage Tables
 
         $.ajax({
-            url: " http://" +ipaddress+ ":" +restport+ "/wm/core/storage/tables/json",
+            url: " http://" + ipaddress + ":" + restport + "/wm/core/storage/tables/json",
             success: function (data) {
 
                 var html = "<table class='table table-hover'>";
 
-                for (var i = 0 ; i < data.length; i++) {
-
+                for (var i = 0; i < data.length; i++) {
                     html += "<tr><td>" + data[i] + "</td></tr>";
-
                 }
                 html += "</table>";
                 $("#storageTables").html(html);
@@ -651,26 +840,17 @@
             }
         });
 
-
         //denetleyici modülleri
 
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/loaded/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/module/loaded/json",
             success: function (data) {
-
                 var obj = data;
-
-
                 var html = "<table class='table table-hover'>";
                 for (propName in obj) {
-
-
                     html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
-
                 }
                 html += "</table>";
-
-
                 $("#loadedModules").html("");
                 $("#loadedModules").html(html);
 
@@ -683,223 +863,46 @@
 
 
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/all/json",
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/module/all/json",
             success: function (data) {
-
                 var obj = data;
-
-
                 var html = "<table class='table table-hover'>";
                 for (propName in obj) {
-
-
                     html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
-
                 }
                 html += "</table>";
 
-
                 $("#allModules").html("");
                 $("#allModules").html(html);
-
-
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
+    }
 
-       $(function() {
-           startRefresh();
-       });
-
-       function startRefresh() {
-           setTimeout(startRefresh,1000);
-
-           function LoadControllerRole() {
-
-               $.ajax({
-                   url: "http://" +ipaddress+ ":" +restport+ "/wm/core/role/json",
-                   success: function (data) {
-                       var role = data["role"];
-                       var changeTime = data["role-change-date-time"];
-
-
-                       if (role == "ACTIVE") {
-                           $("#rbActive").prop("checked", true);
-
-                       }
-                       else if (role == "STANDBY") {
-                           $("#rbStandBy").prop("checked", true);
-                       }
-
-                       $("#controllerRole").html(role);
-                   },
-                   error: function (jqXHR, textStatus, errorThrown) {
-                       alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-                   }
-               });
-           }
-
-           //Controller status
-           $.ajax({
-               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/health/json",
-               success: function (data) {
-                   var healthy = data["healthy"];
-
-                   if (healthy == "1") {
-                       $("#controllerStatus").html("Active");
-
-                       $("#controllerStatusPanel").removeClass("panel-green");
-                       $("#controllerStatusPanel").addClass("panel-green");
-                       $("#controllerStatusIcon").addClass("glyphicon glyphicon-ok fa-5x");
-                   }
-                   else {
-                       $("#controllerStatus").html("Passive");
-                       $("#controllerStatusPanel").removeClass("panel-green");
-                       $("#controllerStatusPanel").addClass("panel-red");
-                       $("#controllerStatusIcon").removeClass("glyphicon glyphicon-ok fa-5x")
-                       $("#controllerStatusIcon").addClass("glyphicon glyphicon-remove fa-5x");
-                   }
-
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-
-
-           //controller summary
-           $.ajax({
-               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/summary/json",
-
-               success: function (data) {
-
-                   var switchCount = data["# Switches"];
-                   var hostCount = data["# hosts"];
-                   var linkCount = data["# inter-switch links"];
-                   var portCount = data["# quarantine ports"];
-
-                   console.log(linkCount);
-
-                   $("#switchCountDiv").html(switchCount);
-                   $("#hostCountDiv").html(hostCount);
-                   $("#linkCountDiv").html(linkCount);
-                   $("#portCountDiv").html(portCount);
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-           //controller memory used
-           $.ajax({
-               url: "http://" + ipaddress + ":" + restport + "/wm/core/memory/json",
-
-               success: function (data) {
-                   var total = data["total"];
-                   var free = data["free"];
-                   var used = Number(total) - Number(free);
-
-                   $("#goal-text").html(formatSizeUnits(total));
-                   $("#totalMemoryDiv").html(formatSizeUnits(total));
-                   $("#usedMemoryDiv").html(formatSizeUnits(used));
-                   $("#freeMemoryDiv").html(formatSizeUnits(free));
-
-                   gauge.maxValue = total; // set max gauge value
-                   gauge.animationSpeed = 64; // set animation speed (32 is default value)
-                   gauge.set(used); // set actual value
-                   gauge.setTextField(document.getElementById("gauge-text"));
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-           //controller uptime
-           $.ajax({
-               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/system/uptime/json",
-               success: function (data) {
-                   var uptime = data["systemUptimeMsec"];
-                   uptime = uptime / 1000;
-                   $("#controllerUpTime").html(Math.floor(uptime));
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-           //storage Tables
-
-           $.ajax({
-               url: " http://" +ipaddress+ ":" +restport+ "/wm/core/storage/tables/json",
-               success: function (data) {
-
-                   var html = "<table class='table table-hover'>";
-
-                   for (var i = 0 ; i < data.length; i++) {
-                       html += "<tr><td>" + data[i] + "</td></tr>";
-                   }
-                   html += "</table>";
-                   $("#storageTables").html(html);
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-           //denetleyici modülleri
-
-           $.ajax({
-               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/loaded/json",
-               success: function (data) {
-                   var obj = data;
-                   var html = "<table class='table table-hover'>";
-                   for (propName in obj) {
-                       html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
-                   }
-                   html += "</table>";
-                   $("#loadedModules").html("");
-                   $("#loadedModules").html(html);
-
-
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-
-
-           $.ajax({
-               url: "http://" +ipaddress+ ":" +restport+ "/wm/core/module/all/json",
-               success: function (data) {
-                   var obj = data;
-                   var html = "<table class='table table-hover'>";
-                   for (propName in obj) {
-                       html += "<tr><td>" + propName.replace("net.floodlightcontroller.", "") + "</td></tr>";
-                   }
-                   html += "</table>";
-
-                   $("#allModules").html("");
-                   $("#allModules").html(html);
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                   alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-               }
-           });
-       }
-
-       function formatSizeUnits(bytes){
-           if      (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
-           else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
-           else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
-           else if (bytes>1)           {bytes=bytes+' bytes';}
-           else if (bytes==1)          {bytes=bytes+' byte';}
-           else                        {bytes='0 byte';}
-           return bytes;
-       }
-    </script>
+    function formatSizeUnits(bytes) {
+        if (bytes >= 1000000000) {
+            bytes = (bytes / 1000000000).toFixed(2) + ' GB';
+        }
+        else if (bytes >= 1000000) {
+            bytes = (bytes / 1000000).toFixed(2) + ' MB';
+        }
+        else if (bytes >= 1000) {
+            bytes = (bytes / 1000).toFixed(2) + ' KB';
+        }
+        else if (bytes > 1) {
+            bytes = bytes + ' bytes';
+        }
+        else if (bytes == 1) {
+            bytes = bytes + ' byte';
+        }
+        else {
+            bytes = '0 byte';
+        }
+        return bytes;
+    }
+</script>
 
 </body>
 </html>
