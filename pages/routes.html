@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SDNCore - Anahtarlar</title>
+    <title>SDNCore - Routes</title>
+
+    <style>
+        form {
+            display: inline-block;
+        }
+    </style>
+
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -19,6 +26,7 @@
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -78,37 +86,56 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header">Switches</h3>
+                <h3 class="page-header">Routes</h3>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Switches Connected
+                        Routes between switches
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
 
                         <div class="dataTable_wrapper">
-                            <form name="frmSelect">
+                            <form name="sourceForm">
                                 <p>
-                                    <select name="Switch" onchange="getSwitches()">
+                                    <select name="Switch" id="sourceSwitchDropdown" class="form-control">
                                         <option>Switch</option>
-                                        <option>France</option>
-                                        <option>Germany</option>
-                                        <option>Spain</option>
                                     </select>
                                 </p>
                             </form>
+
+                            <form name="destinationForm">
+                                <p>
+                                    <select name="Switch" id="destinationSwitchDropdown" class="form-control">
+                                        <option>Switch</option>
+                                    </select>
+                                </p>
+                            </form>
+
+                            <form name="numRoutesForm">
+                                <p>
+                                    <input placeholder="Number of Routes" type="text" name="NumRoutes" id="numberOfRoutesInput" class="form-control">
+                                    </input>
+                                </p>
+                            </form>
+
+                            <form name="getRoutes">
+                                <button type="reset" class="btn btn-primary" onclick="getRoutesBetweenSwitches()">Get Routes</button>
+                            </form>
+
                             <table class="table table-striped table-bordered table-hover" id="tableRoutes">
                                 <thead>
                                 <tr>
+                                    <th> click </th>
                                     <th>Switch ID</th>
                                     <th>IPv4 Address</th>
                                     <th>Connected Since</th>
+                                    <th>Path</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -122,25 +149,25 @@
 
 
             </div>
-            <!-- /.col-lg-8 -->
-            <div class="col-lg-4">
+            <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
+            <!--<div class="col-lg-4">-->
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Switch Roles
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="dataTable_wrapper">
-                            <div id="rolTable">
-                            </div>
-                        </div>
-                        <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
+                <!--<div class="panel panel-primary">-->
+                    <!--<div class="panel-heading">-->
+                        <!--Switch Roles-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+                    <!--<div class="panel-body">-->
+                        <!--<div class="dataTable_wrapper">-->
+                            <!--<div id="rolTable">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; /.table-responsive &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
         </div>
         <!-- /.row -->
     </div>
@@ -169,70 +196,127 @@
 
     var url = "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json";
 
-    var editor;
 
-    $(document).ready(function () {
+    function getRoutesBetweenSwitches() {
+        console.log("GETTIN THE ROUTES");
 
-        $('#tableRoutes').DataTable({
-            responsive: true,
-            ajax:
-            {
-                url: url,
-                dataSrc: ''
-            },
-            "columnDefs": [
-                {
-                    // The `data` parameter refers to the data for the cell (defined by the
-                    // `data` option, which defaults to the column being worked with, in
-                    // this case `data: 0`.
-                    "render": function (data, type, row) {
-                        return "<a href='switchDetail.html?macAddress=" + data + "'>" + data + "</<a>";
-                    },
-                    "targets": 0
-                }
+        var s = document.getElementById("sourceSwitchDropdown");
+        var d = document.getElementById("destinationSwitchDropdown");
+        var n = document.getElementById("numberOfRoutesInput");
 
-            ],
-            columns: [
-                { data: 'switchDPID' },
-                { data: 'inetAddress' },
-                { data: 'connectedSince' }
+        var src = String(s.options[s.selectedIndex].value);
+        var dst = String(d.options[d.selectedIndex].value);
+        var num = String(n.value);
 
-            ]
-        });
+        if (src == -1 || dst == -1) {
+            alert("Source and destination must both be chosen!");
+            return;
+        }
 
-
-    });
-
-
-
-    $(document).ready(function () {
+        console.log(src);
+        console.log(dst);
 
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/switch/all/role/json",
-            success: function (data) {
-                var obj = data;
-                var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'><thead><tr> <th>Switch MAC </th> <th>Role</th></tr></thead><tbody>";
-                for (propName in obj) {
-
-                    if (obj.hasOwnProperty(propName)) {
-                        value = obj[propName];
-                    }
-
-                    html += "<tr><td>" + propName + "</td><td>" + value + "</td></tr>";
-
-                }
-                html += "  </tbody></table>";
-
-
-                $("#rolTable").html("");
-                $("#rolTable").html(html);
-
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
+            success: function(data) {
+                console.log("http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json");
+                console.log(data);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
             }
         });
 
+        var table = $('#tableRoutes').DataTable({
+            responsive: true,
+            ajax:
+            {
+                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
+                dataSrc: ''
+            },
+            columnDefs: [
+                {
+                    "targets": [ 1 ],
+                    "visible": false
+                },
+                {
+                    "targets": [ 2 ],
+                    "visible": false
+                },
+                {
+                    "targets": [ 3 ],
+                    "visible": false
+                }
+            ],
+            columns: [
+                {
+                    "className":      'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { data: 'src_dpid' },
+                { data: 'dst_dpid' },
+                { data: 'route_count' },
+                { data: 'path' }
+            ]
+        });
+
+        $('#tableroutes tbody').on('click', 'details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+            console.log(row);
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        } );
+    }
+
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                '<td>Full name:</td>'+
+                '<td>'+d.path[0]+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td>'+d.path[0]+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+                '</tr>'+
+                '</table>';
+    }
+
+    $().ready(function() {
+        $.ajax({
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json",
+            success: function(data) {
+                $("#sourceSwitchDropdown").get(0).options.length = 0;
+                $("#sourceSwitchDropdown").get(0).options[0] = new Option("Select Source Switch", "-1");
+                $("#destinationSwitchDropdown").get(0).options.length = 0;
+                $("#destinationSwitchDropdown").get(0).options[0] = new Option("Select Destination Switch", "-1");
+
+                $.each(data, function(index, item) {
+                    $("#sourceSwitchDropdown").get(0).options[$("#sourceSwitchDropdown").get(0).options.length] = new Option(item.switchDPID, item.switchDPID);
+                    $("#destinationSwitchDropdown").get(0).options[$("#destinationSwitchDropdown").get(0).options.length] = new Option(item.switchDPID, item.switchDPID);
+                });
+            },
+            error: function() {
+                alert("Failed to load switches");
+            }
+        });
     });
 
 </script>
