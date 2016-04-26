@@ -68,6 +68,14 @@
                     </li>
 
                     <li>
+                        <a href="links.html"><i class="fa fa-expand fa-fw"></i> Links</a>
+                    </li>
+
+                    <li>
+                        <a href="routes.html"><i class="fa fa-link fa-fw"></i> Routes</a>
+                    </li>
+
+                    <li>
                         <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
                     </li>
                     <li>
@@ -114,6 +122,7 @@
                                     <th>Destination Switch</th>
                                     <th>Source Port</th>
                                     <th>Source Switch</th>
+                                    <th>Latency (ms)</th>
                                     <th>Type</th>
                                 </tr>
                                 </thead>
@@ -150,6 +159,7 @@
                                     <th>Destination Switch</th>
                                     <th>Source Port</th>
                                     <th>Source Switch</th>
+                                    <th>Latency (ms)</th>
                                     <th>Type</th>
                                 </tr>
                                 </thead>
@@ -197,8 +207,6 @@
     var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
     var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
-    var url = "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json";
-
     $(document).ready(function () {
 
         $('#tableInternalLinks').DataTable({
@@ -214,15 +222,21 @@
                 { data: 'dst-switch' },
                 { data: 'src-port' },
                 { data: 'src-switch' },
+                { data: 'latency' },
                 { data: 'type' }
 
 
             ]
         });
 
-    });
+        $.ajax({
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
+            success: function (links) {
+                console.log(links);
+            }
+        });
 
-    var url = "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json";
+    });
 
     $(document).ready(function () {
 
@@ -239,13 +253,22 @@
                 { data: 'dst-switch' },
                 { data: 'src-port' },
                 { data: 'src-switch' },
+                { data: 'latency' },
                 { data: 'type' }
 
 
             ]
         });
 
+        $.ajax({
+            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json",
+            success: function (links) {
+                console.log(links);
+            }
+        });
+
     });
+
 
 
 </script>

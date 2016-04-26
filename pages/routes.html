@@ -63,6 +63,14 @@
                     </li>
 
                     <li>
+                        <a href="links.html"><i class="fa fa-expand fa-fw"></i> Links</a>
+                    </li>
+
+                    <li>
+                        <a href="routes.html"><i class="fa fa-link fa-fw"></i> Routes</a>
+                    </li>
+
+                    <li>
                         <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
                     </li>
                     <li>
@@ -92,7 +100,7 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Routes between switches
@@ -131,10 +139,9 @@
                             <table class="table table-striped table-bordered table-hover" id="tableRoutes">
                                 <thead>
                                 <tr>
-                                    <th> click </th>
-                                    <th>Switch ID</th>
-                                    <th>IPv4 Address</th>
-                                    <th>Connected Since</th>
+                                    <th>Route #</th>
+                                    <th>Hop Count</th>
+                                    <th>Latency</th>
                                     <th>Path</th>
                                 </tr>
                                 </thead>
@@ -144,35 +151,60 @@
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
+                    <form name="Metric1">
+                        <button type="reset" class="btn btn-success" id="hopcountButton" onclick="setMetricToHopCount()">Hop Count</button>
+                    </form>
+                    <form name="Metric2">
+                        <button type="reset" class="btn btn-default" id="latencyButton" onclick="setMetricToLatency()">Latency</button>
+                    </form>
                 </div>
                 <!-- /.panel -->
 
 
             </div>
-            <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
-            <!--<div class="col-lg-4">-->
+            <div class="col-lg-5" id="network">
+                <h3 class="page-header">Network</h3>
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Path Detail
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
+                            <table class="table table-striped table-bordered table-hover" id="pathTable">
+                                <thead>
+                                <tr>
+                                    <th>Switch ID</th>
+                                    <th>Port</th>
+                                    <!--<th></th>-->
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
 
-                <!--<div class="panel panel-primary">-->
-                    <!--<div class="panel-heading">-->
-                        <!--Switch Roles-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
-                    <!--<div class="panel-body">-->
-                        <!--<div class="dataTable_wrapper">-->
-                            <!--<div id="rolTable">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.table-responsive &ndash;&gt;-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
-                <!--</div>-->
+            </div>
+        </div>
+        <!-- /.row -->
 
+        <!-- /.row -->
+        <div class="row">
+            <!--<div class="col-lg-12" id="network">-->
+                <!--<h3 class="page-header">Network</h3>-->
             <!--</div>-->
+            <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
     </div>
 
-     <!--/#page-wrapper -->
+    <!--/#page-wrapper -->
 </div>
 <!-- /#wrapper -->
 <!-- jQuery -->
@@ -188,18 +220,39 @@
 <script src="../dist/js/sb-admin-2.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 
+<script src="../bower_components/visjs/vis.js"></script>
+<script src="../bower_components/visjs/googleAnalytics.js"></script>
+
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script src="../js/querystringparser.js"></script>
 <script>
     var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
     var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
-    var url = "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json";
+    var routeTable;
+    var pathTable;
 
+    function setMetricToHopCount() {
+        document.getElementById("hopcountButton").className = "btn btn-success";
+        document.getElementById("latencyButton").className = "btn btn-default";
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/topology/setroutemetric/hopcount/json",
+        });
+    }
+
+    function setMetricToLatency() {
+        document.getElementById("latencyButton").className = "btn btn-success";
+        document.getElementById("hopcountButton").className = "btn btn-default";
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: " http://" +ipaddress+ ":" +restport+ "/wm/topology/setroutemetric/latency/json",
+        });
+    }
 
     function getRoutesBetweenSwitches() {
-        console.log("GETTIN THE ROUTES");
-
         var s = document.getElementById("sourceSwitchDropdown");
         var d = document.getElementById("destinationSwitchDropdown");
         var n = document.getElementById("numberOfRoutesInput");
@@ -213,92 +266,85 @@
             return;
         }
 
-        console.log(src);
-        console.log(dst);
+        routeTable.clear();
+        routeTable.ajax.url( "http://" + ipaddress + ":" + restport +
+                "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json" ).load();
 
-        $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
-            success: function(data) {
-                console.log("http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json");
-                console.log(data);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-        });
 
-        var table = $('#tableRoutes').DataTable({
+        $('#tableRoutes tbody').on('click', 'tr', function () {
+            var data = routeTable.row( this ).data();
+            console.log(data);
+
+            pathTable.clear();
+            pathTable.rows.add(data.path).draw();
+
+            colorLinks(data.path);
+
+        } );
+
+        $('#pathTable').find('tbody').on('click', 'tr', function () {
+            var data = pathTable.row( this ).data();
+            console.log(data);
+        } );
+    }
+
+    /*
+     When the page is loaded, initialize the datatables so that they can be called later and refreshed.
+     */
+    $().ready(function() {
+        routeTable = $('#tableRoutes').DataTable({
             responsive: true,
-            ajax:
-            {
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
+//            ajax:
+//            {
+//                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
+//                dataSrc: ''
+//            },
+            ajax: {
+                url: '',
                 dataSrc: ''
             },
-            columnDefs: [
-                {
-                    "targets": [ 1 ],
-                    "visible": false
-                },
-                {
-                    "targets": [ 2 ],
-                    "visible": false
-                },
+            "ordering": false,
+            "columnDefs": [
                 {
                     "targets": [ 3 ],
-                    "visible": false
+                    "visible": false,
+                    "searchable": false
                 }
             ],
             columns: [
-                {
-                    "className":      'details-control',
-                    "orderable":      false,
-                    "data":           null,
-                    "defaultContent": ''
-                },
-                { data: 'src_dpid' },
-                { data: 'dst_dpid' },
                 { data: 'route_count' },
+                { data: 'hop_count' },
+                { data: 'latency' },
                 { data: 'path' }
             ]
         });
 
-        $('#tableroutes tbody').on('click', 'details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
-            console.log(row);
+        pathTable = $('#pathTable').DataTable({
+            data:'',
+            "ordering": false,
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "orderable": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [ 1 ],
+                    "orderable": false,
+                    "searchable": false
+                }
+            ],
+            columns:[
+                {data: 'dpid'},
+                {data: 'port'}
+            ]
+        });
+    });
 
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                // Open this row
-                row.child( format(row.data()) ).show();
-                tr.addClass('shown');
-            }
-        } );
-    }
-
-    function format ( d ) {
-        // `d` is the original data object for the row
-        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-                '<tr>'+
-                '<td>Full name:</td>'+
-                '<td>'+d.path[0]+'</td>'+
-                '</tr>'+
-                '<tr>'+
-                '<td>Extension number:</td>'+
-                '<td>'+d.path[0]+'</td>'+
-                '</tr>'+
-                '<tr>'+
-                '<td>Extra info:</td>'+
-                '<td>And any further details here (images etc)...</td>'+
-                '</tr>'+
-                '</table>';
-    }
-
+    /*
+     When the page is loaded, query the controller for the switches and populate the drop down lists with
+     these values. The user will then choose a source and destination from these lists.
+     */
     $().ready(function() {
         $.ajax({
             url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json",
@@ -319,8 +365,296 @@
         });
     });
 
+
 </script>
 
+<script type="text/javascript">
+
+    var ipaddress = $.cookie('cip');
+    if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
+
+
+    var nodes = null;
+    var edges = null;
+    var edges_copy = null;
+    var network = null;
+
+    var DIR = '../bower_components/visjs/img/refresh-cl/';
+    var EDGE_LENGTH_MAIN = 50;
+    var EDGE_LENGTH_SUB = 50;
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+
+
+//        nodes.push({id: 1, label: 'Main', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+//        nodes.push({id: 2, label: 'Office', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+//        nodes.push({id: 3, label: 'Wireless', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
+//        edges.push({from: 1, to: 2, length: EDGE_LENGTH_MAIN});
+//        edges.push({from: 1, to: 3, length: EDGE_LENGTH_MAIN});
+//
+//        for (var i = 4; i <= 7; i++) {
+//          nodes.push({id: i, label: 'Computer', image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image'});
+//          edges.push({from: 2, to: i, length: EDGE_LENGTH_SUB});
+//        }
+//
+//        nodes.push({id: 101, label: 'Printer', image: DIR + 'Hardware-Printer-Blue-icon.png', shape: 'image'});
+//        edges.push({from: 2, to: 101, length: EDGE_LENGTH_SUB});
+//
+//        nodes.push({id: 102, label: 'Laptop', image: DIR + 'Hardware-Laptop-1-icon.png', shape: 'image'});
+//        edges.push({from: 3, to: 102, length: EDGE_LENGTH_SUB});
+//
+//        nodes.push({id: 103, label: 'network drive', image: DIR + 'Network-Drive-icon.png', shape: 'image'});
+//        edges.push({from: 1, to: 103, length: EDGE_LENGTH_SUB});
+//
+//        nodes.push({id: 104, label: 'Internet', image: DIR + 'System-Firewall-2-icon.png', shape: 'image'});
+//        edges.push({from: 1, to: 104, length: EDGE_LENGTH_SUB});
+//
+//        for (var i = 200; i <= 201; i++ ) {
+//          nodes.push({id: i, label: 'Smartphone', image: DIR + 'Hardware-My-PDA-02-icon.png', shape: 'image'});
+//          edges.push({from: 3, to: i, length: EDGE_LENGTH_SUB});
+//        }
+
+        // create a network
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            autoResize: true,
+            height: '600px',
+            width: '100%',
+            layout:{
+                randomSeed: 1000,
+                improvedLayout: true
+            }
+        };
+        network = new vis.Network(container, data, options);
+        network.on("showPopup", function (params) {
+            if (params.charAt(0) == 's') {
+                var id = params.substring(1);
+                network["body"]["nodes"][params]["options"]["title"] = parseFlows(id);
+            }
+        });
+
+    }
+
+    function resetNetwork() {
+        edges = [];
+        edges = $.extend(true, [], edges_copy);
+    }
+
+    function colorLinks(path) {
+        resetNetwork();
+        var links = network["body"]["data"]["edges"]["_data"];
+        for (var i = 0; i <= path.length - 2; i = i + 2) {
+            //console.log(path[i] + "    " + path[i+1]);
+            //Object.keys(links).forEach(function (key, index) {
+            for (var j = 0; j < edges.length; j++) {
+//                var npts = links[key].title.split("<br>");
+                var npts = edges[j].title.split("<br>");
+                var npt1 = npts[0].split("/");
+                var npt2 = npts[1].split("/");
+                //console.log(npt1 + "    " + npt2);
+                if (path[i].dpid == npt1[0] &&
+                    path[i+1].dpid == npt2[0] &&
+                    path[i].port == npt1[1] &&
+                    path[i+1].port == npt2[1] ||
+                        path[i].dpid == npt2[0] &&
+                        path[i+1].dpid == npt1[0] &&
+                        path[i].port == npt2[1] &&
+                        path[i+1].port == npt1[1]) {
+                    edges[j].color = 'blue';
+                    edges[j].width = 7;
+
+                }
+            }
+            //);
+        }
+        console.log(network);
+        console.log("Edges: " + edges);
+        draw();
+
+
+    }
+
+
+</script>
+
+
+<script>
+    // Create a data table with nodes.
+    nodes = [];
+
+    // Create a data table with links.
+    edges = [];
+
+
+    LoadSwitches();
+
+
+    function LoadExternalLinks(hosts) {  ///LİNKLER
+
+        var url = "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json";
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    edges.push({
+                        from: "s" + data[i]["src-switch"],
+                        to: "s" + data[i]["dst-switch"],
+                        length: EDGE_LENGTH_MAIN,
+                        title: data[i]["src-switch"] + "/" + data[i]["src-port"] + "<br>" + data[i]["dst-switch"] + "/" + data[i]["dst-port"],
+                        color: 'red',
+                        width: 4
+                    });
+                }
+
+                for (var i = 0; i < hosts.length; i++) {
+                    if (hosts[i]["attachmentPoint"].length > 0) {
+                        if (hosts[i].hasOwnProperty("trueAttachmentPoint") && hosts[i]["trueAttachmentPoint"][0] != null) {
+                            edges.push({
+                                from: "h" + hosts[i]["mac"]
+                                , to: "s" + hosts[i]["trueAttachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["trueAttachmentPoint"][0].switchDPID + "/" + hosts[i]["trueAttachmentPoint"][0].port,
+                                color: 'green',
+                                width: 2
+                            });
+                        }
+                        else {
+                            edges.push({
+                                from: "h" + hosts[i]["mac"]
+                                , to: "s" + hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["attachmentPoint"][0].switchDPID + "/" + hosts[i]["attachmentPoint"][0].port,
+                                color: 'green',
+                                width: 2
+                            });
+                        }
+                    }
+                }
+
+                LoadInternalLinks();
+                //draw();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.responseText);
+                alert('Haddddddddta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function LoadInternalLinks(hosts) {  ///LİNKLER
+
+
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    edges.push({
+                        from: "s" + data[i]["src-switch"], to: "s" + data[i]["dst-switch"], length: EDGE_LENGTH_MAIN,
+                        title: data[i]["src-switch"] + "/" + data[i]["src-port"] + "<br>" + data[i]["dst-switch"] + "/" + data[i]["dst-port"],
+                        width: 3,
+                        color: 'black'
+                    });
+                }
+                edges_copy = $.extend(true, [], edges);
+                draw();
+                //LoadExternalLinks(hosts);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Haccccccccta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function parseFlows(id) {
+        var flowString = "";
+        $.ajax({
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/switch/" + id + "/flow/json",
+            async: false,
+            success: function (flowobject) {
+                for (var i = 0; i < flowobject["flows"].length; i++) {
+                    flowString += "Flow " + i + ":";
+                    flowString += "<br>&nbsp;&nbsp;&nbsp;Packet count: " + JSON.stringify(flowobject["flows"][i]["packetCount"]);
+                    flowString += "<br>&nbsp;&nbsp;&nbsp;Matches: " + JSON.stringify(flowobject["flows"][i]["match"]);
+                    if (flowobject["flows"][i]["version"] == "OF_13") {
+                        flowString += "<br>&nbsp;&nbsp;&nbsp;Actions: " + JSON.stringify(flowobject["flows"][i]["instructions"]["instruction_apply_actions"]["actions"]);
+                    }
+                    if (flowobject["flows"][i]["version"] == "OF_10") {
+                        flowString += "<br>&nbsp;&nbsp;&nbsp;Actions: " + JSON.stringify(flowobject["flows"][i]["actions"]["actions"]);
+                    }
+                    flowString += "<br>";
+                }
+            }
+        });
+        return flowString;
+    }
+
+
+    function LoadSwitches() {
+
+        var url = "http://" + ipaddress + ":" + restport + "/wm/core/controller/switches/json";
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    var id = "s" + data[i]["switchDPID"];
+                    var label = "s" + data[i]["switchDPID"];
+                    nodes.push({
+                        id: id,
+                        label: label,
+                        image: DIR + 'switch.png',
+                        shape: 'image',
+                        title: parseFlows(data[i]["switchDPID"])
+                    });
+                }
+                LoadHosts();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Habbbbbbbbta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+    }
+
+    function LoadHosts() {
+        var url = "http://" + ipaddress + ":" + restport + "/wm/device/";
+        ///HOSTLAR
+        $.ajax({
+            url: url,
+            success: function (hosts) {
+                console.log(hosts);
+                for (var i = 0; i < hosts.length; i++) {
+
+                    if (hosts[i]["attachmentPoint"].length > 0) {
+                        var id = "h" + hosts[i]["mac"];
+                        var label = "h" + hosts[i]["ipv4"];
+                        nodes.push({
+                            id: id,
+                            label: label,
+                            image: DIR + 'Hardware-My-Computer-3-icon.png',
+                            shape: 'image',
+                            title: hosts[i]["mac"]
+                        });
+                    }
+                }
+                LoadExternalLinks(hosts);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.responseText);
+                alert('Haaaaaaaata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+            }
+        });
+
+    }
+
+
+</script>
 
 </body>
 </html>
