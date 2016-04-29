@@ -18,7 +18,8 @@
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+          rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
     <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
@@ -63,33 +64,31 @@
                     <li>
                         <a href="switches.html"><i class="fa fa-exchange"></i> Switches</a>
                     </li>
+
                     <li>
                         <a href="hosts.html"><i class="fa fa-desktop fa-fw"></i> Hosts</a>
                     </li>
-
                     <li>
                         <a href="links.html"><i class="fa fa-expand fa-fw"></i> Links</a>
                     </li>
-
                     <li>
                         <a href="routes.html"><i class="fa fa-link fa-fw"></i> Routes</a>
                     </li>
-
                     <li>
                         <a href="topology.html"><i class="fa fa-sitemap fa-fw"></i> Topology</a>
                     </li>
                     <li>
-                        <a href="firewall.html"><i class="fa fa-warning fa-fw"></i>  Firewall</a>
+                        <a href="firewall.html"><i class="fa fa-warning fa-fw"></i> Firewall</a>
                     </li>
                     <li>
                         <a href="acl.html"><i class="fa fa-warning fa-fw"></i> Access Control Lists</a>
                     </li>
-
                     <li>
                         <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                    </li><li>
-                    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
-                </li>
+                    </li>
+                    <li>
+                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -118,10 +117,10 @@
                                 <thead>
                                 <tr>
                                     <th>Direction</th>
-                                    <th>Destination Port</th>
-                                    <th>Destination Switch</th>
                                     <th>Source Port</th>
                                     <th>Source Switch</th>
+                                    <th>Destination Port</th>
+                                    <th>Destination Switch</th>
                                     <th>Latency (ms)</th>
                                     <th>Type</th>
                                 </tr>
@@ -134,8 +133,6 @@
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-
-
 
             </div>
             <!-- /.col-lg-12 -->
@@ -155,10 +152,10 @@
                                 <thead>
                                 <tr>
                                     <th>Direction</th>
-                                    <th>Destination Port</th>
-                                    <th>Destination Switch</th>
                                     <th>Source Port</th>
                                     <th>Source Switch</th>
+                                    <th>Destination Port</th>
+                                    <th>Destination Switch</th>
                                     <th>Latency (ms)</th>
                                     <th>Type</th>
                                 </tr>
@@ -171,8 +168,6 @@
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-
-
 
             </div>
             <!-- /.col-lg-12 -->
@@ -204,72 +199,95 @@
 <script src="../js/querystringparser.js"></script>
 
 <script>
-    var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
-    var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
+    /*
+     * These cookies are set on the login page at login.html.
+     * They are simply the IP address of your controller and the REST api port.
+     * */
+    var ipaddress = $.cookie('cip');
+    if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
 
     $(document).ready(function () {
+        loadInternalLinks();
+        loadExternalLinks();
 
-        $('#tableInternalLinks').DataTable({
+        startRefresh();
+    });
+
+    /*
+     * Refreshes all of the values on the page every fifteen seconds.
+     * */
+    function startRefresh() {
+        setTimeout(startRefresh, 15000);
+
+        internalLinkTable.ajax.reload();
+        externalLinkTable.ajax.reload();
+    }
+
+    /*
+    * This function loads all the internal links that the controller sees.
+    * An internal link is defined as a link that LLDP can travel across.
+    **/
+    function loadInternalLinks() {
+        internalLinkTable = $('#tableInternalLinks').DataTable({
             responsive: true,
-            ajax:
-            {
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
+            order: [[ 2, 'asc' ], [ 4, 'asc' ]],
+            ajax      : {
+                url    : "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
                 dataSrc: ''
             },
-            columns: [
-                { data: 'direction' },
-                { data: 'dst-port' },
-                { data: 'dst-switch' },
-                { data: 'src-port' },
-                { data: 'src-switch' },
-                { data: 'latency' },
-                { data: 'type' }
-
+            columns   : [
+                {data: 'direction'},
+                {data: 'src-port'},
+                {data: 'src-switch'},
+                {data: 'dst-port'},
+                {data: 'dst-switch'},
+                {data: 'latency'},
+                {data: 'type'}
 
             ]
         });
 
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/links/json",
+            url    : "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
             success: function (links) {
                 console.log(links);
             }
         });
+    }
 
-    });
-
-    $(document).ready(function () {
-
-        $('#tableExternalLinks').DataTable({
+    /*
+     * This function loads all the external links that the controller sees.
+     * An internal link is defined as a link that LLDP cannot travel across, only BDDP.
+     **/
+    function loadExternalLinks() {
+        externalLinkTable = $('#tableExternalLinks').DataTable({
             responsive: true,
-            ajax:
-            {
-                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json",
+            order: [[ 2, 'asc' ], [ 4, 'asc' ]],
+            ajax      : {
+                url    : "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json",
                 dataSrc: ''
             },
-            columns: [
-                { data: 'direction' },
-                { data: 'dst-port' },
-                { data: 'dst-switch' },
-                { data: 'src-port' },
-                { data: 'src-switch' },
-                { data: 'latency' },
-                { data: 'type' }
-
+            columns   : [
+                {data: 'direction'},
+                {data: 'src-port'},
+                {data: 'src-switch'},
+                {data: 'dst-port'},
+                {data: 'dst-switch'},
+                {data: 'latency'},
+                {data: 'type'}
 
             ]
         });
 
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/external-links/json",
+            url    : "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json",
             success: function (links) {
                 console.log(links);
             }
         });
-
-    });
-
-
+    }
 
 </script>
 
