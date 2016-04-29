@@ -121,28 +121,29 @@
                 </div>
                 <!-- /.panel -->
 
-            <!--</div>-->
-            <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
-            <!--<div class="col-lg-4">-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
+                <!--<div class="col-lg-4">-->
 
                 <!--<div class="panel panel-primary">-->
-                    <!--<div class="panel-heading">-->
-                        <!--Switch Roles-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
-                    <!--<div class="panel-body">-->
-                        <!--<div class="dataTable_wrapper">-->
-                            <!--<div id="rolTable">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.table-responsive &ndash;&gt;-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
+                <!--<div class="panel-heading">-->
+                <!--Switch Roles-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+                <!--<div class="panel-body">-->
+                <!--<div class="dataTable_wrapper">-->
+                <!--<div id="rolTable">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.table-responsive &ndash;&gt;-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
                 <!--</div>-->
 
-            <!--</div>-->
+                <!--</div>-->
+            </div>
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 </div>
@@ -187,8 +188,8 @@
     }
 
     /*
-    * Gets all of the connected switches from the controller.
-    * */
+     * Gets all of the connected switches from the controller.
+     * */
     function loadSwitches() {
         switchTable = $('#tableSwitches').DataTable({
             responsive  : true,
@@ -225,34 +226,34 @@
         });
     }
 
-//    $(document).ready(function () {
-//
-//        $.ajax({
-//            url    : "http://" + ipaddress + ":" + restport + "/wm/core/switch/all/role/json",
-//            success: function (data) {
-//                var obj = data;
-//                var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'>" +
-//                        "<thead><tr> <th>Switch MAC </th>  <th>Role</th></tr></thead><tbody>";
-//
-//                for (propName in obj) {
-//                    if (obj.hasOwnProperty(propName)) {
-//                        value = obj[propName];
-//                    }
-//                    html += "<tr><td>" + propName + "</td><td>" + value + "</td></tr>";
-//                }
-//
-//                html += "  </tbody></table>";
-//
-//                $("#rolTable").html("");
-//                $("#rolTable").html(html);
-//
-//            },
-//            error  : function (jqXHR, textStatus, errorThrown) {
-//                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
-//            }
-//        });
-//
-//    });
+    //    $(document).ready(function () {
+    //
+    //        $.ajax({
+    //            url    : "http://" + ipaddress + ":" + restport + "/wm/core/switch/all/role/json",
+    //            success: function (data) {
+    //                var obj = data;
+    //                var html = " <table class='table table-bordered table-striped table-hover responsive-utilities'>" +
+    //                        "<thead><tr> <th>Switch MAC </th>  <th>Role</th></tr></thead><tbody>";
+    //
+    //                for (propName in obj) {
+    //                    if (obj.hasOwnProperty(propName)) {
+    //                        value = obj[propName];
+    //                    }
+    //                    html += "<tr><td>" + propName + "</td><td>" + value + "</td></tr>";
+    //                }
+    //
+    //                html += "  </tbody></table>";
+    //
+    //                $("#rolTable").html("");
+    //                $("#rolTable").html(html);
+    //
+    //            },
+    //            error  : function (jqXHR, textStatus, errorThrown) {
+    //                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+    //            }
+    //        });
+    //
+    //    });
 
 </script>
 </body>

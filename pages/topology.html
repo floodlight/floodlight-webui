@@ -153,68 +153,43 @@
 <script src="../js/jquery.cookie.js"></script>
 
 <script type="text/javascript">
-
+    /*
+     * These cookies are set on the login page at login.html.
+     * They are simply the IP address of your controller and the REST api port.
+     * */
     var ipaddress = $.cookie('cip');
     if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
     var restport = $.cookie('cport');
     if (restport == null || restport == "") window.location.href = "login.html";
 
 
-    var nodes = null;
-    var edges = null;
+    var nodes = [];
+    var edges = [];
     var network = null;
 
     var DIR = '../bower_components/visjs/img/refresh-cl/';
     var EDGE_LENGTH_MAIN = 50;
     var EDGE_LENGTH_SUB = 50;
 
-    // Called when the Visualization API is loaded.
+    /*
+    * This function draws the network and assigns actions to it as well.
+    **/
     function draw() {
-
-
-//        nodes.push({id: 1, label: 'Main', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-//        nodes.push({id: 2, label: 'Office', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-//        nodes.push({id: 3, label: 'Wireless', image: DIR + 'Network-Pipe-icon.png', shape: 'image'});
-//        edges.push({from: 1, to: 2, length: EDGE_LENGTH_MAIN});
-//        edges.push({from: 1, to: 3, length: EDGE_LENGTH_MAIN});
-//
-//        for (var i = 4; i <= 7; i++) {
-//          nodes.push({id: i, label: 'Computer', image: DIR + 'Hardware-My-Computer-3-icon.png', shape: 'image'});
-//          edges.push({from: 2, to: i, length: EDGE_LENGTH_SUB});
-//        }
-//
-//        nodes.push({id: 101, label: 'Printer', image: DIR + 'Hardware-Printer-Blue-icon.png', shape: 'image'});
-//        edges.push({from: 2, to: 101, length: EDGE_LENGTH_SUB});
-//
-//        nodes.push({id: 102, label: 'Laptop', image: DIR + 'Hardware-Laptop-1-icon.png', shape: 'image'});
-//        edges.push({from: 3, to: 102, length: EDGE_LENGTH_SUB});
-//
-//        nodes.push({id: 103, label: 'network drive', image: DIR + 'Network-Drive-icon.png', shape: 'image'});
-//        edges.push({from: 1, to: 103, length: EDGE_LENGTH_SUB});
-//
-//        nodes.push({id: 104, label: 'Internet', image: DIR + 'System-Firewall-2-icon.png', shape: 'image'});
-//        edges.push({from: 1, to: 104, length: EDGE_LENGTH_SUB});
-//
-//        for (var i = 200; i <= 201; i++ ) {
-//          nodes.push({id: i, label: 'Smartphone', image: DIR + 'Hardware-My-PDA-02-icon.png', shape: 'image'});
-//          edges.push({from: 3, to: i, length: EDGE_LENGTH_SUB});
-//        }
 
         // create a network
         var container = document.getElementById('mynetwork');
+
         var data = {
             nodes: nodes,
             edges: edges
         };
+
         var options = {
             autoResize: true,
             height: '1000px',
             width: '100%',
-            layout:{
-                //randomSeed: 2,
-                //improvedLayout: false
-            }
         };
+
         network = new vis.Network(container, data, options);
 
         network.on("showPopup", function (params) {
@@ -226,22 +201,10 @@
 
     }
 
-
-</script>
-
-
-<script>
-    // Create a data table with nodes.
-    nodes = [];
-
-    // Create a data table with links.
-    edges = [];
+    loadSwitches();
 
 
-    LoadSwitches();
-
-
-    function LoadExternalLinks(hosts) {  ///LİNKLER
+    function loadExternalLinks(hosts) {
 
         var url = "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json";
 
@@ -282,19 +245,18 @@
                     }
                 }
 
-                LoadInternalLinks();
+                loadInternalLinks();
                 //draw();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.responseText);
-                alert('Haddddddddta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
 
-    function LoadInternalLinks(hosts) {  ///LİNKLER
-
-
+    function loadInternalLinks(hosts) {
         $.ajax({
             url: "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
             success: function (data) {
@@ -310,7 +272,8 @@
                 //LoadExternalLinks(hosts);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Haccccccccta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
@@ -339,12 +302,9 @@
     }
 
 
-    function LoadSwitches() {
-
-        var url = "http://" + ipaddress + ":" + restport + "/wm/core/controller/switches/json";
-
+    function loadSwitches() {
         $.ajax({
-            url: url,
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/controller/switches/json",
             success: function (data) {
 
                 for (var i = 0; i < data.length; i++) {
@@ -361,16 +321,15 @@
                 LoadHosts();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Habbbbbbbbta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
 
     function LoadHosts() {
-        var url = "http://" + ipaddress + ":" + restport + "/wm/device/";
-        ///HOSTLAR
         $.ajax({
-            url: url,
+            url: "http://" + ipaddress + ":" + restport + "/wm/device/",
             success: function (hosts) {
                 console.log(hosts);
                 for (var i = 0; i < hosts.length; i++) {
@@ -391,7 +350,8 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.responseText);
-                alert('Haaaaaaaata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
 

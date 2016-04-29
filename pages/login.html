@@ -33,15 +33,18 @@
     <script type="text/javascript">
 
         function SetIpAddress() {
+            alert(window.location.host);
 
-            var ip = $("#ipaddress").val();
-            var port = $("#restport").val();
- 
+//            var ip = $("#ipaddress").val();
+//            var port = $("#restport").val();
+            var url = window.location.host.split(':');
+            var ip = url[0];
+            var port = url[1];
+
             $.cookie('cip', ip, { expires: 7 });
             $.cookie('cport', port, { expires: 7 });
 
             var readed = $.cookie('cip');
-
 
             if (readed != null && readed != "")
                 window.location.href = "index.html";

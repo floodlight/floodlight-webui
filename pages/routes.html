@@ -141,7 +141,7 @@
                                 <tr>
                                     <th>Route #</th>
                                     <th>Hop Count</th>
-                                    <th>Latency</th>
+                                    <th>Latency (ms)</th>
                                     <th>Path</th>
                                 </tr>
                                 </thead>
@@ -226,6 +226,10 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script src="../js/querystringparser.js"></script>
 <script>
+    /*
+     * These cookies are set on the login page at login.html.
+     * They are simply the IP address of your controller and the REST api port.
+     * */
     var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
     var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
 
@@ -294,16 +298,14 @@
     $().ready(function() {
         routeTable = $('#tableRoutes').DataTable({
             responsive: true,
-//            ajax:
-//            {
-//                url: "http://" +ipaddress+ ":" +restport+ "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json",
-//                dataSrc: ''
-//            },
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "autoWidth": false,
             ajax: {
                 url: '',
                 dataSrc: ''
             },
-            "ordering": false,
             "columnDefs": [
                 {
                     "targets": [ 3 ],
@@ -321,7 +323,9 @@
 
         pathTable = $('#pathTable').DataTable({
             data:'',
+            "paging":   false,
             "ordering": false,
+            "info":     false,
             "columnDefs": [
                 {
                     "targets": [ 0 ],
