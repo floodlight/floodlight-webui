@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge" id="controllerUpTime">...</div>
-                                <div>Uptime (s)</div>
+                                <div>Uptime (HH-mm-ss)</div>
                             </div>
                         </div>
                     </div>
@@ -431,7 +431,9 @@
     var restport = $.cookie('cport');
     if (restport == null || restport == "") window.location.href = "login.html";
 
-    startRefresh(); // Start refreshing the page values.
+    $(document).ready(function () {
+        startRefresh();
+    });
 
     function getControllerRole() {
         $.ajax({
@@ -511,7 +513,12 @@
             success: function (data) {
                 var uptime = data["systemUptimeMsec"];
                 uptime = uptime / 1000;
-                $("#controllerUpTime").html(Math.floor(uptime));
+                var hours = Math.floor(uptime / 3600);
+                uptime %= 3600;
+                var minutes = Math.floor(uptime / 60);
+                var seconds = Math.floor(uptime % 60);
+                $("#controllerUpTime").html(("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2) + ":" +
+                        ("0" + seconds).slice(-2));
             },
             error  : function (jqXHR, textStatus, errorThrown) {
                 alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
