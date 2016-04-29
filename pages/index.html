@@ -396,6 +396,52 @@
             </div>
         </div>
 
+        <!-- Large login modal -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="login-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header" >
+                    <button type="button" class="close" id="loginModalCloseButton" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel3">LOGIN</h4>
+                    </div>
+
+                    <div class="modal-body" >
+                        <div class="row">
+                            <!--<div class="col-md-6 col-md-offset-4">-->
+                                <!--<div class="login-panel panel panel-default">-->
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Please Enter The Controller's Ip Address and Port</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="Controller's ip address" id="ipaddress"  name="ipaddress" type="text" autofocus>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="Controller's rest port (e.g. 8080)" id="restport"  name="restport" type="text" autofocus>
+                                                </div>
+                                                <!-- Change this to a button or input when using this as a form -->
+                                                <button  class="btn btn-lg btn-success btn-block" data-dismiss="modal"
+                                                         onclick="SetIpAddress();" >Start Application</button>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="display: none">
+                    <!--<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>-->
+                    <!--<button type="button" id="btnChangeLogin" class="btn btn-xs btn-primary">Change</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- /#page-wrapper -->
 </div>
@@ -432,6 +478,7 @@
     if (restport == null || restport == "") window.location.href = "login.html";
 
     $(document).ready(function () {
+        getControllerStatus();
         startRefresh();
     });
 
@@ -459,9 +506,9 @@
     }
 
     /*
-    * This function brings up a modal that allows you to change the controller role,
-    * either to Active or Standby
-    * */
+     * This function brings up a modal that allows you to change the controller role,
+     * either to Active or Standby
+     * */
     $("#btnChangeRole").click(function () {
 
         var roleStandBy = $('input[id=rbStandBy]:checked').val();
@@ -505,8 +552,8 @@
     });
 
     /*
-    * Gets the total uptime from the controller.
-    * */
+     * Gets the total uptime from the controller.
+     * */
     function getControllerUptime() {
         $.ajax({
             url    : "http://" + ipaddress + ":" + restport + "/wm/core/system/uptime/json",
@@ -527,8 +574,8 @@
     }
 
     /*
-    * Gets the current status of the controller.
-    * */
+     * Gets the current status of the controller.
+     * */
     function getControllerStatus() {
         $.ajax({
             url    : "http://" + ipaddress + ":" + restport + "/wm/core/health/json",
@@ -552,14 +599,15 @@
 
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                $('#login-modal').modal();
+//                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
     /*
-    * Gets the current summary of switches, hosts, links, and ports connected to the controller.
-    * This probably needs to be changed as it isn't accurate.
-    * */
+     * Gets the current summary of switches, hosts, links, and ports connected to the controller.
+     * This probably needs to be changed as it isn't accurate.
+     * */
     function getControllerSummary() {
         $.ajax({
             url: "http://" + ipaddress + ":" + restport + "/wm/core/controller/summary/json",
@@ -585,10 +633,10 @@
     }
 
     /*
-    * Gets the current memory usage of the controller.
-    * The gauge is created outside the function so it isn't
-    * just created over and over again.
-    * */
+     * Gets the current memory usage of the controller.
+     * The gauge is created outside the function so it isn't
+     * just created over and over again.
+     * */
     var target = document.getElementById('foo'); // your canvas element
     var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
 
@@ -618,8 +666,8 @@
     }
 
     /*
-    * Loads storage tables.
-    * */
+     * Loads storage tables.
+     * */
     function getControllerStorageTables() {
         $.ajax({
             url    : " http://" + ipaddress + ":" + restport + "/wm/core/storage/tables/json",
@@ -642,8 +690,8 @@
     }
 
     /*
-    * List the modules that are loaded in the controller.
-    * */
+     * List the modules that are loaded in the controller.
+     * */
     function getControllerLoadedModules() {
         $.ajax({
             url    : "http://" + ipaddress + ":" + restport + "/wm/core/module/loaded/json",
@@ -670,8 +718,8 @@
     }
 
     /*
-    * List all of the modules in the controller.
-    * */
+     * List all of the modules in the controller.
+     * */
     function getControllerModules() {
         $.ajax({
             url    : "http://" + ipaddress + ":" + restport + "/wm/core/module/all/json",
@@ -698,8 +746,8 @@
     }
 
     /*
-    * Refreshes all of the values on the page every second.
-    * */
+     * Refreshes all of the values on the page every second.
+     * */
     function startRefresh() {
         setTimeout(startRefresh, 1000);
 
@@ -713,9 +761,30 @@
         getControllerModules();
     }
 
+    function SetIpAddress() {
+
+        var ip = $("#ipaddress").val();
+        var port = $("#restport").val();
+
+        $.cookie('cip', ip, { expires: 7 });
+        $.cookie('cport', port, { expires: 7 });
+
+        var readed = $.cookie('cip');
+
+        if (readed != null && readed != "") {
+            console.log("correct!");
+            ipaddress = ip;
+            restport = port;
+        }
+    else
+        {
+            console.log("Can not set the ip address!");
+        }
+    }
+
     /*
-    * Helper function to convert bytes to a string with correct units.
-    * */
+     * Helper function to convert bytes to a string with correct units.
+     * */
     function formatSizeUnits(bytes) {
         if (bytes >= 1000000000) {
             bytes = (bytes / 1000000000).toFixed(2) + ' GB';
