@@ -103,7 +103,7 @@
                         <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                     </li>
                     <li>
-                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        <a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-out"></i> Change Controllers</a>
                     </li>
                 </ul>
             </div>
@@ -123,6 +123,8 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
+    <div id="login-modal-include"></div>
+
 
 </div>
 <!-- /#wrapper -->
@@ -151,6 +153,12 @@
 <script src="../bower_components/visjs/googleAnalytics.js"></script>
 
 <script src="../js/jquery.cookie.js"></script>
+
+<script>
+    $(function(){
+        $("#login-modal-include").load("loginmodal.html");
+    });
+</script>
 
 <script type="text/javascript">
     /*
@@ -346,7 +354,7 @@
                         });
                     }
                 }
-                LoadExternalLinks(hosts);
+                loadExternalLinks(hosts);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.responseText);

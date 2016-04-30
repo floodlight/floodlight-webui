@@ -89,7 +89,7 @@
                     </li>
 
                     <li>
-                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        <a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-out"></i> Change Controllers</a>
                     </li>
                 </ul>
             </div>
@@ -396,51 +396,7 @@
             </div>
         </div>
 
-        <!-- Large login modal -->
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="login-modal">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header" >
-                    <button type="button" class="close" id="loginModalCloseButton" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel3">LOGIN</h4>
-                    </div>
-
-                    <div class="modal-body" >
-                        <div class="row">
-                            <!--<div class="col-md-6 col-md-offset-4">-->
-                                <!--<div class="login-panel panel panel-default">-->
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Please Enter The Controller's Ip Address and Port</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form role="form">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <input class="form-control" placeholder="Controller's ip address" id="ipaddress"  name="ipaddress" type="text" autofocus>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input class="form-control" placeholder="Controller's rest port (e.g. 8080)" id="restport"  name="restport" type="text" autofocus>
-                                                </div>
-                                                <!-- Change this to a button or input when using this as a form -->
-                                                <button  class="btn btn-lg btn-success btn-block" data-dismiss="modal"
-                                                         onclick="SetIpAddress();" >Start Application</button>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                <!--</div>-->
-                            <!--</div>-->
-                        </div>
-                    </div>
-                    <div class="modal-footer" style="display: none">
-                    <!--<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>-->
-                    <!--<button type="button" id="btnChangeLogin" class="btn btn-xs btn-primary">Change</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="login-modal-include"></div>
 
     </div>
     <!-- /#page-wrapper -->
@@ -467,6 +423,12 @@
 <script src="../js/querystringparser.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 
+<script>
+    $(function(){
+        $("#login-modal-include").load("loginmodal.html");
+    });
+</script>
+
 <script type="text/javascript">
     /*
      * These cookies are set on the login page at login.html.
@@ -477,9 +439,28 @@
     var restport = $.cookie('cport');
     if (restport == null || restport == "") window.location.href = "login.html";
 
+    $('#login-modal button').on('click', function (e) {
+        var $target = $(e.target);
+        if ($target[0].id == "start-button") {
+            $('#login-modal').on('hide.bs.modal', function (e) {
+                if (!checkConnection($("#ipaddress").val(), $("#restport").val())) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+                else {
+                    setIpAddress();
+                    startRefresh();
+                }
+            });
+        }
+    });
+
     $(document).ready(function () {
-        getControllerStatus();
-        startRefresh();
+        if (!checkConnection(ipaddress, restport)) {
+            $('#login-modal').modal('show');
+        }
+        else startRefresh();
     });
 
     function getControllerRole() {
@@ -500,7 +481,6 @@
                 $("#controllerRole").html(role);
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -544,7 +524,6 @@
 
                 },
                 error   : function (jqXHR, textStatus, errorThrown) {
-                    alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
                 }
             });
         }
@@ -568,7 +547,6 @@
                         ("0" + seconds).slice(-2));
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -599,8 +577,8 @@
 
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                $('#login-modal').modal();
-//                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+//                stopRefresh();
+//                $('#login-modal').modal();
             }
         });
     }
@@ -627,7 +605,6 @@
                 $("#portCountDiv").html(portCount);
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -637,8 +614,6 @@
      * The gauge is created outside the function so it isn't
      * just created over and over again.
      * */
-    var target = document.getElementById('foo'); // your canvas element
-    var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
 
     function getControllerMemoryUsage() {
         $.ajax({
@@ -660,7 +635,6 @@
                 gauge.setTextField(document.getElementById("gauge-text"));
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -684,7 +658,6 @@
                 $("#storageTables").html(html);
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -712,7 +685,6 @@
 
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -740,7 +712,6 @@
 
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -749,10 +720,26 @@
      * Refreshes all of the values on the page every second.
      * */
     function startRefresh() {
-        setTimeout(startRefresh, 1000);
+        target = document.getElementById('foo'); // your canvas element
+        gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
 
-        getControllerRole();
+        console.log("Refresh started!");
+        refreshHandler = setInterval(getControllerValues, 1000);
+        //getControllerValues();
+    }
+
+    function stopRefresh() {
+        console.log("Refresh stopped!");
+        clearInterval(refreshHandler);
+    }
+
+
+    /*
+     * Used to get all of the controller values. Makes refreshing the page easier.
+     **/
+    function getControllerValues() {
         getControllerStatus();
+        getControllerRole();
         getControllerSummary();
         getControllerMemoryUsage();
         getControllerUptime();
@@ -761,7 +748,24 @@
         getControllerModules();
     }
 
-    function SetIpAddress() {
+    function checkConnection(ip, port) {
+        var returnMessage = $.ajax({
+            url    : "http://" + ip + ":" + port + "/wm/core/health/json",
+            async: false,
+            success: function (data) {
+                console.log("Connection made!");
+                return data;
+            },
+            error  : function (jqXHR, textStatus, errorThrown) {
+                console.log("Connection cannot be made! :(");
+            }
+        });
+
+        if (returnMessage.statusText == "OK") return true;
+        else return false;
+    }
+
+    function setIpAddress() {
 
         var ip = $("#ipaddress").val();
         var port = $("#restport").val();
@@ -776,7 +780,7 @@
             ipaddress = ip;
             restport = port;
         }
-    else
+        else
         {
             console.log("Can not set the ip address!");
         }

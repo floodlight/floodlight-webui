@@ -82,9 +82,10 @@
 
                     <li>
                         <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
-                    </li><li>
-                    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
-                </li>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-out"></i> Change Controllers</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -205,6 +206,8 @@
     </div>
 
     <!--/#page-wrapper -->
+    <div id="login-modal-include"></div>
+
 </div>
 <!-- /#wrapper -->
 <!-- jQuery -->
@@ -225,6 +228,13 @@
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script src="../js/querystringparser.js"></script>
+
+<script>
+    $(function(){
+        $("#login-modal-include").load("loginmodal.html");
+    });
+</script>
+
 <script>
     /*
      * These cookies are set on the login page at login.html.
@@ -271,11 +281,15 @@
         }
 
         routeTable.clear();
+        console.log('tableRoutes load attempt');
         routeTable.ajax.url( "http://" + ipaddress + ":" + restport +
                 "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json" ).load();
+        console.log('tableRoutes post load attempt');
+
 
 
         $('#tableRoutes tbody').on('click', 'tr', function () {
+            console.log('Color and fill path');
             var data = routeTable.row( this ).data();
             console.log(data);
 
@@ -296,6 +310,7 @@
      When the page is loaded, initialize the datatables so that they can be called later and refreshed.
      */
     $().ready(function() {
+        console.log('load tableRoutes');
         routeTable = $('#tableRoutes').DataTable({
             responsive: true,
             "paging":   false,
@@ -303,7 +318,7 @@
             "info":     false,
             "autoWidth": false,
             ajax: {
-                url: '',
+                url: "http://" + ipaddress + ":" + restport + "/wm/core/health/json",
                 dataSrc: ''
             },
             "columnDefs": [
@@ -320,7 +335,7 @@
                 { data: 'path' }
             ]
         });
-
+        console.log('load pathTable');
         pathTable = $('#pathTable').DataTable({
             data:'',
             "paging":   false,
@@ -350,6 +365,7 @@
      these values. The user will then choose a source and destination from these lists.
      */
     $().ready(function() {
+        console.log('load switches');
         $.ajax({
             url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json",
             success: function(data) {
@@ -546,7 +562,8 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.responseText);
-                alert('Haddddddddta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
@@ -570,7 +587,8 @@
                 //LoadExternalLinks(hosts);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Haccccccccta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
@@ -621,18 +639,18 @@
                 LoadHosts();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Habbbbbbbbta: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
     }
 
     function LoadHosts() {
         var url = "http://" + ipaddress + ":" + restport + "/wm/device/";
-        ///HOSTLAR
+
         $.ajax({
             url: url,
             success: function (hosts) {
-                console.log(hosts);
                 for (var i = 0; i < hosts.length; i++) {
 
                     if (hosts[i]["attachmentPoint"].length > 0) {
@@ -651,7 +669,8 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.responseText);
-                alert('Haaaaaaaata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " +
+                        errorThrown);
             }
         });
 

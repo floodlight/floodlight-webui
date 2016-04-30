@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Animate.css -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../bower_components/pnotify/css/pnotify.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Large login modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true"
+     id="login-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <button type="button" class="close" id="cancel-button-out" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true" id="cancel-button">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel3">LOGIN</h4>
+            </div>
+
+            <div class="modal-body" >
+                <div class="row">
+                    <!--<div class="col-md-6 col-md-offset-4">-->
+                    <!--<div class="login-panel panel panel-default">-->
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Enter The Controller's Ip Address and Port</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Controller's ip address" id="ipaddress"  name="ipaddress" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Controller's rest port (e.g. 8080)" id="restport"  name="restport" type="text" autofocus>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button  class="btn btn-lg btn-success btn-block" data-dismiss="modal"
+                                id="start-button">Start Application</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="modal-footer" style="display: none">
+                <!--<button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cancel</button>-->
+                <!--<button type="button" id="btnChangeLogin" class="btn btn-xs btn-primary">Change</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/loginmodal.js"></script>
+
+</body>
+
+</html>

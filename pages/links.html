@@ -87,7 +87,7 @@
                         <a href="statistics.html"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics</a>
                     </li>
                     <li>
-                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        <a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-out"></i> Change Controllers</a>
                     </li>
                 </ul>
             </div>
@@ -176,6 +176,8 @@
     </div>
     <!-- /#page-wrapper -->
 
+    <div id="login-modal-include"></div>
+
 </div>
 <!-- /#wrapper -->
 
@@ -197,6 +199,12 @@
 <script src="../js/jquery.cookie.js"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script src="../js/querystringparser.js"></script>
+
+<script>
+    $(function(){
+        $("#login-modal-include").load("loginmodal.html");
+    });
+</script>
 
 <script>
     /*
