@@ -154,17 +154,19 @@
 <script>
     var ipaddress = $.cookie('cip');
     if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
 
     $("#btnChange").click(function () {
 
         if ($("#rbEnable").is(':checked')) {
             OpenStatistic();
-            $("#btnChange").attr("disabled", true);
+            //$("#btnChange").attr("disabled", true);
         }
 
         else if ($("#rbDisable").is(':checked')) {
             CloseStatistic();
-            $("#btnChange").attr("disabled", true);
+            //$("#btnChange").attr("disabled", true);
         }
 
         else {
@@ -182,7 +184,7 @@
         $.ajax({
             type    : "PUT",
             dataType: 'json',
-            url     : "http://" + ipaddress + ":8080/wm/statistics/config/enable/json",
+            url     : "http://" + ipaddress + ":" + restport + "/wm/statistics/config/enable/json",
 
             success: function (data) {
 
@@ -195,7 +197,7 @@
 
             },
             error  : function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
@@ -204,7 +206,7 @@
         $.ajax({
             type    : "PUT",
             dataType: 'json',
-            url     : " http://" + ipaddress + ":8080/wm/statistics/config/disable/json",
+            url     : " http://" + ipaddress + ":" + restport + "/wm/statistics/config/disable/json",
             success : function (data) {
 
                 new PNotify({
@@ -215,7 +217,7 @@
                 });
             },
             error   : function (jqXHR, textStatus, errorThrown) {
-                alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
+                alert('Error: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
             }
         });
     }
