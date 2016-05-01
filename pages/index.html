@@ -420,6 +420,7 @@
 
     $(document).ready(function () {
         if (!checkConnection(ipaddress, restport)) {
+            console.log('Trying to show modal');
             $('#login-modal').modal('show');
         }
         else startRefresh();
