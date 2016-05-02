@@ -292,6 +292,10 @@
 
             $('#aclTable').DataTable({
                 responsive  : true,
+                searching: false,
+                lengthChange: false,
+                scrollX: true,
+                paging: false,
                 ajax        : {
                     url    : url,
                     dataSrc: ''

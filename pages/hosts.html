@@ -82,7 +82,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="tableHosts">
+                            <table class="table table-striped table-bordered table-hover" id="tableHosts" width="100%">
                                 <thead>
                                 <tr>
                                     <th>MAC</th>
@@ -163,6 +163,10 @@
 
         $('#tableHosts').DataTable({
             responsive: true,
+            searching: false,
+            lengthChange: false,
+            scrollX: true,
+            paging: false,
             ajax: {
                 url: url,
                 dataSrc: ''
