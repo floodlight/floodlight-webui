@@ -186,7 +186,7 @@
                     <div class="panel-body">
 
                         <table class="table table-bordered table-hover table-responsive responsive-utilities"
-                               id="ruleTable">
+                               id="ruleTable" width="100%">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -606,6 +606,9 @@
 
             $('#ruleTable').DataTable({
                 responsive  : true,
+                lengthChange: false,
+                searching: false,
+                scrollX: true,
                 ajax        : {
                     url    : url,
                     dataSrc: ''
