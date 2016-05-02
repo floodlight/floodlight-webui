@@ -19,7 +19,8 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+          rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -66,7 +67,7 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Routes between switches
@@ -93,16 +94,19 @@
 
                             <form name="numRoutesForm">
                                 <p>
-                                    <input placeholder="Number of Routes" type="text" name="NumRoutes" id="numberOfRoutesInput" class="form-control">
+                                    <input placeholder="Number of Routes" type="text" name="NumRoutes"
+                                           id="numberOfRoutesInput" class="form-control">
                                     </input>
                                 </p>
                             </form>
 
                             <form name="getRoutes">
-                                <button type="reset" class="btn btn-primary" onclick="getRoutesBetweenSwitches()">Get Routes</button>
+                                <button type="reset" class="btn btn-primary" onclick="getRoutesBetweenSwitches()">Get
+                                    Routes
+                                </button>
                             </form>
 
-                            <table class="table table-striped table-bordered table-hover" id="tableRoutes">
+                            <table class="table table-striped table-bordered table-hover" id="tableRoutes" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Route #</th>
@@ -118,21 +122,27 @@
                     </div>
                     <!-- /.panel-body -->
                     <form name="Metric1">
-                        <button type="reset" class="btn btn-success" id="hopcountButton" onclick="setMetricToHopCount()">Hop Count</button>
+                        <button type="reset" class="btn btn-success" id="hopcountButton"
+                                onclick="setMetricToHopCount()">Hop Count
+                        </button>
                     </form>
                     <form name="Metric2">
-                        <button type="reset" class="btn btn-default" id="latencyButton" onclick="setMetricToLatency()">Latency</button>
+                        <button type="reset" class="btn btn-default" id="latencyButton" onclick="setMetricToLatency()">
+                            Latency
+                        </button>
                     </form>
                 </div>
                 <!-- /.panel -->
 
 
             </div>
-            <div class="col-lg-5" id="network">
+            <div class="col-lg-6" id="network">
                 <h3 class="page-header">Network</h3>
             </div>
+        </div>
+        <div class="row">
             <!-- /.col-lg-8 -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Path Detail
@@ -140,7 +150,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="pathTable">
+                            <table class="table table-striped table-bordered table-hover" id="pathTable" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Switch ID</th>
@@ -155,23 +165,23 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
-
             </div>
         </div>
-        <!-- /.row -->
-
-        <!-- /.row -->
-        <div class="row">
-            <!--<div class="col-lg-12" id="network">-->
-                <!--<h3 class="page-header">Network</h3>-->
-            <!--</div>-->
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
     </div>
+    <!-- /.row -->
 
-    <!--/#page-wrapper -->
-    <div id="login-modal-include"></div>
+    <!-- /.row -->
+    <div class="row">
+        <!--<div class="col-lg-12" id="network">-->
+        <!--<h3 class="page-header">Network</h3>-->
+        <!--</div>-->
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<!--/#page-wrapper -->
+<div id="login-modal-include"></div>
 
 </div>
 <!-- /#wrapper -->
@@ -197,7 +207,7 @@
 <!-- Custom scripts to load in HTML -->
 <script src="../js/navbar.js"></script>
 <script>
-    $(function(){
+    $(function () {
         $("#login-modal-include").load("loginmodal.html");
     });
 </script>
@@ -207,8 +217,10 @@
      * These cookies are set on the login page at login.html.
      * They are simply the IP address of your controller and the REST api port.
      * */
-    var ipaddress = $.cookie('cip'); if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
-    var restport = $.cookie('cport'); if (restport == null || restport == "") window.location.href = "login.html";
+    var ipaddress = $.cookie('cip');
+    if (ipaddress == null || ipaddress == "") window.location.href = "login.html";
+    var restport = $.cookie('cport');
+    if (restport == null || restport == "") window.location.href = "login.html";
 
     var routeTable;
     var pathTable;
@@ -219,7 +231,7 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: " http://" +ipaddress+ ":" +restport+ "/wm/topology/setroutemetric/hopcount/json",
+            url: " http://" + ipaddress + ":" + restport + "/wm/topology/setroutemetric/hopcount/json",
         });
     }
 
@@ -229,7 +241,7 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: " http://" +ipaddress+ ":" +restport+ "/wm/topology/setroutemetric/latency/json",
+            url: " http://" + ipaddress + ":" + restport + "/wm/topology/setroutemetric/latency/json",
         });
     }
 
@@ -249,15 +261,14 @@
 
         routeTable.clear();
         console.log('tableRoutes load attempt');
-        routeTable.ajax.url( "http://" + ipaddress + ":" + restport +
-                "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json" ).load();
+        routeTable.ajax.url("http://" + ipaddress + ":" + restport +
+                "/wm/topology/routes/" + src + "/" + dst + "/" + num + "/json").load();
         console.log('tableRoutes post load attempt');
-
 
 
         $('#tableRoutes tbody').on('click', 'tr', function () {
             console.log('Color and fill path');
-            var data = routeTable.row( this ).data();
+            var data = routeTable.row(this).data();
             console.log(data);
 
             pathTable.clear();
@@ -265,62 +276,66 @@
 
             colorLinks(data.path);
 
-        } );
+        });
 
         $('#pathTable').find('tbody').on('click', 'tr', function () {
-            var data = pathTable.row( this ).data();
+            var data = pathTable.row(this).data();
             console.log(data);
-        } );
+        });
     }
 
     /*
      When the page is loaded, initialize the datatables so that they can be called later and refreshed.
      */
-    $().ready(function() {
+    $().ready(function () {
         console.log('load tableRoutes');
         routeTable = $('#tableRoutes').DataTable({
             responsive: true,
-            "paging":   false,
+            "paging": false,
             "ordering": false,
-            "info":     false,
-            "autoWidth": false,
+            "info": false,
+//            "autoWidth": false,
+//            "scrollX": true,
             ajax: {
                 url: "http://" + ipaddress + ":" + restport + "/wm/core/health/json",
                 dataSrc: ''
             },
             "columnDefs": [
                 {
-                    "targets": [ 3 ],
+                    "targets": [3],
                     "visible": false,
                     "searchable": false
                 }
             ],
             columns: [
-                { data: 'route_count' },
-                { data: 'hop_count' },
-                { data: 'latency' },
-                { data: 'path' }
+                {data: 'route_count'},
+                {data: 'hop_count'},
+                {data: 'latency'},
+                {data: 'path'}
             ]
         });
         console.log('load pathTable');
         pathTable = $('#pathTable').DataTable({
-            data:'',
-            "paging":   false,
+            data: '',
+            "paging": false,
             "ordering": false,
-            "info":     false,
+            "info": false,
+//            "autoWidth": false,
+            "responsive": true,
+//            "scrollX": true,
             "columnDefs": [
                 {
-                    "targets": [ 0 ],
+                    "targets": [0],
                     "orderable": false,
                     "searchable": false
                 },
                 {
-                    "targets": [ 1 ],
+                    "targets": [1],
                     "orderable": false,
                     "searchable": false
                 }
             ],
-            columns:[
+            columns: [
                 {data: 'dpid'},
                 {data: 'port'}
             ]
@@ -331,22 +346,22 @@
      When the page is loaded, query the controller for the switches and populate the drop down lists with
      these values. The user will then choose a source and destination from these lists.
      */
-    $().ready(function() {
+    $().ready(function () {
         console.log('load switches');
         $.ajax({
-            url: "http://" +ipaddress+ ":" +restport+ "/wm/core/controller/switches/json",
-            success: function(data) {
+            url: "http://" + ipaddress + ":" + restport + "/wm/core/controller/switches/json",
+            success: function (data) {
                 $("#sourceSwitchDropdown").get(0).options.length = 0;
                 $("#sourceSwitchDropdown").get(0).options[0] = new Option("Select Source Switch", "-1");
                 $("#destinationSwitchDropdown").get(0).options.length = 0;
                 $("#destinationSwitchDropdown").get(0).options[0] = new Option("Select Destination Switch", "-1");
 
-                $.each(data, function(index, item) {
+                $.each(data, function (index, item) {
                     $("#sourceSwitchDropdown").get(0).options[$("#sourceSwitchDropdown").get(0).options.length] = new Option(item.switchDPID, item.switchDPID);
                     $("#destinationSwitchDropdown").get(0).options[$("#destinationSwitchDropdown").get(0).options.length] = new Option(item.switchDPID, item.switchDPID);
                 });
             },
-            error: function() {
+            error: function () {
                 alert("Failed to load switches");
             }
         });
@@ -414,7 +429,7 @@
             autoResize: true,
             height: '600px',
             width: '100%',
-            layout:{
+            layout: {
                 randomSeed: 1000,
                 improvedLayout: true
             }
@@ -447,13 +462,13 @@
                 var npt2 = npts[1].split("/");
                 //console.log(npt1 + "    " + npt2);
                 if (path[i].dpid == npt1[0] &&
-                    path[i+1].dpid == npt2[0] &&
-                    path[i].port == npt1[1] &&
-                    path[i+1].port == npt2[1] ||
+                        path[i + 1].dpid == npt2[0] &&
+                        path[i].port == npt1[1] &&
+                        path[i + 1].port == npt2[1] ||
                         path[i].dpid == npt2[0] &&
-                        path[i+1].dpid == npt1[0] &&
+                        path[i + 1].dpid == npt1[0] &&
                         path[i].port == npt2[1] &&
-                        path[i+1].port == npt1[1]) {
+                        path[i + 1].port == npt1[1]) {
                     edges[j].color = 'blue';
                     edges[j].width = 7;
 
