@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDNCore - Links</title>
+    <title>Floodlight OpenFlow Controller - Links</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+            <a class="navbar-brand" href="index.html" id="home-button-title">Floodlight OpenFlow Controller </a>
         </div>
         <!-- /.navbar-header -->
         <!-- /.navbar-top-links -->
@@ -81,7 +81,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="tableInternalLinks">
+                            <table class="table table-striped table-bordered table-hover" id="tableInternalLinks" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Direction</th>
@@ -116,7 +116,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="tableExternalLinks">
+                            <table class="table table-striped table-bordered table-hover" id="tableExternalLinks" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Direction</th>
@@ -210,6 +210,10 @@
     function loadInternalLinks() {
         internalLinkTable = $('#tableInternalLinks').DataTable({
             responsive: true,
+            searching: false,
+            lengthChange: false,
+            scrollX: true,
+            paging: false,
             order: [[ 2, 'asc' ], [ 4, 'asc' ]],
             ajax      : {
                 url    : "http://" + ipaddress + ":" + restport + "/wm/topology/links/json",
@@ -242,6 +246,10 @@
     function loadExternalLinks() {
         externalLinkTable = $('#tableExternalLinks').DataTable({
             responsive: true,
+            searching: false,
+            lengthChange: false,
+            scrollX: true,
+            paging: false,
             order: [[ 2, 'asc' ], [ 4, 'asc' ]],
             ajax      : {
                 url    : "http://" + ipaddress + ":" + restport + "/wm/topology/external-links/json",

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SDNCore - Firewall</title>
+    <title>Floodlight OpenFlow Controller - Firewall</title>
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+            <a class="navbar-brand" href="index.html" id="home-button-title">Floodlight OpenFlow Controller </a>
         </div>
         <!-- /.navbar-top-links -->
         <div class="navbar-default sidebar" role="navigation">
@@ -186,7 +186,7 @@
                     <div class="panel-body">
 
                         <table class="table table-bordered table-hover table-responsive responsive-utilities"
-                               id="ruleTable">
+                               id="ruleTable" width="100%">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -606,6 +606,10 @@
 
             $('#ruleTable').DataTable({
                 responsive  : true,
+                lengthChange: false,
+                searching: false,
+                scrollX: true,
+                paging: false,
                 ajax        : {
                     url    : url,
                     dataSrc: ''

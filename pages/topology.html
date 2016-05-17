@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDNCore - Topology</title>
+    <title>Floodlight OpenFlow Controller - Topology</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,11 +41,28 @@
     <![endif]-->
     <style type="text/css">
         #mynetwork {
-            width: 100%;
-            height: 100%;
+            flex: 1;
+            height: calc(100vh - 51px);
             border: 1px solid lightgray;
             background-color: #f8f8f8;
         }
+        /*#page-wrapper {*/
+            /*flex: 1;*/
+        /*}*/
+        body, html, #wrapper {
+            height: auto;
+        }
+        #page-wrapper {
+            /*display: flex;*/
+            height: auto;
+        }
+        /*body, #page-wrapper {*/
+            /*display: flex;*/
+        /*}*/
+        /*.row {*/
+            /*display: flex;*/
+            /*flex: 1;*/
+        /*}*/
     </style>
 </head>
 
@@ -62,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+            <a class="navbar-brand" href="index.html" id="home-button-title">Floodlight OpenFlow Controller </a>
         </div>
         <!-- /.navbar-header -->
 
@@ -78,14 +95,11 @@
     </nav>
 
     <div id="page-wrapper">
-        <!-- /.row -->
-        <div class="row">
-
+         <!--/.row-->
+        <!--<div class="row">-->
             <div id="mynetwork"></div>
-
-
-        </div>
-        <!-- /.row -->
+        <!--</div>-->
+         <!--/.row-->
     </div>
     <!-- /#page-wrapper -->
     <div id="login-modal-include"></div>
@@ -161,11 +175,12 @@
 
         var options = {
             autoResize: true,
-            height: '1000px',
-            width: '100%',
+            height: '100%',
+            width: '100%'
         };
 
         network = new vis.Network(container, data, options);
+//        network.fit({scale: 4.0});
 
         network.on("showPopup", function (params) {
             if (params.charAt(0) == 's') {
@@ -306,6 +321,7 @@
         $.ajax({
             url: "http://" + ipaddress + ":" + restport + "/wm/device/",
             success: function (hosts) {
+                hosts = hosts.devices;
                 console.log(hosts);
                 for (var i = 0; i < hosts.length; i++) {
 

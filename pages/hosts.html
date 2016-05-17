@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDNCore - Devices</title>
+    <title>Floodlight OpenFlow Controller - Devices</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SDNCore - Network Management System</a>
+            <a class="navbar-brand" href="index.html" id="home-button-title">Floodlight OpenFlow Controller </a>
         </div>
         <!-- /.navbar-header -->
         <!-- /.navbar-top-links -->
@@ -82,7 +82,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="tableHosts">
+                            <table class="table table-striped table-bordered table-hover" id="tableHosts" width="100%">
                                 <thead>
                                 <tr>
                                     <th>MAC</th>
@@ -157,15 +157,18 @@
             dataType: 'json',
      
             success: function(data_response){
-
             }
         });
 
         $('#tableHosts').DataTable({
             responsive: true,
+            searching: false,
+            lengthChange: false,
+            scrollX: true,
+            paging: false,
             ajax: {
                 url: url,
-                dataSrc: ''
+                dataSrc: 'devices'
             },
             "createdRow": function (data) {
                 data.lastSeen = Date(data.lastSeen);
