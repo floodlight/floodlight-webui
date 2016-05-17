@@ -157,7 +157,6 @@
             dataType: 'json',
      
             success: function(data_response){
-
             }
         });
 
@@ -169,7 +168,7 @@
             paging: false,
             ajax: {
                 url: url,
-                dataSrc: ''
+                dataSrc: 'devices'
             },
             "createdRow": function (data) {
                 data.lastSeen = Date(data.lastSeen);

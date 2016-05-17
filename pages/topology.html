@@ -321,6 +321,7 @@
         $.ajax({
             url: "http://" + ipaddress + ":" + restport + "/wm/device/",
             success: function (hosts) {
+                hosts = hosts.devices;
                 console.log(hosts);
                 for (var i = 0; i < hosts.length; i++) {
 
