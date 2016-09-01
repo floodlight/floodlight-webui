@@ -276,7 +276,7 @@
             success: function (flowobject) {
                 for (var i = 0; i < flowobject["flows"].length; i++) {
                     flowString += "Flow " + i + ":";
-                    flowString += "<br>&nbsp;&nbsp;&nbsp;Packet count: " + JSON.stringify(flowobject["flows"][i]["packetCount"]);
+                    flowString += "<br>&nbsp;&nbsp;&nbsp;Packet count: " + JSON.stringify(flowobject["flows"][i]["packet_count"]);
                     flowString += "<br>&nbsp;&nbsp;&nbsp;Matches: " + JSON.stringify(flowobject["flows"][i]["match"]);
                     if (flowobject["flows"][i]["version"] == "OF_13") {
                         flowString += "<br>&nbsp;&nbsp;&nbsp;Actions: " + JSON.stringify(flowobject["flows"][i]["instructions"]["instruction_apply_actions"]["actions"]);
