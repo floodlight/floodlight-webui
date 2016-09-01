@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Switch Detail</title>
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -463,11 +463,11 @@
         success: function (data) {
 
             $(".version").html(data.desc["version"]);
-            $("#hardwareDescription").html(data.desc["hardwareDescription"]);
-            $("#manufacturerDescription").html(data.desc["manufacturerDescription"]);
-            $("#softwareDescription").html(data.desc["softwareDescription"]);
-            $("#serialNumber").html(data.desc["serialNumber"]);
-            $("#datapathDescription").html(data.desc["datapathDescription"]);
+            $("#hardwareDescription").html(data.desc["hardware_description"]);
+            $("#manufacturerDescription").html(data.desc["manufacturer_description"]);
+            $("#softwareDescription").html(data.desc["software_description"]);
+            $("#serialNumber").html(data.desc["serial_number"]);
+            $("#datapathDescription").html(data.desc["datapath_description"]);
 
             if (sId != "")
                 $(".macAddress").html(sId);
@@ -507,9 +507,9 @@
         success: function (data) {
 
             $(".version").html(data.aggregate["version"]);
-            $("#flowCount").html(data.aggregate["flowCount"]);
-            $("#packetCount").html(data.aggregate["packetCount"]);
-            $("#byteCount").html(data.aggregate["byteCount"]);
+            $("#flowCount").html(data.aggregate["flow_count"]);
+            $("#packetCount").html(data.aggregate["packet_count"]);
+            $("#byteCount").html(data.aggregate["byte_count"]);
             $("#flags").html(data.aggregate["flags"]);
 
         },
@@ -541,15 +541,15 @@
                 ],
 
                 "aoColumns": [
-                    {"mData": 'port.0.portNumber'},
-                    {"mData": 'port.0.receivePackets'},
-                    {"mData": 'port.0.transmitPackets'},
-                    {"mData": 'port.0.receiveBytes'},
-                    {"mData": 'port.0.transmitBytes'},
-                    {"mData": 'port.0.receiveDropped'},
-                    {"mData": 'port.0.transmitDropped'},
+                    {"mData": 'port.0.port_number'},
+                    {"mData": 'port.0.receive_packets'},
+                    {"mData": 'port.0.transmit_packets'},
+                    {"mData": 'port.0.receive_bytes'},
+                    {"mData": 'port.0.transmit_bytes'},
+                    {"mData": 'port.0.receive_dropped'},
+                    {"mData": 'port.0.transmit_dropped'},
                     {"mData": 'port.0.collisions'},
-                    {"mData": 'port.0.durationSec'}
+                    {"mData": 'port.0.duration_sec'}
                 ]
             });
 
@@ -573,13 +573,13 @@
             $('#flowTable').DataTable({
                 data: dat["flows"],
                 columns: [
-                    {data: 'tableId'},
-                    {data: 'packetCount'},
-                    {data: 'byteCount'},
-                    {data: 'durationSeconds'},
+                    {data: 'table_id'},
+                    {data: 'packet_count'},
+                    {data: 'byte_count'},
+                    {data: 'duration_sec'},
                     {data: 'priority'},
-                    {data: 'idleTimeoutSec'},
-                    {data: 'hardTimeoutSec'},
+                    {data: 'idle_timeout_s'},
+                    {data: 'hard_timeout_s'},
                     {data: 'flags'},
                     {data: 'instructions.instruction_apply_actions.actions'}
                 ]
@@ -675,10 +675,10 @@
             $('#switchTables').DataTable({
                 data: dat["table"],
                 columns: [
-                    {data: 'tableId'},
-                    {data: 'activeCount'},
-                    {data: 'lookUpCount'},
-                    {data: 'matchCount'}
+                    {data: 'table_id'},
+                    {data: 'active_count'},
+                    {data: 'lookup_count'},
+                    {data: 'match_count'}
                 ]
             });
 
