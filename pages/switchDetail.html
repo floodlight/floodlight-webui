@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Switch Detail</title>
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -463,11 +463,11 @@
         success: function (data) {
 
             $(".version").html(data.desc["version"]);
-            $("#hardwareDescription").html(data.desc["hardwareDescription"]);
-            $("#manufacturerDescription").html(data.desc["manufacturerDescription"]);
-            $("#softwareDescription").html(data.desc["softwareDescription"]);
-            $("#serialNumber").html(data.desc["serialNumber"]);
-            $("#datapathDescription").html(data.desc["datapathDescription"]);
+            $("#hardwareDescription").html(data.desc["hardware_description"]);
+            $("#manufacturerDescription").html(data.desc["manufacturer_description"]);
+            $("#softwareDescription").html(data.desc["software_description"]);
+            $("#serialNumber").html(data.desc["serial_number"]);
+            $("#datapathDescription").html(data.desc["datapath_description"]);
 
             if (sId != "")
                 $(".macAddress").html(sId);

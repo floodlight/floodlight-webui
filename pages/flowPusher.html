@@ -368,7 +368,7 @@
                                     + "<td>" + objValue["outPort"] + "</td>"
                                     + "<td>" + objValue["flags"] + "</td>"
                                     + "<td>" + objValue["match"]["in_port"] + "</td>"
-                                    + "<td>" + objValue["instructions"]["instruction_apply_actions"].actions + "</td>"
+                                    + "<td>" + JSON.stringify(objValue["instructions"]) + "</td>"
                                     + "<td><input type='button' value='Delete' class='btn btn-xs btn-danger' onclick=" + "\"" + "DeleteRule('" + propName + "');" + "\"" + "/></td>"
                                     + "</tr>";
                         }
