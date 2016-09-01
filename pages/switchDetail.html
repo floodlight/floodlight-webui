@@ -484,16 +484,16 @@
         url: " http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/group-features/json",
         success: function (data) {
             console.log(data);
-            $("#capabilities").html(data.groupFeatures["capabilities"]);
-            $("#maxGroupsAll").html(data.groupFeatures["maxGroupsAll"]);
-            $("#maxGroupsSelect").html(data.groupFeatures["maxGroupsSelect"]);
-            $("#maxGroupsIndirect").html(data.groupFeatures["maxGroupsIndirect"]);
-            $("#maxGroupsFf").html(data.groupFeatures["maxGroupsFf"]);
+            $("#capabilities").html(data.group_features["capabilities"]);
+            $("#maxGroupsAll").html(data.group_features["max_groups_all"]);
+            $("#maxGroupsSelect").html(data.group_features["max_groups_select"]);
+            $("#maxGroupsIndirect").html(data.group_features["max_groups_indirect"]);
+            $("#maxGroupsFf").html(data.group_features["max_groups_ff"]);
 
-            $("#actionsAll").html(data.groupFeatures["actionsAll"]);
-            $("#actionsSelect").html(data.groupFeatures["actionsSelect"]);
-            $("#actionsIndirect").html(data.groupFeatures["actionsIndirect"]);
-            $("#actionsFf").html(data.groupFeatures["actionsFf"]);
+            $("#actionsAll").html(data.group_features["actions_all"]);
+            $("#actionsSelect").html(data.group_features["actions_select"]);
+            $("#actionsIndirect").html(data.group_features["actions_indirect"]);
+            $("#actionsFf").html(data.group_features["actions_ff"]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Hata: ' + " " + jqXHR.responseText + " \n Status: " + textStatus + " \n Error Thrown: " + errorThrown);
@@ -507,7 +507,7 @@
         success: function (data) {
 
             $(".version").html(data.aggregate["version"]);
-            $("#flowCount").html(data.aggregate["flowCount"]);
+            $("#flowCount").html(data.aggregate["flow_count"]);
             $("#packet_count").html(data.aggregate["packet_count"]);
             $("#byte_count").html(data.aggregate["byte_count"]);
             $("#flags").html(data.aggregate["flags"]);
