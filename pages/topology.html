@@ -217,8 +217,8 @@
                         if (hosts[i].hasOwnProperty("trueAttachmentPoint") && hosts[i]["trueAttachmentPoint"][0] != null) {
                             edges.push({
                                 from: "h" + hosts[i]["mac"]
-                                , to: "s" + hosts[i]["trueAttachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
-                                title: hosts[i]["trueAttachmentPoint"][0].switchDPID + "/" + hosts[i]["trueAttachmentPoint"][0].port,
+                                , to: "s" + hosts[i]["trueAttachmentPoint"][0].switch, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["trueAttachmentPoint"][0].switch + "/" + hosts[i]["trueAttachmentPoint"][0].port,
                                 color: 'green',
                                 width: 2
                             });
@@ -226,8 +226,8 @@
                         else {
                             edges.push({
                                 from: "h" + hosts[i]["mac"]
-                                , to: "s" + hosts[i]["attachmentPoint"][0].switchDPID, length: EDGE_LENGTH_MAIN,
-                                title: hosts[i]["attachmentPoint"][0].switchDPID + "/" + hosts[i]["attachmentPoint"][0].port,
+                                , to: "s" + hosts[i]["attachmentPoint"][0].switch, length: EDGE_LENGTH_MAIN,
+                                title: hosts[i]["attachmentPoint"][0].switch + "/" + hosts[i]["attachmentPoint"][0].port,
                                 color: 'green',
                                 width: 2
                             });
