@@ -435,11 +435,32 @@
     var restport = $.cookie('cport');
     if (restport == null || restport == "") window.location.href = "login.html";
 
+    //Quick function to make strings received through the REST API safe to pass through ".html()" function.
+	var escapeString = function(string) {
+      return string
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+    };
+    
+    var escapeAllStrings = function(jsonObj) {
+      for(var key in jsonObj) {
+        if(jsonObj.hasOwnProperty(key) && typeof jsonObj[key] === 'string') {
+          jsonObj[key] = escapeString(jsonObj[key]);
+        }    
+      }
+      return jsonObj;
+    };
+
     var sId = getQueryParameterByName("macAddress");
     ///ANAHTAR features
     $.ajax({
         url: " http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/features/json",
         success: function (data) {
+
+			data = escapeAllStrings(data);
 
             $(".version").html(data["version"]);
             $("#bufferCount").html(data["buffers"]);
@@ -461,7 +482,9 @@
     $.ajax({
         url: " http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/desc/json",
         success: function (data) {
-
+            
+            data.desc = escapeAllStrings(data.desc);
+            
             $(".version").html(data.desc["version"]);
             $("#hardwareDescription").html(data.desc["hardware_description"]);
             $("#manufacturerDescription").html(data.desc["manufacturer_description"]);
@@ -484,6 +507,9 @@
         url: " http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/group-features/json",
         success: function (data) {
             console.log(data);
+            
+            data.group_features = escapeAllStrings(data.group_features);
+
             $("#capabilities").html(data.group_features["capabilities"]);
             $("#maxGroupsAll").html(data.group_features["max_groups_all"]);
             $("#maxGroupsSelect").html(data.group_features["max_groups_select"]);
@@ -506,6 +532,8 @@
         url: " http://" + ipaddress + ":" + restport + "/wm/core/switch/" + sId + "/aggregate/json",
         success: function (data) {
 
+			data.aggregate = escapeAllStrings(data.aggregate);
+			
             $(".version").html(data.aggregate["version"]);
             $("#flowCount").html(data.aggregate["flow_count"]);
             $("#packet_count").html(data.aggregate["packet_count"]);
