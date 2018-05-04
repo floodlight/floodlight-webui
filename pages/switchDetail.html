@@ -553,33 +553,67 @@
         success: function (dat) {
             console.log(dat["port_reply"][0].port);
 //
-            $('#portTable').DataTable({
-                aaData: dat["port_reply"],
-                "columnDefs": [
-                    {
-                        // The `data` parameter refers to the data for the cell (defined by the
-                        // `data` option, which defaults to the column being worked with, in
-                        // this case `data: 0`.
-                        "render": function (data, type, row) {
-                            return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
-                        },
-                        "targets": 0
-                    }
 
-                ],
+            if (dat["port_reply"][0].version == "OF_14") {
+                $('#portTable').DataTable({
+                    aaData: dat["port_reply"],
+                    "columnDefs": [
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function (data, type, row) {
+                                return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
+                            },
+                            "targets": 0
+                        }
 
-                "aoColumns": [
-                    {"mData": 'port.0.port_number'},
-                    {"mData": 'port.0.receive_packets'},
-                    {"mData": 'port.0.transmit_packets'},
-                    {"mData": 'port.0.receive_bytes'},
-                    {"mData": 'port.0.transmit_bytes'},
-                    {"mData": 'port.0.receive_dropped'},
-                    {"mData": 'port.0.transmit_dropped'},
-                    {"mData": 'port.0.collisions'},
-                    {"mData": 'port.0.duration_sec'}
-                ]
-            });
+                    ],
+
+                    "aoColumns": [
+                        {"mData": 'port.0.port_number'},
+                        {"mData": 'port.0.receive_packets'},
+                        {"mData": 'port.0.transmit_packets'},
+                        {"mData": 'port.0.receive_bytes'},
+                        {"mData": 'port.0.transmit_bytes'},
+                        {"mData": 'port.0.receive_dropped'},
+                        {"mData": 'port.0.transmit_dropped'},
+                        {"mData": 'port.0.properties.collisions'},
+                        {"mData": 'port.0.duration_sec'}
+                    ]
+                });
+            }
+            else {
+                $('#portTable').DataTable({
+                    aaData: dat["port_reply"],
+                    "columnDefs": [
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function (data, type, row) {
+                                return "<a  id='btnStatistic' class='btn btn-sm btn-default'  onclick='getStatistic(" + data + ")' >" + data + "</<a>";
+                            },
+                            "targets": 0
+                        }
+
+                    ],
+
+                    "aoColumns": [
+                        {"mData": 'port.0.port_number'},
+                        {"mData": 'port.0.receive_packets'},
+                        {"mData": 'port.0.transmit_packets'},
+                        {"mData": 'port.0.receive_bytes'},
+                        {"mData": 'port.0.transmit_bytes'},
+                        {"mData": 'port.0.receive_dropped'},
+                        {"mData": 'port.0.transmit_dropped'},
+                        {"mData": 'port.0.collisions'},
+                        {"mData": 'port.0.duration_sec'}
+                    ]
+                });
+            }
+
+
 
             console.log("DATATABLE");
             console.log($("#portTable").DataTable().rows().data());
